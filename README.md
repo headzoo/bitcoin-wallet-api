@@ -68,8 +68,8 @@ The Api class is providing because it has concrete methods for each of the avail
 
 Requirements
 ------------
-PHP 5.4 or greater
-cURL PHP extension
+* PHP 5.4 or greater
+* cURL PHP extension
 
 Installing
 ----------
