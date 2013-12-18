@@ -1,0 +1,21 @@
+{
+    "name": "headzoo/coin-talk",
+    "description": "Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoind, bitcoin-qt, litecoind, etc.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["bitcoin", "litecoin", "cryptocurrency"],
+    "authors": [
+        {
+            "name": "headzoo",
+            "email": "headzoo@yahoo.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Headzoo": "src/"
+        }
+    }
+}
