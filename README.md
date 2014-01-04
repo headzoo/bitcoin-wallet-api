@@ -77,6 +77,12 @@ Add the classes to your project using git.
 
 `git clone git@github.com:headzoo/coin-talk.git`
 
+Adding the project to your composer.json.
+
+`"headzoo/coin-talk" : "dev-master"`
+
+
+
 
 License
 -------
