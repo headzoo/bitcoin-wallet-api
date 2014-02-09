@@ -10,7 +10,6 @@
             "email": "headzoo@yahoo.com"
         }
     ],
-    "version": "1.1",
     "require": {
         "php": ">=5.4.0",
         "ext-curl": "*"
