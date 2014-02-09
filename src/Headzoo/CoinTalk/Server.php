@@ -73,7 +73,7 @@ class Server
      *
      * @param  string $method The method to call
      * @param  array  $params The method parameters
-     * @return object
+     * @return array
      * @throws JsonException When encoding or decoding the server data fails
      * @throws ServerException When the server returns an error message
      */
@@ -92,23 +92,23 @@ class Server
         }
 
         $response = $this->exec($query);
-        $obj = json_decode(trim($response));
+        $obj = json_decode(trim($response), true);
         if (!$obj) {
             throw new JsonException(
                 "Unable to decode server response."
             );
         }
 
-        if (!empty($obj->error)) {
-            throw new ServerException($obj->error->message);
+        if (!empty($obj["error"])) {
+            throw new ServerException($obj["error"]["message"]);
         }
-        if ($obj->id != $request_id) {
+        if ($obj["id"] != $request_id) {
             throw new ServerException(
-                "Server returned ID {$obj->id}, was expecting {$request_id}."
+                "Server returned ID {$obj['id']}, was expecting {$request_id}."
             );
         }
 
-        return $obj->result;
+        return $obj["result"];
 
     }
 
@@ -119,6 +119,7 @@ class Server
      * @return string
      * @throws AuthenticationException When the wrong rpc username or password was sent
      * @throws HttpException When there was an error sending the request
+     * @throws ServerException When the rpc server returns an error message
      */
     protected function exec($query)
     {
@@ -142,12 +143,20 @@ class Server
         if (null !== $error_str) {
             throw new HttpException($error_str, $error_num);
         }
-        if (401 === $status_code) {
+        if (401 == $status_code) {
             throw new AuthenticationException(
                 "The RPC username or password was incorrect."
             );
         }
-        if (200 !== $status_code) {
+        if (200 != $status_code) {
+            if ($response) {
+                $response = json_decode($response, true);
+                if (is_array($response) && !empty($response["error"])) {
+                    throw new ServerException(
+                        $response["error"]["message"]
+                    );
+                }
+            }
             throw new HttpException(
                 "Received HTTP status code {$status_code} from the server."
             );

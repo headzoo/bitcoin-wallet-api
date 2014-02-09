@@ -31,11 +31,11 @@ class ServerTest
             "user" => "test",
             "pass" => "test",
             "host" => "localhost",
-            "port" => 9332
+            "port" => 9352
         ];
         $this->fixture->setConf($conf);
         $response = $this->fixture->query("getinfo");
-        $this->assertTrue(isset($response->version));
+        $this->assertTrue(isset($response["version"]));
     }
 
     /**
@@ -48,7 +48,7 @@ class ServerTest
             "user" => "wrong",
             "pass" => "wrong",
             "host" => "localhost",
-            "port" => 9332
+            "port" => 9352
         ];
         $this->fixture->setConf($conf);
         $this->fixture->query("getinfo");
@@ -64,7 +64,7 @@ class ServerTest
             "user" => "test",
             "pass" => "test",
             "host" => "localhost/wrong",
-            "port" => 9332
+            "port" => 9352
         ];
         $this->fixture->setConf($conf);
         $this->fixture->query("getinfo");
@@ -80,7 +80,7 @@ class ServerTest
             "user" => "test",
             "pass" => "test",
             "host" => "localhost",
-            "port" => 9331
+            "port" => 9352
         ];
         $this->fixture->setConf($conf);
         $this->fixture->query("getinfo");

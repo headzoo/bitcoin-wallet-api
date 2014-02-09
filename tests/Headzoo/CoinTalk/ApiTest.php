@@ -24,7 +24,7 @@ class ApiTest
             "user" => "test",
             "pass" => "test",
             "host" => "localhost",
-            "port" => 9332
+            "port" => 9352
         ];
         $server = new Server($conf);
         $this->fixture = new Api($server);
@@ -36,7 +36,7 @@ class ApiTest
     public function testGetInfo()
     {
         $info = $this->fixture->getInfo();
-        $this->assertTrue(isset($info->version));
+        $this->assertTrue(isset($info["version"]));
     }
 
     /**

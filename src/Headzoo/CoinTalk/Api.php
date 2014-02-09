@@ -47,7 +47,7 @@ class Api
      * @param string $nrequired
      * @param array  $keys
      * @param string $account
-     * @return object
+     * @return array
      */
     public function addMultiSigAddress($nrequired, $keys, $account = null)
     {
@@ -60,7 +60,7 @@ class Api
      * @version 0.8
      * @param mixed  $node
      * @param string $type One of "add", "remove", or "onetry"
-     * @return object
+     * @return array
      */
     public function addNode($node, $type = null)
     {
@@ -71,7 +71,7 @@ class Api
      * Safely copies wallet.dat to destination, which can be a directory or a path with filename.
      *
      * @param string $destination Directory or file path
-     * @return object
+     * @return array
      */
     public function backupWallet($destination)
     {
@@ -83,7 +83,7 @@ class Api
      *
      * @param mixed $nrequired
      * @param array $keys
-     * @return object
+     * @return array
      */
     public function createMultiSig($nrequired, $keys)
     {
@@ -95,7 +95,7 @@ class Api
      *
      * @version 0.7
      * @param string $transaction
-     * @return object
+     * @return array
      */
     public function createRawTransaction($transaction)
     {
@@ -107,7 +107,7 @@ class Api
      *
      * @version 0.7
      * @param string $hex_string
-     * @return object
+     * @return array
      */
     public function decodeRawTransaction($hex_string)
     {
@@ -118,7 +118,7 @@ class Api
      * Reveals the private key corresponding to <bitcoinaddress>
      *
      * @param string $address
-     * @return object
+     * @return array
      */
     public function dumpPrivKey($address)
     {
@@ -129,7 +129,7 @@ class Api
      * Encrypts the wallet with <passphrase>.
      *
      * @param string $pass_phrase
-     * @return object
+     * @return array
      */
     public function encryptWallet($pass_phrase)
     {
@@ -140,7 +140,7 @@ class Api
      * Returns the account associated with the given address.
      *
      * @param string $address
-     * @return object
+     * @return array
      */
     public function getAccount($address)
     {
@@ -151,7 +151,7 @@ class Api
      * Returns the current bitcoin address for receiving payments to this account.
      *
      * @param string $account
-     * @return object
+     * @return array
      */
     public function getAccountAddress($account)
     {
@@ -166,7 +166,7 @@ class Api
      * @version 0.8
      * @param string $dns
      * @param mixed  $node
-     * @return object
+     * @return array
      */
     public function getAddedNodeInfo($dns, $node = null)
     {
@@ -187,7 +187,7 @@ class Api
      *
      * @param string $account
      * @param int    $minconf
-     * @return object
+     * @return array
      */
     public function getBalance($account, $minconf = 1)
     {
@@ -198,7 +198,7 @@ class Api
      * Returns the hash of the best (tip) block in the longest block chain.
      *
      * @version recent git checkouts only
-     * @return object
+     * @return array
      */
     public function getBestBlockHash()
     {
@@ -209,7 +209,7 @@ class Api
      * Returns information about the block with the given hash.
      *
      * @param string $hash
-     * @return object
+     * @return array
      */
     public function getBlock($hash)
     {
@@ -219,7 +219,7 @@ class Api
     /**
      * Returns the number of blocks in the longest block chain.
      *
-     * @return object
+     * @return array
      */
     public function getBlockCount()
     {
@@ -230,7 +230,7 @@ class Api
      * Returns hash of block in best-block-chain at <index>; index 0 is the genesis block
      *
      * @param int $index
-     * @return object
+     * @return array
      */
     public function getBlockHash($index)
     {
@@ -243,7 +243,7 @@ class Api
      * @see https://en.bitcoin.it/wiki/BIP_0022
      *
      * @param string $params
-     * @return object
+     * @return array
      */
     public function getBlockTemplate($params)
     {
@@ -253,7 +253,7 @@ class Api
     /**
      * Returns the number of connections to other nodes.
      *
-     * @return object
+     * @return array
      */
     public function getConnectionCount()
     {
@@ -263,7 +263,7 @@ class Api
     /**
      * Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
      *
-     * @return object
+     * @return array
      */
     public function getDifficulty()
     {
@@ -273,7 +273,7 @@ class Api
     /**
      * Returns true or false whether bitcoind is currently generating hashes
      *
-     * @return object
+     * @return array
      */
     public function getGenerate()
     {
@@ -283,7 +283,7 @@ class Api
     /**
      * Returns a recent hashes per second performance measurement while generating.
      *
-     * @return object
+     * @return array
      */
     public function getHashesPerSec()
     {
@@ -293,7 +293,7 @@ class Api
     /**
      * Returns an object containing various state info.
      *
-     * @return object
+     * @return array
      */
     public function getInfo()
     {
@@ -313,7 +313,7 @@ class Api
      *  pooledtxt
      *  testnet
      *
-     * @return object
+     * @return array
      */
     public function getMiningInfo()
     {
@@ -325,7 +325,7 @@ class Api
      * the address book so payments received with the address will be credited to [account].
      *
      * @param string $account
-     * @return object
+     * @return array
      */
     public function getNewAddress($account)
     {
@@ -336,7 +336,7 @@ class Api
      * Returns data about each connected node.
      *
      * @version 0.7
-     * @return object
+     * @return array
      */
     public function getPeerInfo()
     {
@@ -348,7 +348,7 @@ class Api
      *
      * @version recent git checkouts only
      * @param string $account
-     * @return object
+     * @return array
      */
     public function getRawChangeAddress($account)
     {
@@ -359,7 +359,7 @@ class Api
      * Returns all transaction ids in memory pool
      *
      * @version 0.7
-     * @return object
+     * @return array
      */
     public function getRawMemPool()
     {
@@ -372,7 +372,7 @@ class Api
      * @version 0.7
      * @param string $txid
      * @param int    $verbose
-     * @return object
+     * @return array
      */
     public function getRawTransaction($txid, $verbose = 0)
     {
@@ -385,7 +385,7 @@ class Api
      *
      * @param string $account
      * @param int    $minconf
-     * @return object
+     * @return array
      */
     public function getReceivedByAccount($account, $minconf = 1)
     {
@@ -400,7 +400,7 @@ class Api
      *
      * @param string $address
      * @param int    $minconf
-     * @return object
+     * @return array
      */
     public function getReceivedByAddress($address, $minconf = 1)
     {
@@ -411,7 +411,7 @@ class Api
      * Returns an object about the given transaction
      *
      * @param string $txid
-     * @return object
+     * @return array
      */
     public function getTransaction($txid)
     {
@@ -424,7 +424,7 @@ class Api
      * @param string $txid
      * @param int    $n
      * @param bool   $include_mem_pool
-     * @return object
+     * @return array
      */
     public function getTxOut($txid, $n, $include_mem_pool = true)
     {
@@ -434,7 +434,7 @@ class Api
     /**
      * Returns statistics about the unspent transaction output (UTXO) set
      *
-     * @return object
+     * @return array
      */
     public function getTxOutSetInfo()
     {
@@ -445,7 +445,7 @@ class Api
      * If [data] is not specified, returns formatted hash data to work on
      *
      * @param mixed $data
-     * @return object
+     * @return array
      */
     public function getWork($data)
     {
@@ -459,7 +459,7 @@ class Api
      * @param mixed  $coin_priv_key
      * @param string $label
      * @param bool   $rescan
-     * @return object
+     * @return array
      */
     public function importPrivKey($coin_priv_key, $label, $rescan = true)
     {
@@ -469,7 +469,7 @@ class Api
     /**
      * Fills the keypool, requires wallet passphrase to be set.
      *
-     * @return object
+     * @return array
      */
     public function keyPoolRefill()
     {
@@ -480,7 +480,7 @@ class Api
      * Returns Object that has account names as keys, account balances as values.
      *
      * @param int $minconf
-     * @return object
+     * @return array
      */
     public function listAccounts($minconf = 1)
     {
@@ -491,7 +491,7 @@ class Api
      * Returns all addresses in the wallet and info used for coincontrol.
      *
      * @version 0.7
-     * @return object
+     * @return array
      */
     public function listAddressGroupings()
     {
@@ -506,7 +506,7 @@ class Api
      *
      * @param int  $minconf
      * @param bool $include_empty
-     * @return object
+     * @return array
      */
     public function listReceivedByAccount($minconf = 1, $include_empty = false)
     {
@@ -524,7 +524,7 @@ class Api
      *
      * @param int  $minconf
      * @param bool $include_mem_pool
-     * @return object
+     * @return array
      */
     public function listReceivedByAddress($minconf = 1, $include_mem_pool = false)
     {
@@ -536,7 +536,7 @@ class Api
      *
      * @param string $hash
      * @param int    $target_confirmations
-     * @return object
+     * @return array
      */
     public function listSinceBlock($hash, $target_confirmations)
     {
@@ -550,7 +550,7 @@ class Api
      * @param string $account
      * @param int    $count
      * @param int    $from
-     * @return object
+     * @return array
      */
     public function listTransactions($account, $count = 100, $from = 0)
     {
@@ -563,7 +563,7 @@ class Api
      * @version 0.7
      * @param int $minconf
      * @param int $maxconf
-     * @return object
+     * @return array
      */
     public function listUnspent($minconf = 1, $maxconf = 999999)
     {
@@ -574,7 +574,7 @@ class Api
      * Returns list of temporarily unspendable outputs
      *
      * @version 0.8
-     * @return object
+     * @return array
      */
     public function listLockUnspent()
     {
@@ -587,7 +587,7 @@ class Api
      * @version 0.8
      * @param mixed $unlock
      * @param mixed $objs
-     * @return object
+     * @return array
      */
     public function lockUnspent($unlock, $objs = null)
     {
@@ -602,7 +602,7 @@ class Api
      * @param float  $amount
      * @param int    $minconf
      * @param string $comment
-     * @return object
+     * @return array
      */
     public function move($from_account, $to_account, $amount, $minconf = 1, $comment = null)
     {
@@ -620,7 +620,7 @@ class Api
      * @param int    $minconf
      * @param string $comment
      * @param string $comment_to
-     * @return object
+     * @return array
      */
     public function sendFrom($from_account, $to_address, $amount, $minconf = 1, $comment = null, $comment_to = null)
     {
@@ -634,7 +634,7 @@ class Api
      * @param float  $amount
      * @param string $comment
      * @param string $comment_to
-     * @return object
+     * @return array
      */
     public function sendToAddress($address, $amount, $comment = null, $comment_to = null)
     {
@@ -649,7 +649,7 @@ class Api
      * @param array  $addresses ["address1" => "amount1", "address2" => "amount2"]
      * @param int    $minconf
      * @param string $comment
-     * @return object
+     * @return array
      */
     public function sendMany($from_account, $addresses, $minconf = 1, $comment = null)
     {
@@ -661,7 +661,7 @@ class Api
      *
      * @version 0.7
      * @param string $hex_string
-     * @return object
+     * @return array
      */
     public function sendRawTransaction($hex_string)
     {
@@ -674,7 +674,7 @@ class Api
      *
      * @param string $address
      * @param string $account
-     * @return object
+     * @return array
      */
     public function setAccount($address, $account)
     {
@@ -687,7 +687,7 @@ class Api
      *
      * @param bool $generate
      * @param int  $gen_proc_limit
-     * @return object
+     * @return array
      */
     public function setGenerate($generate, $gen_proc_limit = -1)
     {
@@ -698,7 +698,7 @@ class Api
      * <amount> is a real and is rounded to the nearest 0.00000001
      *
      * @param float $amount
-     * @return object
+     * @return array
      */
     public function setTxFee($amount)
     {
@@ -710,7 +710,7 @@ class Api
      *
      * @param string $address
      * @param string $message
-     * @return object
+     * @return array
      */
     public function signMessage($address, $message)
     {
@@ -723,7 +723,7 @@ class Api
      * @version 0.7
      * @param string $hex_string
      * @param string $transaction
-     * @return object
+     * @return array
      */
     public function signRawTransaction($hex_string, $transaction = null)
     {
@@ -733,7 +733,7 @@ class Api
     /**
      * Stop bitcoin server.
      *
-     * @return object
+     * @return array
      */
     public function stop()
     {
@@ -745,7 +745,7 @@ class Api
      *
      * @param string $hex_data
      * @param mixed  $params
-     * @return object
+     * @return array
      */
     public function submitBlock($hex_data, $params = null)
     {
@@ -756,7 +756,7 @@ class Api
      * Return information about <bitcoinaddress>.
      *
      * @param string $address
-     * @return object
+     * @return array
      */
     public function validateAddress($address)
     {
@@ -769,7 +769,7 @@ class Api
      * @param string $address
      * @param string $signature
      * @param string $message
-     * @return object
+     * @return array
      */
     public function verifyMessage($address, $signature, $message)
     {
@@ -780,7 +780,7 @@ class Api
      * Removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to
      * call walletpassphrase again before being able to call any methods which require the wallet to be unlocked.
      *
-     * @return object
+     * @return array
      */
     public function walletLock()
     {
@@ -792,7 +792,7 @@ class Api
      *
      * @param string $passphrase
      * @param int    $timeout
-     * @return object
+     * @return array
      */
     public function walletPassPhrase($passphrase, $timeout)
     {
@@ -804,7 +804,7 @@ class Api
      *
      * @param string $old_passphrase
      * @param string $new_passphrase
-     * @return object
+     * @return array
      */
     public function walletPassPhraseChange($old_passphrase, $new_passphrase)
     {
