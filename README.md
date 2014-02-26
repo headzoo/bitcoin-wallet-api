@@ -28,7 +28,7 @@ $info = $server->query("getinfo");
 print_r($info);
 
 // Outputs
-// stdClass Object
+// array
 // (
 //     [version] => 60401
 //     [protocolversion] => 60011
