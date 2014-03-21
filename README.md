@@ -7,6 +7,7 @@ Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoin
 * Get information about the network, such as block information, transactions, and more.
 * Send coins to other people.
 * Backup a wallet, encrypt a wallet, and lock a wallet.
+* Pool connections to wallets.
 
 And much more. See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
@@ -59,12 +60,39 @@ $conf = [
 $server = new Headzoo\CoinTalk\Server($conf);
 $api    = new Headzoo\CoinTalk\Api($server);
 
-$info = $api->getInfo();
+$info    = $api->getInfo();
 $account = $api->getAccount("personal");
-$count = $api->getBlockCount();
+$count   = $api->getBlockCount();
 ```
 
 The Api class is providing because it has concrete methods for each of the available methods on the RPC, which makes testing easier, and makes writing code in an IDE easier.
+
+
+Using the `Headzoo\CoinTalk\Pool` class, which manages a pool of Server instances.
+
+```php
+$pool = new Headzoo\CoinTalk\Pool()
+$conf = [
+    "user" => "testnet",
+    "pass" => "testnet",
+    "host" => "localhost",
+    "port" => 9332
+];
+$server = new Headzoo\CoinTalk\Server($conf);
+$pool->add($server);
+
+$conf = [
+    "user" => "testnet",
+    "pass" => "testnet",
+    "host" => "localhost",
+    "port" => 9333
+];
+$server = new Headzoo\CoinTalk\Server($conf);
+$pool->add($server);
+
+// The query will be sent using one of the Server instances in the pool.
+$info = $pool->query("getinfo");
+```
 
 Requirements
 ------------
@@ -80,9 +108,6 @@ Add the classes to your project using git.
 Adding the project to your composer.json.
 
 `"headzoo/coin-talk" : "dev-master"`
-
-
-
 
 License
 -------
