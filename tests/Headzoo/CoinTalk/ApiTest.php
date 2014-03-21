@@ -24,7 +24,7 @@ class ApiTest
             "user" => "test",
             "pass" => "test",
             "host" => "localhost",
-            "port" => 9352
+            "port" => 9355
         ];
         $server = new Server($conf);
         $this->fixture = new Api($server);
