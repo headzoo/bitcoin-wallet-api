@@ -3,12 +3,39 @@ namespace Headzoo\CoinTalk;
 
 /**
  * Manages a pool of Server instances
+ *
+ * Acts as an instance of IServer, which transparently uses a pool of IServer
+ * instances to query wallets.
+ *
+ * Example:
+ * <code>
+ *  $pool = new Pool();
+ *  $conf = [
+ *      "user" => "test",
+ *      "pass" => "pass",
+ *      "host" => "localhost",
+ *      "port" => 9332
+ *  ];
+ *  $server = new Server($conf);
+ *  $pool->add($server);
+ *
+ *  $conf = [
+ *      "user" => "test",
+ *      "pass" => "pass",
+ *      "host" => "localhost",
+ *      "port" => 9333
+ *  ];
+ *  $server = new Server($conf);
+ *  $pool->add($server);
+ *
+ *  $info = $pool->query("getinfo");
  */
 class Pool
+    implements IServer
 {
     /**
-     * The Server instances in the pool
-     * @var Server[]
+     * The IServer instances in the pool
+     * @var IServer[]
      */
     private $servers = [];
 
@@ -25,12 +52,12 @@ class Pool
     private $index = 0;
 
     /**
-     * Adds an Server instance to the pool
+     * Adds an IServer instance to the pool
      *
-     * @param Server $server The Server instance
+     * @param IServer $server The Server instance
      * @return $this
      */
-    public function add(Server $server)
+    public function add(IServer $server)
     {
         $this->servers[] = $server;
         $this->count++;
@@ -38,11 +65,11 @@ class Pool
     }
 
     /**
-     * Returns an Server instance from the pool
+     * Returns an IServer instance from the pool
      *
      * Returns null when there are no servers in the pool.
      *
-     * @return Server|null
+     * @return IServer|null
      */
     public function get()
     {
@@ -66,4 +93,21 @@ class Pool
     {
         return $this->count;
     }
-} 
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws ServerException When the pool has no available servers
+     */
+    public function query($method, $params = [])
+    {
+        $server = $this->get();
+        if (null === $server) {
+            throw new ServerException(
+                "No Server instances available in the pool."
+            );
+        }
+
+        return $server->query($method, $params);
+    }
+}
