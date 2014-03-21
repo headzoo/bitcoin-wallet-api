@@ -1,5 +1,6 @@
 <?php
-use Headzoo\CoinTalk\Pool;
+use Headzoo\CoinTalk\Pool,
+    Headzoo\CoinTalk\Server;
 
 class PoolTest
     extends PHPUnit_Framework_TestCase
@@ -58,6 +59,42 @@ class PoolTest
         $this->assertSame(
             $server1,
             $this->pool->get()
+        );
+    }
+
+    /**
+     * @covers Headzoo\CoinTalk\Pool::query
+     */
+    public function testQuery()
+    {
+        $conf = [
+            "user" => "test",
+            "pass" => "test",
+            "host" => "127.0.0.1",
+            "port" => 9336
+        ];
+        $server = new Server($conf);
+        $this->pool->add($server);
+
+        $conf = [
+            "user" => "test",
+            "pass" => "test",
+            "host" => "127.0.0.1",
+            "port" => 9335
+        ];
+        $server = new Server($conf);
+        $this->pool->add($server);
+
+        $info = $this->pool->query("getinfo");
+        $this->assertArrayHasKey(
+            "version",
+            $info
+        );
+
+        $info = $this->pool->query("getinfo");
+        $this->assertArrayHasKey(
+            "version",
+            $info
         );
     }
 }
