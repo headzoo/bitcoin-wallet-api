@@ -26,16 +26,16 @@ class Api
 {
     /**
      * Used to query the coin server
-     * @var Server
+     * @var IServer
      */
     protected $server = null;
 
     /**
      * Constructor
      *
-     * @param Server $server Needed to communicate with the server
+     * @param IServer $server Needed to communicate with the server
      */
-    public function __construct(Server $server)
+    public function __construct(IServer $server)
     {
         $this->server = $server;
     }
