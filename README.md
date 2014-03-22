@@ -9,10 +9,10 @@ classes you may:
     - [Headzoo\CoinTalk\Api](#headzoocointalkapi)
     - [Headzoo\CoinTalk\Pool](#headzoocointalkpool)
 - [Requirements](#requirements)
-- [Examples](#examples)
 - [Installing](#installing)
     - [Git](#git)
     - [Composer](#composer)
+- [Examples](#examples)
 - [License](#license)
 
 Overview
@@ -50,23 +50,54 @@ Requirements
 * PHP 5.4 or greater
 * cURL PHP extension
 
+Installing
+----------
+The library may be installed using either git or composer. Additionally you will need to install a Bitcoin wallet, and
+configure the wallet to act as a RPC server.
+
+##### Git
+Simply clone the project with the following command.
+
+```
+git clone git@github.com:headzoo/coin-talk.git
+```
+
+##### Composer
+Add the project to your composer.json as a dependency.
+
+```
+"require": {
+    "headzoo/coin-talk" : "dev-master"
+}
+```
+
 Examples
 --------
 Using the `Headzoo\CoinTalk\Server` class.
 
 ```php
+/**
+ * The wallet connection settings.
+ * These settings represent the following bitcoin.conf settings:
+ *     rpcuser=testuser
+ *     rpcpassword=testpass
+ *     rpcallowip=127.0.0.1
+ *     rpcport=9332
+ *     server=1
+ */
 $conf = [
-    "user" => "testnet",
-    "pass" => "testnet",
-    "host" => "localhost",
+    "user" => "testuser",
+    "pass" => "testpass",
+    "host" => "127.0.0.1",
     "port" => 9332
 ];
-$server = new Headzoo\CoinTalk\Server($conf);
 
+// Create the Server instance, and query the wallet for info.
+$server = new Headzoo\CoinTalk\Server($conf);
 $info = $server->query("getinfo");
 print_r($info);
 
-// Outputs
+// Example output:
 // array
 // (
 //     [version] => 60401
@@ -131,27 +162,6 @@ $info = $pool->query("getinfo");
 // Using the pool with the Api class.
 $api = new Api($pool);
 $info = $api->getInfo();
-```
-
-Installing
-----------
-The library may be installed using either git or composer. Additionally you will need to install a Bitcoin wallet, and
-configure the wallet to act as a RPC server.
-
-##### Git
-Simply clone the project with the following command.
-
-```
-git clone git@github.com:headzoo/coin-talk.git
-```
-
-##### Composer
-Add the project to your composer.json as a dependency.
-
-```
-"require": {
-    "headzoo/coin-talk" : "dev-master"
-}
 ```
 
 License
