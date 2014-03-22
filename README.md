@@ -1,7 +1,7 @@
-Coin Talk
----------
+# Coin Talk
 
-Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoind, bitcoin-qt, litecoind, etc. With the classes you may:
+Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoind, bitcoin-qt, litecoind, etc. With the
+classes you may:
 
 * Get information about the accounts held in the wallet
 * Get information about the network, such as block information, transactions, and more.
@@ -9,12 +9,30 @@ Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoin
 * Backup a wallet, encrypt a wallet, and lock a wallet.
 * Pool connections to wallets.
 
-And much more. See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
+See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
-Examples
---------
+## Overview
+The library is comprised of three primary classes: `Headzoo\CoinTalk\Server`, `Headzoo\CoinTalk\Api`, and `Headzoo\CoinTalk\Pool`.
 
-Using the `Headzoo\CoinTalk\Server` class, which provides a low level means of communicating with the rpc server.
+### Headzoo\CoinTalk\Server
+Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
+via the `Headzoo\CoinTalk\IServer` interface, which is used to call any of the wallet API methods.
+
+### Headzoo\CoinTalk\Api
+Wraps an instance of `Headzoo\CoinTalk\Server` to provide a higher level interface. This class has a method for every
+single wallet method, eg `Api::getInfo()`, `Api::backupWallet($destination)`, `Api::getAccount($address)`, etc. Using
+this class instead of using `Headzoo\CoinTalk\Server` directly makes it easier to catch programming errors, and allows
+IDEs to provide type hinting.
+
+### Headzoo\CoinTalk\Pool
+Manages a pool of `Headzoo\CoinTalk\Server` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\Server`
+class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\IServer`. Each call to `Headzoo\CoinTalk\Pool::query()`
+chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
+to an `Headzoo\CoinTalk\Api` instance to get the pooling and the higher level interface.
+
+## Examples
+
+Using the `Headzoo\CoinTalk\Server` class.
 
 ```php
 $conf = [
@@ -48,7 +66,7 @@ print_r($info);
 )
 ```
 
-Using the `Headzoo\CoinTalk\Api` class, which is slightly higher level, but requires a `Headzoo\CoinTalk\Server` instance.
+Using the `Headzoo\CoinTalk\Api` class.
 
 ```php
 $conf = [
@@ -65,10 +83,7 @@ $account = $api->getAccount("personal");
 $count   = $api->getBlockCount();
 ```
 
-The Api class is providing because it has concrete methods for each of the available methods on the RPC, which makes testing easier, and makes writing code in an IDE easier.
-
-
-Using the `Headzoo\CoinTalk\Pool` class, which manages a pool of Server instances.
+Using the `Headzoo\CoinTalk\Pool` class.
 
 ```php
 $pool = new Headzoo\CoinTalk\Pool()
@@ -92,23 +107,35 @@ $pool->add($server);
 
 // The query will be sent using one of the Server instances in the pool.
 $info = $pool->query("getinfo");
+
+// Using the pool with the Api class.
+$api = new Api($pool);
+$info = $api->getInfo();
 ```
 
-Requirements
-------------
+## Requirements
 * PHP 5.4 or greater
 * cURL PHP extension
 
-Installing
-----------
-Add the classes to your project using git.
+## Installing
+The library may be installed using either git or composer. Additionally you will need to install a Bitcoin wallet, and
+configure the wallet to act as a RPC server.
 
-`git clone git@github.com:headzoo/coin-talk.git`
+### Git
+Simply clone the project with the following command.
 
-Adding the project to your composer.json.
+```
+git clone git@github.com:headzoo/coin-talk.git
+```
 
-`"headzoo/coin-talk" : "dev-master"`
+### Composer
+Add the project to your composer.json as a dependency.
 
-License
--------
+```
+"require": {
+    "headzoo/coin-talk" : "dev-master"
+}
+```
+
+## License
 This content is released under the MIT License. See the included LICENSE for more information.
