@@ -10,6 +10,12 @@ class ApiTest
     extends PHPUnit_Framework_TestCase
 {
     /**
+     * Wallet configuration
+     * @var array
+     */
+    protected $conf = [];
+    
+    /**
      * The test fixture
      * @var Api
      */
@@ -21,13 +27,8 @@ class ApiTest
      */
     protected function setUp()
     {
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "localhost",
-            "port" => 9355
-        ];
-        $server = new Server($conf);
+        $this->conf = include(__DIR__ . "/conf.php");
+        $server = new Server($this->conf["wallet1"]);
         $this->fixture = new Api($server);
     }
 
@@ -40,13 +41,7 @@ class ApiTest
         $this->assertTrue(isset($info["version"]));
 
         $pool = new Pool();
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "localhost",
-            "port" => 9355
-        ];
-        $server = new Server($conf);
+        $server = new Server($this->conf["wallet1"]);
         $pool->add($server);
         $this->fixture = new Api($pool);
         $info = $this->fixture->getInfo();
