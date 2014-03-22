@@ -108,7 +108,6 @@ class Server
     protected function exec($query)
     {
         $error_str = null;
-        $error_num = 0;
 
         $ch = curl_init("http://{$this->conf['host']}:{$this->conf['port']}");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -120,22 +119,23 @@ class Server
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if (false === $response) {
             $error_str = curl_error($ch);
-            $error_num = curl_errno($ch);
         }
         curl_close($ch);
 
         if (null !== $error_str) {
-            throw new HttpException($error_str, $error_num);
+            throw new HttpException($error_str, $status_code);
         }
         if (401 == $status_code) {
             throw new AuthenticationException(
-                "The RPC username or password was incorrect."
+                "The RPC username or password was incorrect.",
+                $status_code
             );
         }
         if (404 == $status_code) {
             $query = json_decode($query, true);
             throw new MethodNotFoundException(
-                "The method '{$query['method']}' was not found."
+                "The method '{$query['method']}' was not found.",
+                $status_code
             );
         }
         if (200 != $status_code) {
@@ -143,12 +143,14 @@ class Server
                 $response = json_decode($response, true);
                 if (is_array($response) && !empty($response["error"])) {
                     throw new ServerException(
-                        $response["error"]["message"]
+                        $response["error"]["message"],
+                        $status_code
                     );
                 }
             }
             throw new HttpException(
-                "Received HTTP status code {$status_code} from the server. '{$response}'."
+                "Received HTTP status code {$status_code} from the server. '{$response}'.",
+                $status_code
             );
         }
 
