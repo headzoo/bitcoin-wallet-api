@@ -44,12 +44,12 @@ class Api
      * Add a nrequired-to-sign multisignature address to the wallet. Each key is a bitcoin address or hex-encoded
      * public key. If [account] is specified, assign address to [account].
      *
-     * @param string $nrequired
-     * @param array  $keys
-     * @param string $account
+     * @param  string $nrequired
+     * @param  array  $keys
+     * @param  string $account
      * @return array
      */
-    public function addMultiSigAddress($nrequired, $keys, $account = null)
+    public function addMultiSigAddress($nrequired, array $keys, $account = null)
     {
         return $this->server->query(__FUNCTION__, func_get_args());
     }
@@ -58,8 +58,8 @@ class Api
      * Attempts add or remove <node> from the addnode list or try a connection to <node> once.
      *
      * @version 0.8
-     * @param mixed  $node
-     * @param string $type One of "add", "remove", or "onetry"
+     * @param  mixed  $node
+     * @param  string $type One of "add", "remove", or "onetry"
      * @return array
      */
     public function addNode($node, $type = null)
@@ -70,7 +70,7 @@ class Api
     /**
      * Safely copies wallet.dat to destination, which can be a directory or a path with filename.
      *
-     * @param string $destination Directory or file path
+     * @param  string $destination Directory or file path
      * @return array
      */
     public function backupWallet($destination)
@@ -81,11 +81,11 @@ class Api
     /**
      * Creates a multi-signature address and returns a json object
      *
-     * @param mixed $nrequired
-     * @param array $keys
+     * @param  mixed $nrequired
+     * @param  array $keys
      * @return array
      */
-    public function createMultiSig($nrequired, $keys)
+    public function createMultiSig($nrequired, array $keys)
     {
         return $this->server->query(__FUNCTION__, func_get_args());
     }
@@ -94,7 +94,7 @@ class Api
      * Creates a raw transaction spending given inputs.
      *
      * @version 0.7
-     * @param string $transaction
+     * @param  string $transaction
      * @return array
      */
     public function createRawTransaction($transaction)
@@ -106,7 +106,7 @@ class Api
      * Produces a human-readable JSON object for a raw transaction.
      *
      * @version 0.7
-     * @param string $hex_string
+     * @param  string $hex_string
      * @return array
      */
     public function decodeRawTransaction($hex_string)
@@ -117,7 +117,7 @@ class Api
     /**
      * Reveals the private key corresponding to <bitcoinaddress>
      *
-     * @param string $address
+     * @param  string $address
      * @return array
      */
     public function dumpPrivKey($address)
@@ -128,7 +128,7 @@ class Api
     /**
      * Encrypts the wallet with <passphrase>.
      *
-     * @param string $pass_phrase
+     * @param  string $pass_phrase
      * @return array
      */
     public function encryptWallet($pass_phrase)
@@ -139,7 +139,7 @@ class Api
     /**
      * Returns the account associated with the given address.
      *
-     * @param string $address
+     * @param  string $address
      * @return array
      */
     public function getAccount($address)
@@ -150,7 +150,7 @@ class Api
     /**
      * Returns the current bitcoin address for receiving payments to this account.
      *
-     * @param string $account
+     * @param  string $account
      * @return array
      */
     public function getAccountAddress($account)
@@ -164,8 +164,8 @@ class Api
      * be available.
      *
      * @version 0.8
-     * @param string $dns
-     * @param mixed  $node
+     * @param  string $dns
+     * @param  mixed  $node
      * @return array
      */
     public function getAddedNodeInfo($dns, $node = null)
@@ -175,6 +175,9 @@ class Api
 
     /**
      * Returns the list of addresses for the given account.
+     * 
+     * @param  string $account Name of the account
+     * @return array
      */
     public function getAddressByAccount($account)
     {
@@ -185,8 +188,8 @@ class Api
      * If [account] is not specified, returns the server's total available balance.
      * If [account] is specified, returns the balance in the account.
      *
-     * @param string $account
-     * @param int    $minconf
+     * @param  string $account
+     * @param  int    $minconf
      * @return array
      */
     public function getBalance($account, $minconf = 1)
@@ -208,7 +211,7 @@ class Api
     /**
      * Returns information about the block with the given hash.
      *
-     * @param string $hash
+     * @param  string $hash
      * @return array
      */
     public function getBlock($hash)
@@ -229,7 +232,7 @@ class Api
     /**
      * Returns hash of block in best-block-chain at <index>; index 0 is the genesis block
      *
-     * @param int $index
+     * @param  int $index
      * @return array
      */
     public function getBlockHash($index)
@@ -242,7 +245,7 @@ class Api
      *
      * @see https://en.bitcoin.it/wiki/BIP_0022
      *
-     * @param string $params
+     * @param  string $params
      * @return array
      */
     public function getBlockTemplate($params)
@@ -324,7 +327,7 @@ class Api
      * Returns a new bitcoin address for receiving payments. If [account] is specified (recommended), it is added to
      * the address book so payments received with the address will be credited to [account].
      *
-     * @param string $account
+     * @param  string $account
      * @return array
      */
     public function getNewAddress($account)
@@ -347,7 +350,7 @@ class Api
      * Returns a new Bitcoin address, for receiving change. This is for use with raw transactions, NOT normal use.
      *
      * @version recent git checkouts only
-     * @param string $account
+     * @param  string $account
      * @return array
      */
     public function getRawChangeAddress($account)
@@ -370,8 +373,8 @@ class Api
      * Returns raw transaction representation for given transaction id.
      *
      * @version 0.7
-     * @param string $txid
-     * @param int    $verbose
+     * @param  string $txid
+     * @param  int    $verbose
      * @return array
      */
     public function getRawTransaction($txid, $verbose = 0)
@@ -383,8 +386,8 @@ class Api
      * Returns the total amount received by addresses with [account] in transactions with at least [minconf]
      * confirmations. If [account] not provided return will include all transactions to all accounts.
      *
-     * @param string $account
-     * @param int    $minconf
+     * @param  string $account
+     * @param  int    $minconf
      * @return array
      */
     public function getReceivedByAccount($account, $minconf = 1)
@@ -398,8 +401,8 @@ class Api
      * addresses are only ever used for receiving transactions. Works only for addresses in the local wallet, external
      * addresses will always show 0.
      *
-     * @param string $address
-     * @param int    $minconf
+     * @param  string $address
+     * @param  int    $minconf
      * @return array
      */
     public function getReceivedByAddress($address, $minconf = 1)
@@ -410,7 +413,7 @@ class Api
     /**
      * Returns an object about the given transaction
      *
-     * @param string $txid
+     * @param  string $txid
      * @return array
      */
     public function getTransaction($txid)
@@ -421,9 +424,9 @@ class Api
     /**
      * Returns details about an unspent transaction output (UTXO)
      *
-     * @param string $txid
-     * @param int    $n
-     * @param bool   $include_mem_pool
+     * @param  string $txid
+     * @param  int    $n
+     * @param  bool   $include_mem_pool
      * @return array
      */
     public function getTxOut($txid, $n, $include_mem_pool = true)
@@ -444,7 +447,7 @@ class Api
     /**
      * If [data] is not specified, returns formatted hash data to work on
      *
-     * @param mixed $data
+     * @param  mixed $data
      * @return array
      */
     public function getWork($data)
@@ -456,9 +459,9 @@ class Api
      * Adds a private key (as returned by dumpprivkey) to your wallet. This may take a while, as a rescan is done,
      * looking for existing transactions. Optional [rescan] parameter added in 0.8.0.
      *
-     * @param mixed  $coin_priv_key
-     * @param string $label
-     * @param bool   $rescan
+     * @param  mixed  $coin_priv_key
+     * @param  string $label
+     * @param  bool   $rescan
      * @return array
      */
     public function importPrivKey($coin_priv_key, $label, $rescan = true)
@@ -479,7 +482,7 @@ class Api
     /**
      * Returns Object that has account names as keys, account balances as values.
      *
-     * @param int $minconf
+     * @param  int $minconf
      * @return array
      */
     public function listAccounts($minconf = 1)
@@ -504,8 +507,8 @@ class Api
      *  amount - total amount received by addresses with this account
      *  confirmations - number of confirmations of the most recent transaction included
      *
-     * @param int  $minconf
-     * @param bool $include_empty
+     * @param  int  $minconf
+     * @param  bool $include_empty
      * @return array
      */
     public function listReceivedByAccount($minconf = 1, $include_empty = false)
@@ -522,8 +525,8 @@ class Api
      *
      * To get a list of accounts on the system, execute bitcoind listreceivedbyaddress 0 true
      *
-     * @param int  $minconf
-     * @param bool $include_mem_pool
+     * @param  int  $minconf
+     * @param  bool $include_mem_pool
      * @return array
      */
     public function listReceivedByAddress($minconf = 1, $include_mem_pool = false)
@@ -534,8 +537,8 @@ class Api
     /**
      * Get all transactions in blocks since block [blockhash], or all transactions if omitted.
      *
-     * @param string $hash
-     * @param int    $target_confirmations
+     * @param  string $hash
+     * @param  int    $target_confirmations
      * @return array
      */
     public function listSinceBlock($hash, $target_confirmations)
@@ -547,9 +550,9 @@ class Api
      * Returns up to [count] most recent transactions skipping the first [from] transactions for account [account].
      * If [account] not provided will return recent transaction from all accounts.
      *
-     * @param string $account
-     * @param int    $count
-     * @param int    $from
+     * @param  string $account
+     * @param  int    $count
+     * @param  int    $from
      * @return array
      */
     public function listTransactions($account, $count = 100, $from = 0)
@@ -561,8 +564,8 @@ class Api
      * Returns array of unspent transaction inputs in the wallet.
      *
      * @version 0.7
-     * @param int $minconf
-     * @param int $maxconf
+     * @param  int $minconf
+     * @param  int $maxconf
      * @return array
      */
     public function listUnspent($minconf = 1, $maxconf = 999999)
@@ -585,8 +588,8 @@ class Api
      * Updates list of temporarily unspendable outputs
      *
      * @version 0.8
-     * @param mixed $unlock
-     * @param mixed $objs
+     * @param  mixed $unlock
+     * @param  mixed $objs
      * @return array
      */
     public function lockUnspent($unlock, $objs = null)
@@ -597,11 +600,11 @@ class Api
     /**
      * Move from one account in your wallet to another
      *
-     * @param string $from_account
-     * @param string $to_account
-     * @param float  $amount
-     * @param int    $minconf
-     * @param string $comment
+     * @param  string $from_account
+     * @param  string $to_account
+     * @param  float  $amount
+     * @param  int    $minconf
+     * @param  string $comment
      * @return array
      */
     public function move($from_account, $to_account, $amount, $minconf = 1, $comment = null)
@@ -614,12 +617,12 @@ class Api
      * ensuring the account has a valid balance using [minconf] confirmations. Returns the transaction ID if successful
      * (not in JSON object).
      *
-     * @param string $from_account
-     * @param string $to_address
-     * @param float  $amount
-     * @param int    $minconf
-     * @param string $comment
-     * @param string $comment_to
+     * @param  string $from_account
+     * @param  string $to_address
+     * @param  float  $amount
+     * @param  int    $minconf
+     * @param  string $comment
+     * @param  string $comment_to
      * @return array
      */
     public function sendFrom($from_account, $to_address, $amount, $minconf = 1, $comment = null, $comment_to = null)
@@ -630,10 +633,10 @@ class Api
     /**
      * <amount> is a real and is rounded to 8 decimal places. Returns the transaction ID <txid> if successful.
      *
-     * @param string $address
-     * @param float  $amount
-     * @param string $comment
-     * @param string $comment_to
+     * @param  string $address
+     * @param  float  $amount
+     * @param  string $comment
+     * @param  string $comment_to
      * @return array
      */
     public function sendToAddress($address, $amount, $comment = null, $comment_to = null)
@@ -645,13 +648,13 @@ class Api
     /**
      * amounts are double-precision floating point numbers
      *
-     * @param string $from_account
-     * @param array  $addresses ["address1" => "amount1", "address2" => "amount2"]
-     * @param int    $minconf
-     * @param string $comment
+     * @param  string $from_account
+     * @param  array  $addresses ["address1" => "amount1", "address2" => "amount2"]
+     * @param  int    $minconf
+     * @param  string $comment
      * @return array
      */
-    public function sendMany($from_account, $addresses, $minconf = 1, $comment = null)
+    public function sendMany($from_account, array $addresses, $minconf = 1, $comment = null)
     {
         return $this->server->query(__FUNCTION__, func_get_args());
     }
@@ -660,7 +663,7 @@ class Api
      * Submits raw transaction (serialized, hex-encoded) to local node and network.
      *
      * @version 0.7
-     * @param string $hex_string
+     * @param  string $hex_string
      * @return array
      */
     public function sendRawTransaction($hex_string)
@@ -672,8 +675,8 @@ class Api
      * Sets the account associated with the given address. Assigning address that is already assigned to the same
      * account will create a new address associated with that account.
      *
-     * @param string $address
-     * @param string $account
+     * @param  string $address
+     * @param  string $account
      * @return array
      */
     public function setAccount($address, $account)
@@ -685,8 +688,8 @@ class Api
      * <generate> is true or false to turn generation on or off.
      * Generation is limited to [genproclimit] processors, -1 is unlimited.
      *
-     * @param bool $generate
-     * @param int  $gen_proc_limit
+     * @param  bool $generate
+     * @param  int  $gen_proc_limit
      * @return array
      */
     public function setGenerate($generate, $gen_proc_limit = -1)
@@ -697,7 +700,7 @@ class Api
     /**
      * <amount> is a real and is rounded to the nearest 0.00000001
      *
-     * @param float $amount
+     * @param  float $amount
      * @return array
      */
     public function setTxFee($amount)
@@ -708,8 +711,8 @@ class Api
     /**
      * Sign a message with the private key of an address.
      *
-     * @param string $address
-     * @param string $message
+     * @param  string $address
+     * @param  string $message
      * @return array
      */
     public function signMessage($address, $message)
@@ -721,8 +724,8 @@ class Api
      * Adds signatures to a raw transaction and returns the resulting raw transaction.
      *
      * @version 0.7
-     * @param string $hex_string
-     * @param string $transaction
+     * @param  string $hex_string
+     * @param  string $transaction
      * @return array
      */
     public function signRawTransaction($hex_string, $transaction = null)
@@ -743,8 +746,8 @@ class Api
     /**
      * Attempts to submit new block to network.
      *
-     * @param string $hex_data
-     * @param mixed  $params
+     * @param  string $hex_data
+     * @param  mixed  $params
      * @return array
      */
     public function submitBlock($hex_data, $params = null)
@@ -755,7 +758,7 @@ class Api
     /**
      * Return information about <bitcoinaddress>.
      *
-     * @param string $address
+     * @param  string $address
      * @return array
      */
     public function validateAddress($address)
@@ -766,9 +769,9 @@ class Api
     /**
      * Verify a signed message.
      *
-     * @param string $address
-     * @param string $signature
-     * @param string $message
+     * @param  string $address
+     * @param  string $signature
+     * @param  string $message
      * @return array
      */
     public function verifyMessage($address, $signature, $message)
@@ -790,8 +793,8 @@ class Api
     /**
      * Stores the wallet decryption key in memory for <timeout> seconds.
      *
-     * @param string $passphrase
-     * @param int    $timeout
+     * @param  string $passphrase
+     * @param  int    $timeout
      * @return array
      */
     public function walletPassPhrase($passphrase, $timeout)
@@ -802,8 +805,8 @@ class Api
     /**
      * Changes the wallet passphrase from <oldpassphrase> to <newpassphrase>.
      *
-     * @param string $old_passphrase
-     * @param string $new_passphrase
+     * @param  string $old_passphrase
+     * @param  string $new_passphrase
      * @return array
      */
     public function walletPassPhraseChange($old_passphrase, $new_passphrase)
