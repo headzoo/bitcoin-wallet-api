@@ -132,6 +132,12 @@ class Server
                 "The RPC username or password was incorrect."
             );
         }
+        if (404 == $status_code) {
+            $query = json_decode($query, true);
+            throw new MethodNotFoundException(
+                "The method '{$query['method']}' was not found."
+            );
+        }
         if (200 != $status_code) {
             if ($response) {
                 $response = json_decode($response, true);
@@ -142,7 +148,7 @@ class Server
                 }
             }
             throw new HttpException(
-                "Received HTTP status code {$status_code} from the server."
+                "Received HTTP status code {$status_code} from the server. '{$response}'."
             );
         }
 
