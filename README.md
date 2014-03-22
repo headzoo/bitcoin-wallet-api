@@ -16,17 +16,17 @@ Overview
 --------
 The library is comprised of three primary classes: `Headzoo\CoinTalk\Server`, `Headzoo\CoinTalk\Api`, and `Headzoo\CoinTalk\Pool`.
 
-#### Headzoo\CoinTalk\Server
+##### Headzoo\CoinTalk\Server
 Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
 via the `Headzoo\CoinTalk\IServer` interface, which is used to call any of the wallet API methods.
 
-#### Headzoo\CoinTalk\Api
+##### Headzoo\CoinTalk\Api
 Wraps an instance of `Headzoo\CoinTalk\Server` to provide a higher level interface. This class has a method for every
 single wallet method, eg `Api::getInfo()`, `Api::backupWallet($destination)`, `Api::getAccount($address)`, etc. Using
 this class instead of using `Headzoo\CoinTalk\Server` directly makes it easier to catch programming errors, and allows
 IDEs to provide type hinting.
 
-#### Headzoo\CoinTalk\Pool
+##### Headzoo\CoinTalk\Pool
 Manages a pool of `Headzoo\CoinTalk\Server` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\Server`
 class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\IServer`. Each call to `Headzoo\CoinTalk\Pool::query()`
 chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
@@ -125,14 +125,14 @@ Installing
 The library may be installed using either git or composer. Additionally you will need to install a Bitcoin wallet, and
 configure the wallet to act as a RPC server.
 
-#### Git
+##### Git
 Simply clone the project with the following command.
 
 ```
 git clone git@github.com:headzoo/coin-talk.git
 ```
 
-#### Composer
+##### Composer
 Add the project to your composer.json as a dependency.
 
 ```
