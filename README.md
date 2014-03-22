@@ -189,4 +189,5 @@ This content is released under the MIT License. See the included LICENSE for mor
 Donations are always welcome.
 
 Bitcoin: 1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM
+
 Litecoin: LheadzBgTNAitxYxUTUTTQ3RT7zR5jnkfq
