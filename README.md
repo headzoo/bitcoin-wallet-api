@@ -92,9 +92,14 @@ $conf = [
 ];
 
 // Create the Server instance, and query the wallet for info.
-$server = new Headzoo\CoinTalk\Server($conf);
-$info = $server->query("getinfo");
-print_r($info);
+try {
+    $server = new Headzoo\CoinTalk\Server($conf);
+    $info = $server->query("getinfo");
+    print_r($info);
+} catch (Headzoo\CoinTalk\ServerException $e) {
+    echo $e->getTraceAsString();
+    die();
+}
 
 // Example output:
 // array
@@ -125,12 +130,17 @@ $conf = [
     "host" => "localhost",
     "port" => 9332
 ];
-$server = new Headzoo\CoinTalk\Server($conf);
-$api    = new Headzoo\CoinTalk\Api($server);
 
-$info    = $api->getInfo();
-$account = $api->getAccount("personal");
-$count   = $api->getBlockCount();
+try {
+    $server = new Headzoo\CoinTalk\Server($conf);
+    $api    = new Headzoo\CoinTalk\Api($server);
+    $info    = $api->getInfo();
+    $account = $api->getAccount("personal");
+    $count   = $api->getBlockCount();
+} catch (Headzoo\CoinTalk\ServerException $e) {
+    echo $e->getTraceAsString();
+    die();
+}
 ```
 
 Using the `Headzoo\CoinTalk\Pool` class.
@@ -156,13 +166,27 @@ $server = new Headzoo\CoinTalk\Server($conf);
 $pool->add($server);
 
 // The query will be sent using one of the Server instances in the pool.
-$info = $pool->query("getinfo");
+try {
+    $info = $pool->query("getinfo");
+} catch (Headzoo\CoinTalk\ServerException $e) {
+    echo $e->getTraceAsString();
+    die();
+}
 
 // Using the pool with the Api class.
-$api = new Api($pool);
-$info = $api->getInfo();
+try {
+    $api = new Api($pool);
+    $info = $api->getInfo();
+} catch (Headzoo\CoinTalk\ServerException $e) {
+    echo $e->getTraceAsString();
+    die();
+}
 ```
 
 License
 -------
 This content is released under the MIT License. See the included LICENSE for more information.
+Donations are always welcome.
+
+Bitcoin: 1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM
+Litecoin: LheadzBgTNAitxYxUTUTTQ3RT7zR5jnkfq
