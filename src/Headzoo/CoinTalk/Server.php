@@ -61,7 +61,7 @@ class Server
     /**
      * {@inheritDoc}
      */
-    public function query($method, $params = [])
+    public function query($method, array $params = [])
     {
         $request_id = rand();
         $query = json_encode([

@@ -27,5 +27,5 @@ interface IServer
      * @throws ServerException When the server returns an error message
      * @throws MethodNotFoundException When the method does not exist
      */
-    public function query($method, $params = []);
+    public function query($method, array $params = []);
 } 
