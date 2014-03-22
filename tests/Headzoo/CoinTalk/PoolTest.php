@@ -67,22 +67,11 @@ class PoolTest
      */
     public function testQuery()
     {
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "127.0.0.1",
-            "port" => 9336
-        ];
-        $server = new Server($conf);
+        $conf = include(__DIR__ . "/conf.php");
+        $server = new Server($conf["wallet1"]);
         $this->pool->add($server);
 
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "127.0.0.1",
-            "port" => 9335
-        ];
-        $server = new Server($conf);
+        $server = new Server($conf["wallet2"]);
         $this->pool->add($server);
 
         $info = $this->pool->query("getinfo");
