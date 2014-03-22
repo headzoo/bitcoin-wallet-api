@@ -4,6 +4,17 @@ Coin Talk
 Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoind, bitcoin-qt, litecoind, etc. With the
 classes you may:
 
+- [Overview](#overview)
+- [Examples](#examples)
+- [Requirements](#requirements)
+- [Installing](#installing)
+- [License](#license)
+
+Overview
+--------
+The library is comprised of three primary classes: `Headzoo\CoinTalk\Server`, `Headzoo\CoinTalk\Api`, and `Headzoo\CoinTalk\Pool`.
+With these classes you may:
+
 * Get information about the accounts held in the wallet
 * Get information about the network, such as block information, transactions, and more.
 * Send coins to other people.
@@ -12,9 +23,6 @@ classes you may:
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
-Overview
---------
-The library is comprised of three primary classes: `Headzoo\CoinTalk\Server`, `Headzoo\CoinTalk\Api`, and `Headzoo\CoinTalk\Pool`.
 
 ##### Headzoo\CoinTalk\Server
 Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
