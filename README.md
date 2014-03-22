@@ -77,7 +77,6 @@ Using the `Headzoo\CoinTalk\Server` class.
 
 ```php
 /**
- * The wallet connection settings.
  * These settings represent the following bitcoin.conf settings:
  *     rpcuser=testuser
  *     rpcpassword=testpass
