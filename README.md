@@ -19,11 +19,13 @@ which is a decentest of the Bitcoin wallet.
 Overview
 --------
 The goal of this project is to provide more than a thin PHP wrapper to the Bitcoin JSON-RPC; there are plenty
-of PHP libraries for that purpose. This library is meant to be more powerful by offering the following features:
+of PHP libraries for that purpose. This library is meant to be more powerful than other libraries by offering the
+following features:
 
 * Concrete methods are defined for each API call, which means modern IDEs can provide auto-complete and argument documentation.
 * Arguments for each API call are checked for correct type and format, which is useful during development and debugging.
-* Offers wallet pool management so that wallets may be clustered, with queries being evenly distributed to the wallets.
+* Pool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
+* Solid documentation for each API call. Often taken directly from the Bitcoin source code.
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
@@ -191,4 +193,5 @@ Litecoin: LheadzBgTNAitxYxUTUTTQ3RT7zR5jnkfq
 
 TODO
 ----
-Handle errors caused by encrypted wallets.
+* Handle errors caused by encrypted wallets.
+* Ensure the wallet is the right version for the API call.
