@@ -1,6 +1,7 @@
 <?php
 use Headzoo\CoinTalk\Api,
-    Headzoo\CoinTalk\Server;
+    Headzoo\CoinTalk\Server,
+    Headzoo\CoinTalk\Pool;
 
 /**
  * Test needs a running instance of bitcoind/bitcoin-qt or any other coin server.
@@ -35,6 +36,19 @@ class ApiTest
      */
     public function testGetInfo()
     {
+        $info = $this->fixture->getInfo();
+        $this->assertTrue(isset($info["version"]));
+
+        $pool = new Pool();
+        $conf = [
+            "user" => "test",
+            "pass" => "test",
+            "host" => "localhost",
+            "port" => 9355
+        ];
+        $server = new Server($conf);
+        $pool->add($server);
+        $this->fixture = new Api($pool);
         $info = $this->fixture->getInfo();
         $this->assertTrue(isset($info["version"]));
     }
