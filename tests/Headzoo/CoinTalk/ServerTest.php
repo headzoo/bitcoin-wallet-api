@@ -8,6 +8,12 @@ class ServerTest
     extends PHPUnit_Framework_TestCase
 {
     /**
+     * Wallet configuration
+     * @var array
+     */
+    protected $conf = [];
+    
+    /**
      * The test fixture
      * @var Server
      */
@@ -19,6 +25,7 @@ class ServerTest
      */
     protected function setUp()
     {
+        $this->conf = include(__DIR__ . "/conf.php");
         $this->fixture = new Server();
     }
 
@@ -27,30 +34,29 @@ class ServerTest
      */
     public function testQuery()
     {
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "localhost",
-            "port" => 9352
-        ];
-        $this->fixture->setConf($conf);
+        $this->fixture->setConf($this->conf["wallet1"]);
         $response = $this->fixture->query("getinfo");
         $this->assertTrue(isset($response["version"]));
     }
 
     /**
      * @covers Headzoo\CoinTalk\Server::query
+     * @expectedException Headzoo\CoinTalk\MethodNotFoundException
+     */
+    public function testQuery_MethodNotFoundException()
+    {
+        $this->fixture->setConf($this->conf["wallet1"]);
+        $this->fixture->query("badmethod");
+    }
+    
+    /**
+     * @covers Headzoo\CoinTalk\Server::query
      * @expectedException Headzoo\CoinTalk\AuthenticationException
      */
     public function testQuery_AuthenticationException()
     {
-        $conf = [
-            "user" => "wrong",
-            "pass" => "wrong",
-            "host" => "localhost",
-            "port" => 9352
-        ];
-        $this->fixture->setConf($conf);
+        $this->conf["wallet1"]["user"] = "wrong";
+        $this->fixture->setConf($this->conf["wallet1"]);
         $this->fixture->query("getinfo");
     }
 
@@ -60,13 +66,8 @@ class ServerTest
      */
     public function testQuery_HttpException_Path()
     {
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "localhost/wrong",
-            "port" => 9352
-        ];
-        $this->fixture->setConf($conf);
+        $this->conf["wallet1"]["host"] = "localhost/wrong";
+        $this->fixture->setConf($this->conf["wallet1"]);
         $this->fixture->query("getinfo");
     }
 
@@ -76,13 +77,8 @@ class ServerTest
      */
     public function testQuery_HttpException_Port()
     {
-        $conf = [
-            "user" => "test",
-            "pass" => "test",
-            "host" => "localhost",
-            "port" => 9352
-        ];
-        $this->fixture->setConf($conf);
+        $this->conf["wallet1"]["port"] = 6545;
+        $this->fixture->setConf($this->conf["wallet1"]);
         $this->fixture->query("getinfo");
     }
 }
