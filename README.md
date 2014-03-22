@@ -5,9 +5,14 @@ Provides PHP classes to communicate with cryptocurrency wallets, such as bitcoin
 classes you may:
 
 - [Overview](#overview)
-- [Examples](#examples)
+    - [Headzoo\CoinTalk\Server](#headzoocointalkserver)
+    - [Headzoo\CoinTalk\Api](#headzoocointalkapi)
+    - [Headzoo\CoinTalk\Pool](#headzoocointalkpool)
 - [Requirements](#requirements)
+- [Examples](#examples)
 - [Installing](#installing)
+    - [Git](#git)
+    - [Composer](#composer)
 - [License](#license)
 
 Overview
@@ -39,6 +44,11 @@ Manages a pool of `Headzoo\CoinTalk\Server` instances, which allows clustering o
 class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\IServer`. Each call to `Headzoo\CoinTalk\Pool::query()`
 chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
 to an `Headzoo\CoinTalk\Api` instance to get the pooling and the higher level interface.
+
+Requirements
+------------
+* PHP 5.4 or greater
+* cURL PHP extension
 
 Examples
 --------
@@ -122,11 +132,6 @@ $info = $pool->query("getinfo");
 $api = new Api($pool);
 $info = $api->getInfo();
 ```
-
-Requirements
-------------
-* PHP 5.4 or greater
-* cURL PHP extension
 
 Installing
 ----------
