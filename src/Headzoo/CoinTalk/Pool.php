@@ -99,7 +99,7 @@ class Pool
      *
      * @throws ServerException When the pool has no available servers
      */
-    public function query($method, $params = [])
+    public function query($method, array $params = [])
     {
         $server = $this->get();
         if (null === $server) {
