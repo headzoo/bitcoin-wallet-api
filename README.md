@@ -188,5 +188,5 @@ License
 This content is released under the MIT License. See the included LICENSE for more information.
 Donations are always welcome.
 
-Bitcoin: 1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM
+Bitcoin: 1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM  
 Litecoin: LheadzBgTNAitxYxUTUTTQ3RT7zR5jnkfq
