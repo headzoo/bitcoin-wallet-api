@@ -19,12 +19,7 @@ Methods
 -------
 
 
-### \Headzoo\CoinTalk\JsonRPCInterface::query
-
-```
-array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
-```
-
+### Headzoo\CoinTalk\JsonRPCInterface::query
 Sends a raw query the litecoind rpc
 
 Returns an array which contains the server response.
@@ -37,6 +32,10 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 </code>
+
+```
+array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+```
 
 * Visibility: **public**
 

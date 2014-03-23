@@ -42,40 +42,37 @@ Properties
 
 
 ### $items
-
-```
-private \Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
-```
-
 The JsonRPCInterface instances in the pool
 
 
+
+```
+private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
+```
 
 * Visibility: **private**
 
 
 ### $count
+Number of servers in the pool
+
+
 
 ```
 private int $count
 ```
 
-Number of servers in the pool
-
-
-
 * Visibility: **private**
 
 
 ### $index
+Index of the last server returned from the pool
+
+
 
 ```
 private int $index
 ```
-
-Index of the last server returned from the pool
-
-
 
 * Visibility: **private**
 
@@ -84,15 +81,14 @@ Methods
 -------
 
 
-### \Headzoo\CoinTalk\RPCPool::add
-
-```
-\Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::add(\Headzoo\CoinTalk\JsonRPCInterface $rpc)
-```
-
+### Headzoo\CoinTalk\RPCPool::add
 Adds an JsonRPCInterface instance to the pool
 
 
+
+```
+Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::add(Headzoo\CoinTalk\JsonRPCInterface $rpc)
+```
 
 * Visibility: **public**
 
@@ -102,40 +98,33 @@ Adds an JsonRPCInterface instance to the pool
 
 
 
-### \Headzoo\CoinTalk\RPCPool::get
-
-```
-\Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::get()
-```
-
+### Headzoo\CoinTalk\RPCPool::get
 Returns an JsonRPCInterface instance from the pool
 
 Returns null when there are no servers in the pool.
 
+```
+Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::get()
+```
+
 * Visibility: **public**
 
 
 
-### \Headzoo\CoinTalk\RPCPool::count
-
-```
-int Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::count()
-```
-
+### Headzoo\CoinTalk\RPCPool::count
 Returns the number of JsonRPCInterface instances in the pool
 
 
 
+```
+int Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::count()
+```
+
 * Visibility: **public**
 
 
 
-### \Headzoo\CoinTalk\RPCPool::query
-
-```
-mixed Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::query($method, array $params)
-```
-
+### Headzoo\CoinTalk\RPCPool::query
 Sends a raw query the litecoind rpc
 
 Returns an array which contains the server response.
@@ -148,6 +137,10 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 </code>
+
+```
+mixed Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::query($method, array $params)
+```
 
 * Visibility: **public**
 
@@ -158,12 +151,7 @@ Example:
 
 
 
-### \Headzoo\CoinTalk\JsonRPCInterface::query
-
-```
-array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
-```
-
+### Headzoo\CoinTalk\JsonRPCInterface::query
 Sends a raw query the litecoind rpc
 
 Returns an array which contains the server response.
@@ -176,6 +164,10 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 </code>
+
+```
+array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+```
 
 * Visibility: **public**
 * This method is defined by [Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)
