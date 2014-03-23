@@ -8,7 +8,7 @@ namespace Headzoo\CoinTalk;
  * methods provided by the server.
  *
  * Example:
- * <code>
+ * ```php
  *  $conf = [
  *      "user" => "test",
  *      "pass" => "pass",
@@ -18,7 +18,7 @@ namespace Headzoo\CoinTalk;
  *  $rpc    = new JsonRPC($conf);
  *  $wallet = new Wallet($rpc);
  *  $info   = $wallet->getInfo();
- * </code>
+ * ```
  *
  * @see https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
  *      

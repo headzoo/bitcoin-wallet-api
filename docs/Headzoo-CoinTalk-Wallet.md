@@ -7,7 +7,7 @@ Wraps a JsonRPCInterface instance, and provides concrete methods for each of the
 methods provided by the server.
 
 Example:
-<code>
+```php
  $conf = [
      "user" => "test",
      "pass" => "pass",
@@ -17,7 +17,7 @@ Example:
  $rpc    = new JsonRPC($conf);
  $wallet = new Wallet($rpc);
  $info   = $wallet->getInfo();
-</code>
+```
 
 
 * Class name: Wallet
