@@ -1,5 +1,5 @@
 {
-    "name": "headzoo/bitcoin-wallet-rpc",
+    "name": "headzoo/bitcoin-api",
     "description": "PHP library supporting communication with the Bitcoin wallet JSON-RPC API.",
     "type": "library",
     "license": "MIT",
