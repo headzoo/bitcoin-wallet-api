@@ -37,13 +37,21 @@ class Api
     protected $server;
 
     /**
+     * Only include transactions confirmed at least this many times
+     * @var int
+     */
+    protected $minconf = 1;
+
+    /**
      * Constructor
      *
-     * @param IServer $server Needed to communicate with the server
+     * @param IServer $server  Needed to communicate with the server
+     * @param int     $minconf Only include transactions confirmed at least this many times
      */
-    public function __construct(IServer $server)
+    public function __construct(IServer $server, $minconf = 1)
     {
         $this->server = $server;
+        $this->setMinConf($minconf);
     }
 
     /**
@@ -51,9 +59,31 @@ class Api
      * 
      * @return IServer
      */
-    public function server()
+    public function getServer()
     {
         return $this->server;
+    }
+
+    /**
+     * Returns the minimum number of confirmations needed when checking balances
+     * 
+     * @return int
+     */
+    public function getMinConf()
+    {
+        return $this->minconf;
+    }
+
+    /**
+     * Sets the minimum number of confirmations needed when checking balances
+     * 
+     * @param  int $minconf Only include transactions confirmed at least this many times
+     * @return $this
+     */
+    public function setMinConf($minconf)
+    {
+        $this->minconf = (int)$minconf;
+        return $this;
     }
 
     /**
@@ -357,14 +387,13 @@ class Api
     /**
      * Returns the balance for the entire wallet
      *
-     * @param  int    $minconf Only include transactions confirmed at least this many times
      * @return double
      */
-    public function getBalance($minconf = 1)
+    public function getBalance()
     {
         $args = [
             "*",
-            (int)$minconf
+            $this->minconf
         ];
         return $this->server->query("getBalance", $args);
     }
@@ -381,14 +410,13 @@ class Api
      *
      * To get a list of accounts on the system, call getReceivedByAddress(0, true).
      *
-     * @param  int  $minconf       The minimum number of confirmations before payments are included
      * @param  bool $include_empty Whether to include addresses that haven't received any payments
      * @return array
      */
-    public function getBalances($minconf = 1, $include_empty = false)
+    public function getBalances($include_empty = false)
     {
         $args = [
-            (int)$minconf,
+            $this->minconf,
             (bool)$include_empty
         ];
         return $this->server->query("listReceivedByAddress", $args);
@@ -398,14 +426,13 @@ class Api
      * Returns the balance for the given account
      *
      * @param  string $account The account name, using "" for the default account
-     * @param  int    $minconf Only include transactions confirmed at least this many times
      * @return double
      */
-    public function getBalanceByAccount($account, $minconf = 1)
+    public function getBalanceByAccount($account)
     {
         $args = [
             (string)$account,
-            (int)$minconf
+            $this->minconf
         ];
         return $this->server->query("getBalance", $args);
     }
@@ -414,14 +441,13 @@ class Api
      * Returns the balance for a given address
      *
      * @param  string $address The address
-     * @param  int    $minconf Only include transactions confirmed at least this many times
      * @return double
      */
-    public function getBalanceByAddress($address, $minconf = 1)
+    public function getBalanceByAddress($address)
     {
         $args = [
             (string)$address,
-            (int)$minconf
+            $this->minconf
         ];
         return $this->server->query("getReceivedByAddress", $args);
     }
@@ -431,18 +457,17 @@ class Api
      *
      * @param  string $from_account Name of the from account
      * @param  string $to_account   Name of the to account
-     * @param  double  $amount       The amount to transfer
-     * @param  int    $minconf      Minimum confirmations in from account balance
+     * @param  double  $amount      The amount to transfer
      * @param  string $comment      Comment to record with this transaction
      * @return bool
      */
-    public function move($from_account, $to_account, $amount, $minconf = 1, $comment = "")
+    public function move($from_account, $to_account, $amount, $comment = "")
     {
         $args = [
             (string)$from_account,
             (string)$to_account,
             (double)$amount,
-            (int)$minconf,
+            $this->minconf,
             (string)$comment
         ];
         return $this->server->query(__FUNCTION__, $args);
@@ -473,23 +498,20 @@ class Api
     /**
      * Sends coins from the given account to the given address
      *
-     * Ensures the account has a valid balance using $minconf confirmations. Returns the transaction id if successful.
-     *
      * @param  string $account    Name of the from account
      * @param  string $address    Address to send to
-     * @param  double  $amount     The amount to send
-     * @param  int    $minconf    Minimum confirmations in from account balance
+     * @param  double  $amount    The amount to send
      * @param  string $comment    Comment to record with this transaction
      * @param  string $comment_to Comment sent to the network with the transaction
      * @return string
      */
-    public function sendFromAccount($account, $address, $amount, $minconf = 1, $comment = null, $comment_to = null)
+    public function sendFromAccount($account, $address, $amount, $comment = null, $comment_to = null)
     {
         $args = [
             (string)$account,
             (string)$address,
             (double)$amount,
-            (int)$minconf,
+            $this->minconf,
             (string)$comment,
             (string)$comment_to
         ];
@@ -499,20 +521,17 @@ class Api
     /**
      * Sends coins to multiple addresses
      *
-     * Ensures the account has a valid balance using $minconf confirmations. Returns the transaction id if successful.
-     *
      * @param  string $account      Name of the from account
      * @param  array  $addresses    ["address1" => "amount1", "address2" => "amount2"]
-     * @param  int    $minconf      Minimum confirmations in from account balance
      * @param  string $comment      A comment on this transaction
      * @return array
      */
-    public function sendManyFromAccount($account, array $addresses, $minconf = 1, $comment = null)
+    public function sendManyFromAccount($account, array $addresses, $comment = null)
     {
         $args = [
             (string)$account,
             $addresses,
-            (int)$minconf,
+            $this->minconf,
             (string)$comment
         ];
         return $this->server->query("sendMany", $args);
