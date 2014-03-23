@@ -13,7 +13,7 @@ which is a decentest of the Bitcoin wallet.
 - [Examples](#examples)
     - [Headzoo\CoinTalk\JsonRPC](#headzoocointalkserver)
     - [Headzoo\CoinTalk\Wallet](#headzoocointalkapi)
-    - [Headzoo\CoinTalk\Pool](#headzoocointalkpool)
+    - [Headzoo\CoinTalk\RPCPool](#headzoocointalkpool)
 - [Change Log](#changelog)
 - [TODO](#todo)
 - [License](#license)
@@ -27,7 +27,7 @@ following features:
 * Concrete methods are defined for each API call, which means modern IDEs can provide auto-complete and argument documentation.
 * Arguments for each API call are checked for correct type and format, which is useful during development and debugging.
 * Abstracts away some of the Bitcoin API complications and inconsistencies, while tyring to stay close to the original.
-* Pool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
+* RPCPool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
 * Solid documentation for each API call. Often taken directly from the Bitcoin source code.
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
@@ -143,14 +143,14 @@ try {
 }
 ```
 
-##### Headzoo\CoinTalk\Pool
+##### Headzoo\CoinTalk\RPCPool
 Manages a pool of `Headzoo\CoinTalk\JsonRPC` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\JsonRPC`
-class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\JsonRPCInterface`. Each call to `Headzoo\CoinTalk\Pool::query()`
+class, the `Headzoo\CoinTalk\RPCPool` class implements `Headzoo\CoinTalk\JsonRPCInterface`. Each call to `Headzoo\CoinTalk\RPCPool::query()`
 chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
 to an `Headzoo\CoinTalk\Wallet` instance to get the pooling and the higher level interface.
 
 ```php
-$pool = new Headzoo\CoinTalk\Pool()
+$pool = new Headzoo\CoinTalk\RPCPool()
 $conf = [
     "user" => "testnet",
     "pass" => "testnet",
@@ -193,6 +193,7 @@ Change Log
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
 * Renamed class `Headzoo\CoinTalk\Server` to `Headzoo\CoinTalk\JsonRPC`.
 * Renamed class `Headzoo\CoinTalk\IServer` to `Headzoo\CoinTalk\JsonRPCInterface`.
+* Renamed class `Headzoo\CoinTalk\Pool` to `Headzoo\CoinTalk\RPCPool`.
 * Renamed methods starting with `list` in the `Headzoo\CoinTalk\Wallet` class with `get`, eg `listAccounts()` was renamed to `getAccounts()`.
 * Renamed the following methods to make the method names more consistent, and so they conform to my naming standards:
     * `Headzoo\CoinTalk\Wallet::sendRawTransaction()`      to `Headzoo\CoinTalk\Wallet::submitRawTransaction()`.

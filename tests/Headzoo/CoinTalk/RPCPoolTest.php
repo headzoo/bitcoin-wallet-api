@@ -1,13 +1,13 @@
 <?php
-use Headzoo\CoinTalk\Pool,
+use Headzoo\CoinTalk\RPCPool,
     Headzoo\CoinTalk\JsonRPC;
 
-class PoolTest
+class RPCPoolTest
     extends PHPUnit_Framework_TestCase
 {
     /**
      * The test fixture
-     * @var Pool
+     * @var RPCPool
      */
     protected $pool;
 
@@ -17,11 +17,11 @@ class PoolTest
      */
     protected function setUp()
     {
-        $this->pool = new Pool();
+        $this->pool = new RPCPool();
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Pool::add
+     * @covers Headzoo\CoinTalk\RPCPool::add
      */
     public function testAdd()
     {
@@ -35,7 +35,7 @@ class PoolTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Pool::get
+     * @covers Headzoo\CoinTalk\RPCPool::get
      */
     public function testGet()
     {
@@ -63,7 +63,7 @@ class PoolTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Pool::query
+     * @covers Headzoo\CoinTalk\RPCPool::query
      */
     public function testQuery()
     {

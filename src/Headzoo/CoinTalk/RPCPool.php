@@ -9,7 +9,7 @@ namespace Headzoo\CoinTalk;
  *
  * Example:
  * <code>
- *  $pool = new Pool();
+ *  $pool = new RPCPool();
  *  $conf = [
  *      "user" => "test",
  *      "pass" => "pass",
@@ -30,7 +30,7 @@ namespace Headzoo\CoinTalk;
  *
  *  $info = $pool->query("getinfo");
  */
-class Pool
+class RPCPool
     implements JsonRPCInterface
 {
     /**
