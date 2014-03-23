@@ -3,6 +3,18 @@ namespace Headzoo\CoinTalk;
 
 /**
  * Used to make http post requests.
+ * 
+ * Example:
+ * ```php
+ *  $http = new HTTP("127.0.0.1:8333");
+ *  $http
+ *      ->setContentType("application/json")
+ *      ->setAuthUser("testuser")
+ *      ->setAuthPass("testpass")
+ *      ->setPostData("{'method':'getinfo','params':[],'id':11532}");
+ * $response = $http->request();
+ * $status   = $http->getStatusCode();
+ * ```
  */
 class HTTP
     implements HTTPInterface
