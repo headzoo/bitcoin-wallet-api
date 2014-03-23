@@ -8,6 +8,7 @@ to the Bitcoin wallet, but this library works with any Bitcoin wallet descendant
 - [Installing](#installing)
     - [Git](#git)
     - [Composer](#composer)
+    - [Wallet](#wallet)
 - [Examples](#examples)
     - [Headzoo\CoinTalk\JsonRPC](#headzoocointalkserver)
     - [Headzoo\CoinTalk\Wallet](#headzoocointalkapi)
@@ -37,8 +38,8 @@ Requirements
 ------------
 * PHP 5.4 or greater.
 * cURL PHP extension.
-* A logger library that supports PSR-3 if you want to log requests.
-* A wallet server supporting the Bitcoin JSON-API protocol for Bitcoin wallet version 0.9 or greater.
+* A logger library which supports PSR-3, if you want to log requests.
+* A Bitcoin wallet which supports the JSON-API API.
 
 Installing
 ----------
@@ -60,6 +61,25 @@ Add the project to your composer.json as a dependency.
     "headzoo/coin-talk" : "dev-master"
 }
 ```
+
+##### Wallet
+You will need to configure you wallet to act as a server before using this library. This is done by adding a few
+configuration values to the *bitcoin.conf* file. Shut down your wallet if it's running, and find your Bitcoin data
+directory. By default the data directory is located at */home/<user>/.bitcoin* on Linux systems,
+and */Users/<user>/AppData/Roaming/Bitcoin* on Windows systems. Create the *bitcoin.conf* file in the data directory
+if it does not already exist.
+
+Add the following lines:
+
+```
+rpcuser=testuser
+rpcpassword=testpass
+rpcallowip=127.0.0.1
+rpcport=9335
+server=1
+```
+
+You will of course want to choose a strong username and password combination.
 
 Examples
 --------
