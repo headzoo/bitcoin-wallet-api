@@ -295,7 +295,7 @@ class Api
      * @param  string $node If provided, return information about this specific node, otherwise all nodes are returned
      * @return array
      */
-    public function getAddedNodeInfo($dns, $node = null)
+    public function getNodeInfo($dns, $node = null)
     {
         // Can't pass null as the second arg. The arg must not exist.
         $args = [
@@ -304,7 +304,7 @@ class Api
         if (null !== $node) {
             $args[] = (string)$node;
         }
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->server->query("getAddedNodeInfo", $args);
     }
 
     /**
@@ -337,31 +337,6 @@ class Api
             (string)$transaction
         ];
         return $this->server->query(__FUNCTION__, $args);
-    }
-
-    /**
-     * Returns address information
-     *
-     * The returned array will contain one or more of the following keys:
-     *  "isvalid"      - Whether the address is valid
-     *  "address"      - The address
-     *  "ismine"       - Whether the address belongs to the wallet
-     *  "isscript"     - Is this a script address?
-     *  "pubkey"       - The address public key
-     *  "iscompressed" - Is the address compressed?
-     *  "account"      - The account the address belongs to
-     *
-     * The returned array will only contain ["isvalid" => false] when the address is not valid.
-     *
-     * @param  string $address The coin address
-     * @return array
-     */
-    public function isAddressValid($address)
-    {
-        $args = [
-            (string)$address
-        ];
-        return $this->server->query("validateAddress", $args);
     }
 
     /**
@@ -457,7 +432,7 @@ class Api
      *
      * @param  string $from_account Name of the from account
      * @param  string $to_account   Name of the to account
-     * @param  double  $amount      The amount to transfer
+     * @param  double $amount       The amount to transfer
      * @param  string $comment      Comment to record with this transaction
      * @return bool
      */
@@ -479,7 +454,7 @@ class Api
      * Returns the transaction id if successful.
      *
      * @param  string $address    Address to send to
-     * @param  double  $amount     The amount to send
+     * @param  double $amount     The amount to send
      * @param  string $comment    Comment to record with this transaction
      * @param  string $comment_to Comment sent to the network with the transaction
      * @return string
@@ -500,7 +475,7 @@ class Api
      *
      * @param  string $account    Name of the from account
      * @param  string $address    Address to send to
-     * @param  double  $amount    The amount to send
+     * @param  double $amount     The amount to send
      * @param  string $comment    Comment to record with this transaction
      * @param  string $comment_to Comment sent to the network with the transaction
      * @return string
@@ -521,9 +496,9 @@ class Api
     /**
      * Sends coins to multiple addresses
      *
-     * @param  string $account      Name of the from account
-     * @param  array  $addresses    ["address1" => "amount1", "address2" => "amount2"]
-     * @param  string $comment      A comment on this transaction
+     * @param  string $account   Name of the from account
+     * @param  array  $addresses ["address1" => "amount1", "address2" => "amount2"]
+     * @param  string $comment   A comment on this transaction
      * @return array
      */
     public function sendManyFromAccount($account, array $addresses, $comment = null)
@@ -661,7 +636,7 @@ class Api
      * @param  string $account Name of the account or "" for the default account
      * @return string
      */
-    public function getRawChangeAddress($account = "")
+    public function getRawChangeAddress($account)
     {
         $args = [
             (string)$account
@@ -678,7 +653,7 @@ class Api
      * @param  string $account The account name for the address to be linked to. if not provided, the default account "" is used
      * @return string
      */
-    public function getNewAddress($account = "")
+    public function getNewAddress($account)
     {
         $args = [
             (string)$account
@@ -687,11 +662,36 @@ class Api
     }
 
     /**
+     * Returns address information
+     *
+     * The returned array will contain one or more of the following keys:
+     *  "isvalid"      - (bool)     Whether the address is valid.
+     *  "address"      - (string)   The address.
+     *  "ismine"       - (bool)     Whether the address belongs to the wallet.
+     *  "isscript"     - (bool)     Is this a script address?
+     *  "pubkey"       - (string)   The address public key.
+     *  "iscompressed" - (bool)     Is the address compressed?
+     *  "account"      - (string)   The account the address belongs to.
+     *
+     * The returned array will only contain ["isvalid" => false] when the address is not valid.
+     *
+     * @param  string $address The coin address
+     * @return array
+     */
+    public function getAddressInfo($address)
+    {
+        $args = [
+            (string)$address
+        ];
+        return $this->server->query("validateAddress", $args);
+    }
+
+    /**
      * Returns a new multi-signature address
      *
      * Returns an array with the following keys:
-     *  "address"       - The multi-signature address
-     *  "redeemScript"  - The redeem script
+     *  "address"       - (string) The multi-signature address
+     *  "redeemScript"  - (string) The redeem script
      *
      * @param  int   $nrequired Number of keys needed to redeem
      * @param  array $keys      Array of public keys
@@ -709,9 +709,9 @@ class Api
     /**
      * Add a nrequired-to-sign multisignature address to the wallet
      *
-     * Each key is a bitcoin address or hex-encoded public key. If $account is specified, assign address to $account.
+     * Each key is a address or hex-encoded public key. If $account is specified, assign address to $account.
      *
-     * Returns the The multi-signature address.
+     * Returns the the multi-signature address.
      *
      * @param  int    $nrequired Number of keys needed to redeem
      * @param  array  $keys      Array of public keys
@@ -830,25 +830,25 @@ class Api
     /**
      * Get all transactions in blocks since block $hash
      *
-     * Returns all transaction if $hash is omitted.
+     * Returns all transactions if $hash is omitted.
      *
      * The return value will be an associative array:
-     *  "lastblock"         - The hash of the last block.
-     *  "transactions"      - An array of one or more transactions. Each transaction will contain the following keys:
-     *      "account"           - The account name associated with the transaction. Will be "" for the default account.
-     *      "address"           - The address of the transaction. Not present for move transactions (category = move).
-     *      "category"          - The type of transaction, eg "send", "receive", or "move".
-     *      "amount"            - The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
-     *      "fee"               - The transaction fee. This is negative and only available for the 'send' category of transactions.
-     *      "confirmations"     - The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.
-     *      "blockhash"         - The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.
-     *      "blockindex"        - The block index containing the transaction. Available for 'send' and 'receive' category of transactions.
-     *      "blocktime"         - The block time in seconds since epoch (1 Jan 1970 GMT).
-     *      "txid"              - The transaction id.
-     *      "time"              - The transaction time in seconds since epoch (Jan 1 1970 GMT).
-     *      "timereceived"      - The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
-     *      "comment"           - If a comment is associated with the transaction.
-     *      "to"                - If a comment to is associated with the transaction.
+     *  "lastblock"         - (string)      The hash of the last block.
+     *  "transactions"      - (array)       One or more transactions. Each transaction will contain the following keys:
+     *      "account"           - (string)  The account name associated with the transaction. Will be "" for the default account.
+     *      "address"           - (string)  The address of the transaction. Not present for move transactions (category = move).
+     *      "category"          - (string)  The type of transaction, eg "send", "receive", or "move".
+     *      "amount"            - (double)  The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
+     *      "fee"               - (double)  The transaction fee. This is negative and only available for the 'send' category of transactions.
+     *      "confirmations"     - (int)     The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.
+     *      "blockhash"         - (string)  The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.
+     *      "blockindex"        - (int)     The block index containing the transaction. Available for 'send' and 'receive' category of transactions.
+     *      "blocktime"         - (int)     The block time in seconds since epoch (1 Jan 1970 GMT).
+     *      "txid"              - (string)  The transaction id.
+     *      "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
+     *      "timereceived"      - (int)     The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
+     *      "comment"           - (string)  If a comment is associated with the transaction.
+     *      "to"                - (string)  If a comment to is associated with the transaction.
      *
      * @param  string $hash                 The block hash to list transactions since
      * @param  int    $target_confirmations The confirmations required, must be 1 or more
@@ -870,21 +870,21 @@ class Api
      * non-wallet transactions.
      *
      * The returned array will contain the following keys:
-     *  "amount"        - (double) The transaction amount.
-     *  "fee"           - (double) The transaction fee.
-     *  "confirmations" - (int) The number of confirmations.
-     *  "blockhash"     - (string) The block hash.
-     *  "blockindex"    - (int) The block index.
-     *  "blocktime"     - (int) The time in seconds since epoch (1 Jan 1970 GMT).
-     *  "txid"          - (string) The transaction id.
-     *  "time"          - (int) The transaction time in seconds since epoch (1 Jan 1970 GMT).
-     *  "timereceived"  - (int) The time received in seconds since epoch (1 Jan 1970 GMT).
-     *  "details"       -
-     *      "account"   - (string) The account name involved in the transaction, can be "" for the default account.
-     *      "address"   - (string) The address involved in the transaction.
-     *      "category"  - (string) The category, either "send" or "receive".
-     *      "amount"    - (double) The amount.
-     *      "fee"       - (double) The transaction fee.
+     *  "amount"        - (double)  The transaction amount.
+     *  "fee"           - (double)  The transaction fee.
+     *  "confirmations" - (int)     The number of confirmations.
+     *  "blockhash"     - (string)  The block hash.
+     *  "blockindex"    - (int)     The block index.
+     *  "blocktime"     - (int)     The time in seconds since epoch (1 Jan 1970 GMT).
+     *  "txid"          - (string)  The transaction id.
+     *  "time"          - (int)     The transaction time in seconds since epoch (1 Jan 1970 GMT).
+     *  "timereceived"  - (int)     The time received in seconds since epoch (1 Jan 1970 GMT).
+     *  "details"       - (array)   The transaction details. Each array contains the following keys:
+     *      "account"   - (string)  The account name involved in the transaction, can be "" for the default account.
+     *      "address"   - (string)  The address involved in the transaction.
+     *      "category"  - (string)  The category, either "send" or "receive".
+     *      "amount"    - (double)  The amount.
+     *      "fee"       - (double)  The transaction fee.
      *
      * @param  string $txid The transaction id
      * @return array
@@ -904,19 +904,19 @@ class Api
      * accounts.
      *
      * The return value will be an associative array, with each sub-array containing the following keys:
-     *  "account"           - The account name associated with the transaction. Will be "" for the default account.
-     *  "address"           - The address of the transaction. Not present for move transactions (category = move).
-     *  "category"          - The type of transaction, eg "send", "receive", or "move".
-     *  "amount"            - The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
-     *  "fee"               - The transaction fee. This is negative and only available for the 'send' category of transactions.
-     *  "confirmations"     - The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.
-     *  "blockhash"         - The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.
-     *  "blockindex"        - The block index containing the transaction. Available for 'send' and 'receive' category of transactions.
-     *  "blocktime"         - The block time in seconds since epoch (1 Jan 1970 GMT).
-     *  "txid"              - The transaction id.
-     *  "time"              - The transaction time in seconds since epoch (Jan 1 1970 GMT).
-     *  "timereceived"      - The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
-     *  "comment"           - If a comment is associated with the transaction.
+     *  "account"           - (string)  The account name associated with the transaction. Will be "" for the default account.
+     *  "address"           - (string)  The address of the transaction. Not present for move transactions (category = move).
+     *  "category"          - (string)  The type of transaction, eg "send", "receive", or "move".
+     *  "amount"            - (double)  The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
+     *  "fee"               - (double)  The transaction fee. This is negative and only available for the 'send' category of transactions.
+     *  "confirmations"     - (int)     The number of confirmations for the transaction. Available for 'send' and 'receive' category of transactions.
+     *  "blockhash"         - (string)  The block hash containing the transaction. Available for 'send' and 'receive' category of transactions.
+     *  "blockindex"        - (int)     The block index containing the transaction. Available for 'send' and 'receive' category of transactions.
+     *  "blocktime"         - (int)     The block time in seconds since epoch (1 Jan 1970 GMT).
+     *  "txid"              - (string)  The transaction id.
+     *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
+     *  "timereceived"      - (int)     The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
+     *  "comment"           - (string)  If a comment is associated with the transaction.
      *
      * @param  string $account The name of the account
      * @param  int    $count   Number of transactions to return
@@ -950,30 +950,30 @@ class Api
      * transaction data into an array.
      *
      * Returns an array with the following keys when $verbose is 1.
-     *  "hex"               - (string) The serialized, hex-encoded data.
-     *  "txid"              - (string) The transaction id.
-     *  "version"           - (int) The version.
-     *  "locktime"          - (int) The lock time.
-     *  "vin"               - (array) An array with the following keys:
-     *      "txid"          - (string) The transaction id.
-     *      "vout"          - (int) The vout index.
-     *      "scriptSig"     - (array) The script, an array with keys:
-     *          "asm"       - (string) Script in asm format.
-     *          "hex"       - (string) Script in hex format.
-     *      "sequence"      - (int) The script sequence number.
-     *  "vout"              - (array) An array with the following keys:
-     *      "value"         - (double) The amount sent.
-     *      "n"             - (int) The index.
-     *      "scriptPubKey"  - (array) An array with the following keys:
-     *          "asm"       - (string) The script in asm format.
-     *          "hex"       - (string) The script in hex format.
-     *          "reqSigs"   - (int) The number of required sigs.
-     *          "type"      - (string) The type, eg 'pubkeyhash'.
-     *          "addresses" - (array) An array of addresses.
-     *  "blockhash"         - (string) The block hash.
-     *  "confirmations"     - (int) The number of confirmations.
-     *  "time"              - (int) The transaction time in seconds since epoch (Jan 1 1970 GMT).
-     *  "blocktime"         - (int) The block time in seconds since epoch (Jan 1 1970 GMT).
+     *  "hex"               - (string)  The serialized, hex-encoded data.
+     *  "txid"              - (string)  The transaction id.
+     *  "version"           - (int)     The version.
+     *  "locktime"          - (int)     The lock time.
+     *  "vin"               - (array)   An array with the following keys:
+     *      "txid"          - (string)  The transaction id.
+     *      "vout"          - (int)     The vout index.
+     *      "scriptSig"     - (array)   The script, an array with keys:
+     *          "asm"       - (string)  Script in asm format.
+     *          "hex"       - (string)  Script in hex format.
+     *      "sequence"      - (int)     The script sequence number.
+     *  "vout"              - (array)   An array with the following keys:
+     *      "value"         - (double)  The amount sent.
+     *      "n"             - (int)     The index.
+     *      "scriptPubKey"  - (array)   An array with the following keys:
+     *          "asm"       - (string)  The script in asm format.
+     *          "hex"       - (string)  The script in hex format.
+     *          "reqSigs"   - (int)     The number of required sigs.
+     *          "type"      - (string)  The type, eg 'pubkeyhash'.
+     *          "addresses" - (array)   An array of addresses.
+     *  "blockhash"         - (string)  The block hash.
+     *  "confirmations"     - (int)     The number of confirmations.
+     *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
+     *  "blocktime"         - (int)     The block time in seconds since epoch (Jan 1 1970 GMT).
      *
      * @param  string $txid     The transaction id
      * @param  int    $verbose  If 0, return a string, other return a json object
@@ -992,17 +992,17 @@ class Api
      * Returns details about an unspent transaction output
      *
      * Returns an array with the following keys:
-     *  "bestblock"         - (string) the block hash.
-     *  "confirmations"     - (numeric) The number of confirmations.
-     *  "value"             - (numeric) The transaction value.
-     *  "scriptPubKey"      - (array) The script, an array with the following keys:
-     *      "asm"           - (string) The code in asm format.
-     *      "hex"           - (string) The code in hex format.
-     *      "regSigs"       - (int) Number of required signatures.
-     *      "type"          - (string) The type, eg "pubkeyhash".
-     *      "addresses"     - (array) An array of addresses.
-     *  "version"           - (int) The version.
-     *  "coinbase"          - (bool) Coinbase transaction or not.
+     *  "bestblock"         - (string)  The block hash.
+     *  "confirmations"     - (int)     The number of confirmations.
+     *  "value"             - (double)  The transaction value.
+     *  "scriptPubKey"      - (array)   The script, an array with the following keys:
+     *      "asm"           - (string)  The code in asm format.
+     *      "hex"           - (string)  The code in hex format.
+     *      "regSigs"       - (int)     Number of required signatures.
+     *      "type"          - (string)  The type, eg "pubkeyhash".
+     *      "addresses"     - (array)   An array of addresses.
+     *  "version"           - (int)     The version.
+     *  "coinbase"          - (bool)    Coinbase transaction or not.
      *
      * @param  string $txid             The transaction id
      * @param  int    $n                The vout value
@@ -1068,7 +1068,7 @@ class Api
     /**
      * Returns list of temporarily unspendable outputs
      *
-     * Use the lockUnspent() method to lock and unlock transactions for spending.
+     * Use the setLockUnspent() method to lock and unlock transactions for spending.
      *
      * @return array
      */
@@ -1210,8 +1210,8 @@ class Api
      * Returns a hex-encoded raw transaction spending the given inputs and sending to the given addresses
      *
      * The $transactions argument is a multidimensional array, which each value being an array with the following keys:
-     *  "txid"  - The transaction id.
-     *  "vout"  - The output number.
+     *  "txid"  - (string) The transaction id.
+     *  "vout"  - (int)    The output number.
      *
      * The $addresses argument is an associative array using addresses for keys, and amounts to send to the address
      * as values. For example:
@@ -1262,30 +1262,30 @@ class Api
      * information.
      *
      * Returns an array with the following keys:
-     *  "hex"               - (string) The serialized, hex-encoded data.
-     *  "txid"              - (string) The transaction id.
-     *  "version"           - (int) The version.
-     *  "locktime"          - (int) The lock time.
-     *  "vin"               - (array) An array with the following keys:
-     *      "txid"          - (string) The transaction id.
-     *      "vout"          - (int) The vout index.
-     *      "scriptSig"     - (array) The script, an array with keys:
-     *          "asm"       - (string) Script in asm format.
-     *          "hex"       - (string) Script in hex format.
-     *      "sequence"      - (int) The script sequence number.
-     *  "vout"              - (array) An array with the following keys:
-     *      "value"         - (double) The amount sent.
-     *      "n"             - (int) The index.
-     *      "scriptPubKey"  - (array) An array with the following keys:
-     *          "asm"       - (string) The script in asm format.
-     *          "hex"       - (string) The script in hex format.
-     *          "reqSigs"   - (int) The number of required sigs.
-     *          "type"      - (string) The type, eg 'pubkeyhash'.
-     *          "addresses" - (array) An array of addresses.
-     *  "blockhash"         - (string) The block hash.
-     *  "confirmations"     - (int) The number of confirmations.
-     *  "time"              - (int) The transaction time in seconds since epoch (Jan 1 1970 GMT).
-     *  "blocktime"         - (int) The block time in seconds since epoch (Jan 1 1970 GMT).
+     *  "hex"               - (string)  The serialized, hex-encoded data.
+     *  "txid"              - (string)  The transaction id.
+     *  "version"           - (int)     The version.
+     *  "locktime"          - (int)     The lock time.
+     *  "vin"               - (array)   An array with the following keys:
+     *      "txid"          - (string)  The transaction id.
+     *      "vout"          - (int)     The vout index.
+     *      "scriptSig"     - (array)   The script, an array with keys:
+     *          "asm"       - (string)  Script in asm format.
+     *          "hex"       - (string)  Script in hex format.
+     *      "sequence"      - (int)     The script sequence number.
+     *  "vout"              - (array)   An array with the following keys:
+     *      "value"         - (double)  The amount sent.
+     *      "n"             - (int)     The index.
+     *      "scriptPubKey"  - (array)   An array with the following keys:
+     *          "asm"       - (string)  The script in asm format.
+     *          "hex"       - (string)  The script in hex format.
+     *          "reqSigs"   - (int)     The number of required sigs.
+     *          "type"      - (string)  The type, eg 'pubkeyhash'.
+     *          "addresses" - (array)   An array of addresses.
+     *  "blockhash"         - (string)  The block hash.
+     *  "confirmations"     - (int)     The number of confirmations.
+     *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
+     *  "blocktime"         - (int)     The block time in seconds since epoch (Jan 1 1970 GMT).
      *
      * @param  string $hex_string The serialized, hex-encoded transaction data
      * @return array
@@ -1302,8 +1302,7 @@ class Api
      * Encrypts the wallet with the given pass phrase
      *
      * After this, any calls that interact with private keys such as sending or signing will require the passphrase to
-     * be set prior the making these calls. Use the walletPassPhrase() for this, and then walletLock(). If the wallet
-     * is already encrypted, use the walletPassPhraseChange() method.
+     * be set prior the making these calls. Use the unlock() for this, and then lock().
      *
      * Note: This will shutdown the server.
      *
@@ -1319,16 +1318,16 @@ class Api
     }
     
     /**
-     * Removes the wallet encryption key from memory, locking the wallet.
+     * Removes the wallet encryption key from memory, locking the wallet
      *
-     * After calling this method, you will need to call walletPassPhrase() again before being able to call any methods
+     * After calling this method, you will need to call unlock() again before being able to call any methods
      * which require the wallet to be unlocked.
      *
-     * @return array
+     * @return bool
      */
     public function lock()
     {
-        return $this->server->query("walletLock");
+        return null === $this->server->query("walletLock");
     }
 
     /**
@@ -1374,7 +1373,7 @@ class Api
     }
 
     /**
-     * Safely copies wallet.dat to destination
+     * Safely copies wallet.dat to $destination
      *
      * The destination can be a directory or a path with filename.
      *
@@ -1402,7 +1401,7 @@ class Api
     /**
      * Fills the keypool
      *
-     * @return array
+     * @return bool
      */
     public function fillKeyPool()
     {
