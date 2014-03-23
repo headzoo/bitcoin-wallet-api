@@ -3,6 +3,7 @@
     "description": "Provides PHP classes to communicate with cryptocurrency wallets which support the Bitcoin JSON-RPC interface.",
     "type": "library",
     "license": "MIT",
+    "version": "0.2",
     "keywords": ["bitcoin", "litecoin", "cryptocurrency"],
     "version": "0.3",
     "authors": [
