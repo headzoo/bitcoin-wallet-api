@@ -110,11 +110,11 @@ class Server
         $error_str = null;
 
         $ch = curl_init("http://{$this->conf['host']}:{$this->conf['port']}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
-        curl_setopt($ch, CURLOPT_USERPWD, "{$this->conf['user']}:{$this->conf['pass']}");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,    1);
+        curl_setopt($ch, CURLOPT_POST,              1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,        $query);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,        ["Content-Type: application/json"]);
+        curl_setopt($ch, CURLOPT_USERPWD,           "{$this->conf['user']}:{$this->conf['pass']}");
         $response    = curl_exec($ch);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if (false === $response) {
@@ -125,26 +125,29 @@ class Server
         if (null !== $error_str) {
             throw new HttpException($error_str, $status_code);
         }
-        if (401 == $status_code) {
+        if (HTTPStatusCodes::UNAUTHORIZED == $status_code) {
             throw new AuthenticationException(
                 "The RPC username or password was incorrect.",
                 $status_code
             );
         }
-        if (404 == $status_code) {
+        if (HTTPStatusCodes::NOT_FOUND == $status_code) {
             $query = json_decode($query, true);
             throw new MethodNotFoundException(
                 "The method '{$query['method']}' was not found.",
-                $status_code
+                RPCErrorCodes::METHOD_NOT_FOUND
             );
         }
-        if (200 != $status_code) {
+        if (HTTPStatusCodes::OK != $status_code) {
             if ($response) {
                 $response = json_decode($response, true);
                 if (is_array($response) && !empty($response["error"])) {
+                    $code = !empty($response["error"]["code"])
+                        ? $response["error"]["code"]
+                        : $status_code;
                     throw new ServerException(
                         $response["error"]["message"],
-                        $status_code
+                        $code
                     );
                 }
             }
