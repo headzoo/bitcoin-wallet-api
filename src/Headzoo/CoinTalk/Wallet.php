@@ -16,7 +16,7 @@ namespace Headzoo\CoinTalk;
  *      "port" => 9332
  *  ];
  *  $server = new Server($conf);
- *  $api    = new Api($server);
+ *  $api    = new Wallet($server);
  *  $info   = $api->getInfo();
  * </code>
  *
@@ -28,7 +28,7 @@ namespace Headzoo\CoinTalk;
  * Note: Internally the methods cast each argument to expected types (instead of simply using func_get_args()) to catch
  * type errors. Be sure to have error reporting turned on during development to catch those errors.
  */
-class Api
+class Wallet
 {
     /**
      * Used to query the coin server
