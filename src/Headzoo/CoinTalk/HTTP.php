@@ -48,7 +48,7 @@ class HTTP
      * 
      * @param string $url The url to request
      */
-    public function __construct($url)
+    public function __construct($url = null)
     {
         $this->setUrl($url);
     }
@@ -58,6 +58,10 @@ class HTTP
      */
     public function request()
     {
+        if (!$this->url) {
+            throw new HTTPException("Request URL has not been set.", 1);
+        }
+        
         $ch = curl_init($this->url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,    1);
         curl_setopt($ch, CURLOPT_POST,              1);
