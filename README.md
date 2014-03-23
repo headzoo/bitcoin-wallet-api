@@ -1,7 +1,8 @@
 Coin Talk
 =========
 PHP library which facilitates communication with the Bitcoin JSON-RPC API. The rest of this documentation refers
-to the Bitcoin wallet, but this library works with any Bitcoin wallet descendant.
+to the Bitcoin wallet, but this library works with any Bitcoin wallet descendant. Including wallets for Litecoin and
+Dogecoin. 
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -79,7 +80,9 @@ rpcport=9335
 server=1
 ```
 
-You will of course want to choose a strong username and password combination.
+You will of course want to choose a strong username and password combination. Non-Bitcoin wallets are configured in the
+same way. For example the Litecoin data directory is located at */home/[user]/.litecoin* on Linux systems,
+and */Users/[user]/AppData/Roaming/Litecoin* on Windows systems, and the configuration file is named litecoin.conf.
 
 Examples
 --------
