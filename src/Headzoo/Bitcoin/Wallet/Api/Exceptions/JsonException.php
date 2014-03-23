@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\Bitcoin\Wallet\Api;
+namespace Headzoo\Bitcoin\Wallet\Api\Exceptions;
 
 /**
  * Thrown when json encoding or decoding fails.

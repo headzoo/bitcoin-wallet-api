@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\Bitcoin\Wallet\Api;
+namespace Headzoo\Bitcoin\Wallet\Api\Exceptions;
 
 /**
  * Thrown when the rpc username or password was incorrect.

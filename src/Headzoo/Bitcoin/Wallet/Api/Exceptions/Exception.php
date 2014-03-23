@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\Bitcoin\Wallet\Api;
+namespace Headzoo\Bitcoin\Wallet\Api\Exceptions;
 
 /**
  * Generic exception.
