@@ -138,19 +138,31 @@ class Server
                 RPCErrorCodes::METHOD_NOT_FOUND
             );
         }
+        
         if (HTTPStatusCodes::OK != $status_code) {
             if ($response) {
                 $response = json_decode($response, true);
                 if (is_array($response) && !empty($response["error"])) {
-                    $code = !empty($response["error"]["code"])
-                        ? $response["error"]["code"]
-                        : $status_code;
-                    throw new ServerException(
-                        $response["error"]["message"],
-                        $code
-                    );
+                    switch($response["error"]["code"]) {
+                        case RPCErrorCodes::WALLET_UNLOCK_NEEDED:
+                            throw new UnlockNeededException(
+                                $response["error"]["message"],
+                                $response["error"]["code"]
+                            );
+                            break;
+                        default:
+                            $code = !empty($response["error"]["code"])
+                                ? $response["error"]["code"]
+                                : $status_code;
+                            throw new ServerException(
+                                $response["error"]["message"],
+                                $code
+                            );
+                            break;
+                    }
                 }
             }
+            
             throw new HttpException(
                 "Received HTTP status code {$status_code} from the server. '{$response}'.",
                 $status_code
