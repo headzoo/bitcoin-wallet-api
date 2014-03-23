@@ -7,4 +7,4 @@ namespace Headzoo\Bitcoin\Wallet\Api\Exceptions;
  * This usually means the server returned a request id (nonce) different than the id we sent.
  */
 class IdentityException
-    extends Exception {}
+    extends RPCException {}
