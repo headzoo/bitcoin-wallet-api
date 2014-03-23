@@ -29,6 +29,7 @@ following features:
 * Abstracts away some of the Bitcoin API complications and inconsistencies, while tyring to stay close to the original.
 * RPCPool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
 * Solid documentation for each API call. Often taken directly from the Bitcoin source code.
+* PSR compliance.
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
