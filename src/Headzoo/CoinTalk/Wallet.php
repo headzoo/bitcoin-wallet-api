@@ -90,21 +90,21 @@ class Wallet
      * Returns an array containing various state info
      *
      * The returned array contains the following keys:
-     *  "version"           - (int)     The server version.
-     *  "protocolversion"   - (int)     The protocol version.
-     *  "walletversion"     - (int)     The wallet version.
-     *  "balance"           - (double)  The total bitcoin balance of the wallet.
-     *  "blocks"            - (int)     The current number of blocks processed in the server.
-     *  "timeoffset"        - (int)     The time offset.
-     *  "connections"       - (int)     The number of connections.
-     *  "proxy"             - (string)  The proxy used by the server.
-     *  "difficulty"        - (double)  The current difficulty.
-     *  "testnet"           - (boolean) If the server is using testnet or not.
-     *  "keypoololdest"     - (int)     The timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool.
-     *  "keypoolsize"       - (int)     How many new keys are pre-generated.
-     *  "unlocked_until"    - (int)     The timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked.
-     *  "paytxfee"          - (double)  The transaction fee set in btc/kb.
-     *  "errors"            - (string)  Any error messages.
+     *  * "version"           - (int)     The server version.
+     *  * "protocolversion"   - (int)     The protocol version.
+     *  * "walletversion"     - (int)     The wallet version.
+     *  * "balance"           - (double)  The total bitcoin balance of the wallet.
+     *  * "blocks"            - (int)     The current number of blocks processed in the server.
+     *  * "timeoffset"        - (int)     The time offset.
+     *  * "connections"       - (int)     The number of connections.
+     *  * "proxy"             - (string)  The proxy used by the server.
+     *  * "difficulty"        - (double)  The current difficulty.
+     *  * "testnet"           - (boolean) If the server is using testnet or not.
+     *  * "keypoololdest"     - (int)     The timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool.
+     *  * "keypoolsize"       - (int)     How many new keys are pre-generated.
+     *  * "unlocked_until"    - (int)     The timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked.
+     *  * "paytxfee"          - (double)  The transaction fee set in btc/kb.
+     *  * "errors"            - (string)  Any error messages.
      *
      * @return array
      */
