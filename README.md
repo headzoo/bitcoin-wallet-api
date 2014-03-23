@@ -226,15 +226,14 @@ v0.1 - 2013-12-18
 
 TODO
 ----
-* Handle errors caused by encrypted wallets.
 * Ensure the wallet is the right version for the API call.
 * Document which methods need an unlocked wallet.
-* Get list of all error messages. Don't use strpos($e->getMessage()).
 * Create classes for:
     * Blocks
     * Keys (public/private)
     * Addresses
     * Transactions
+    * etc
     
 License
 -------
