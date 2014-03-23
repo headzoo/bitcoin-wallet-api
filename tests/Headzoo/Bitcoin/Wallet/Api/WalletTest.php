@@ -129,21 +129,16 @@ class WalletTest
 
     /**
      * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::addNode
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getNodeInfo
      */
     public function testAddNode()
     {
         $this->assertTrue($this->wallet->addNode("127.0.0.1:8333", "add"));
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getNodeInfo
-     */
-    public function testGetNodeInfo()
-    {
         $this->assertArrayHasKey(
             "addednode",
             $this->wallet->getNodeInfo(true, "127.0.0.1:8333")[0]
         );
+        $this->assertTrue($this->wallet->addNode("127.0.0.1:8333", "remove"));
     }
 
     /**
@@ -202,7 +197,7 @@ class WalletTest
      */
     public function testGetBalance()
     {
-        $this->assertGreaterThan(0, $this->wallet->getBalance());
+        $this->assertNotEquals(0.0, $this->wallet->getBalance());
     }
 
     /**
@@ -230,51 +225,6 @@ class WalletTest
     public function testGetBalanceByAddress()
     {
         $this->assertGreaterThan(0, $this->wallet->getBalanceByAddress("1JBKAM8W9jEnuGNvPRFjtpmeDGvfQx6PLU"));
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::move
-     */
-    public function testMove()
-    {
-        $this->assertTrue(
-            $this->wallet->move("test1", "test2", 1.00)
-        );
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::send
-     * @expectedException Headzoo\Bitcoin\Wallet\Api\RPCException
-     */
-    public function testSend()
-    {
-        $this->assertNotEmpty(
-            $this->wallet->send("1JBKAM8W9jEnuGNvPRFjtpmeDGvfQx6PLU", "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM", 0.01)
-        );
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::sendFromAccount
-     */
-    public function testSendFromAccount()
-    {
-        $this->assertNotEmpty(
-            $this->wallet->sendFromAccount("Personal", "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM", 0.01)
-        );
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::sendManyFromAccount
-     */
-    public function testSendManyFromAccount()
-    {
-        $addresses = [
-            "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM" => 0.001,
-            "19tjsa4nBeAtn48kcmW9Gg2wRFtm24GRG2" => 0.001
-        ];
-        $this->assertNotEmpty(
-            $this->wallet->sendManyFromAccount("Personal", $addresses, 0.01)
-        );
     }
 
     /**
