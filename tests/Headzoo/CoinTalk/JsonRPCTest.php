@@ -62,9 +62,9 @@ class JsonRPCTest
 
     /**
      * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\HTTPException
+     * @expectedException Headzoo\CoinTalk\RPCException
      */
-    public function testQuery_HttpException_Path()
+    public function testQuery_RPCException_Path()
     {
         $this->conf["wallet1"]["host"] = "localhost/wrong";
         $this->rpc->setConf($this->conf["wallet1"]);
