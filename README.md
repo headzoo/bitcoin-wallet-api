@@ -189,7 +189,7 @@ try {
 
 Change Log
 ----------
-v0.2 - 2014-03-23
+##### v0.2 - 2014-03-23
 * Renamed methods starting with `list` in the `Headzoo\CoinTalk\Api` class with `get`, eg `listAccounts()` was renamed to `getAccounts()`.
 * Renamed the following methods to make the method names more consistent, and so they conform to my naming standards:
     * `Headzoo\CoinTalk\Api::sendRawTransaction()`      to `Headzoo\CoinTalk\Api::submitRawTransaction()`.
@@ -221,7 +221,8 @@ v0.2 - 2014-03-23
 * Removed the following methods:
     * `Headzoo\CoinTalk\Api::getReceivedByAccount()`.
     * `Headzoo\CoinTalk\Api::listReceivedByAccount()`.
-v0.1 - 2013-12-18
+    
+##### v0.1 - 2013-12-18
     * Genesis import!
 
 TODO
