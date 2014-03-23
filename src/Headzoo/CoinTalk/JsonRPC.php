@@ -17,7 +17,7 @@ namespace Headzoo\CoinTalk;
  * </code>
  */
 class JsonRPC
-    implements IServer
+    implements JsonRPCInterface
 {
     /**
      * Configuration for the litecoind rpc

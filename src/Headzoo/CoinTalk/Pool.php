@@ -2,9 +2,9 @@
 namespace Headzoo\CoinTalk;
 
 /**
- * Manages a pool of JsonRPC instances
+ * Manages a pool of JsonRPCInterface instances
  *
- * Acts as an instance of IServer, which transparently uses a pool of IServer
+ * Acts as an instance of JsonRPCInterface, which transparently uses a pool of JsonRPCInterface
  * instances to query wallets.
  *
  * Example:
@@ -31,13 +31,13 @@ namespace Headzoo\CoinTalk;
  *  $info = $pool->query("getinfo");
  */
 class Pool
-    implements IServer
+    implements JsonRPCInterface
 {
     /**
-     * The IServer instances in the pool
-     * @var IServer[]
+     * The JsonRPCInterface instances in the pool
+     * @var JsonRPCInterface[]
      */
-    private $servers = [];
+    private $items = [];
 
     /**
      * Number of servers in the pool
@@ -52,40 +52,40 @@ class Pool
     private $index = 0;
 
     /**
-     * Adds an IServer instance to the pool
+     * Adds an JsonRPCInterface instance to the pool
      *
-     * @param IServer $server The JsonRPC instance
+     * @param JsonRPCInterface $rpc The JsonRPCInterface instance
      * @return $this
      */
-    public function add(IServer $server)
+    public function add(JsonRPCInterface $rpc)
     {
-        $this->servers[] = $server;
+        $this->items[] = $rpc;
         $this->count++;
         return $this;
     }
 
     /**
-     * Returns an IServer instance from the pool
+     * Returns an JsonRPCInterface instance from the pool
      *
      * Returns null when there are no servers in the pool.
      *
-     * @return IServer|null
+     * @return JsonRPCInterface|null
      */
     public function get()
     {
-        $server = null;
+        $rpc = null;
         if ($this->count > 0) {
-            $server = $this->servers[$this->index];
+            $rpc = $this->items[$this->index];
             if (++$this->index > $this->count - 1) {
                 $this->index = 0;
             }
         }
 
-        return $server;
+        return $rpc;
     }
 
     /**
-     * Returns the number of IJsonRPC instances in the pool
+     * Returns the number of JsonRPCInterface instances in the pool
      *
      * @return int
      */
@@ -97,17 +97,17 @@ class Pool
     /**
      * {@inheritDoc}
      *
-     * @throws ServerException When the pool has no available servers
+     * @throws ServerException When the pool has no available JsonRPCInterface instances
      */
     public function query($method, array $params = [])
     {
-        $server = $this->get();
-        if (null === $server) {
+        $rpc = $this->get();
+        if (null === $rpc) {
             throw new ServerException(
-                "No IJsonRPC instances available in the pool."
+                "No JsonRPCInterface instances available in the pool."
             );
         }
 
-        return $server->query($method, $params);
+        return $rpc->query($method, $params);
     }
 }

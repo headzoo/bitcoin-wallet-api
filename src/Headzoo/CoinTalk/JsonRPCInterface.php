@@ -4,7 +4,7 @@ namespace Headzoo\CoinTalk;
 /**
  * Interface for the Bitcoin json-rpc.
  */
-interface IServer
+interface JsonRPCInterface
 {
     /**
      * Sends a raw query the litecoind rpc

@@ -66,7 +66,7 @@ Examples
 
 ##### Headzoo\CoinTalk\JsonRPC
 Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
-via the `Headzoo\CoinTalk\IServer` interface, which is used to call any of the wallet API methods.
+via the `Headzoo\CoinTalk\JsonRPCInterface` interface, which is used to call any of the wallet API methods.
 
 Although you may use this class directly, it does not provide concrete methods for each API call, and does not error
 check the arguments. It's recommended that you use the `Headzoo\CoinTalk\Wallet` class instead.
@@ -145,7 +145,7 @@ try {
 
 ##### Headzoo\CoinTalk\Pool
 Manages a pool of `Headzoo\CoinTalk\JsonRPC` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\JsonRPC`
-class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\IServer`. Each call to `Headzoo\CoinTalk\Pool::query()`
+class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\JsonRPCInterface`. Each call to `Headzoo\CoinTalk\Pool::query()`
 chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
 to an `Headzoo\CoinTalk\Wallet` instance to get the pooling and the higher level interface.
 

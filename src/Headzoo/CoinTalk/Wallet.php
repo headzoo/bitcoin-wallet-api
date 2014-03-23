@@ -4,7 +4,7 @@ namespace Headzoo\CoinTalk;
 /**
  * JsonRPC wrapper class
  *
- * Wraps a IJsonRPC instance, and provides concrete methods for each of the
+ * Wraps a JsonRPCInterface instance, and provides concrete methods for each of the
  * methods provided by the server.
  *
  * Example:
@@ -32,9 +32,9 @@ class Wallet
 {
     /**
      * Used to query the coin server
-     * @var IServer
+     * @var JsonRPCInterface
      */
-    protected $server;
+    protected $rpc;
 
     /**
      * Only include transactions confirmed at least this many times
@@ -45,23 +45,23 @@ class Wallet
     /**
      * Constructor
      *
-     * @param IServer $server  Needed to communicate with the server
+     * @param JsonRPCInterface $server  Needed to communicate with the server
      * @param int     $minconf Only include transactions confirmed at least this many times
      */
-    public function __construct(IServer $server, $minconf = 1)
+    public function __construct(JsonRPCInterface $server, $minconf = 1)
     {
-        $this->server = $server;
+        $this->rpc = $server;
         $this->setMinConf($minconf);
     }
 
     /**
-     * Returns the IServer instance being wrapped
+     * Returns the JsonRPCInterface instance being wrapped
      * 
-     * @return IServer
+     * @return JsonRPCInterface
      */
-    public function getServer()
+    public function getJsonRPC()
     {
-        return $this->server;
+        return $this->rpc;
     }
 
     /**
@@ -110,7 +110,7 @@ class Wallet
      */
     public function getInfo()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -120,7 +120,7 @@ class Wallet
      */
     public function getConnectionCount()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -130,7 +130,7 @@ class Wallet
      */
     public function getDifficulty()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -140,7 +140,7 @@ class Wallet
      */
     public function getGenerate()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -152,7 +152,7 @@ class Wallet
      */
     public function getHashesPerSec()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -175,7 +175,7 @@ class Wallet
      */
     public function getMiningInfo()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -202,7 +202,7 @@ class Wallet
      */
     public function getPeerInfo()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -212,7 +212,7 @@ class Wallet
      */
     public function getBestBlockHash()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
 
     /**
@@ -222,7 +222,7 @@ class Wallet
      */
     public function getBlockCount()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
     
     /**
@@ -236,7 +236,7 @@ class Wallet
         $args = [
             (double)$amount
         ];
-        return $this->server->query("setTxFee", $args);
+        return $this->rpc->query("setTxFee", $args);
     }
 
     /**
@@ -254,7 +254,7 @@ class Wallet
             (bool)$generate,
             (int)$gen_proc_limit
         ];
-        return null === $this->server->query(__FUNCTION__, $args);
+        return null === $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -270,7 +270,7 @@ class Wallet
             (string)$node,
             (string)$type
         ];
-        return null === $this->server->query(__FUNCTION__, $args);
+        return null === $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -304,7 +304,7 @@ class Wallet
         if (null !== $node) {
             $args[] = (string)$node;
         }
-        return $this->server->query("getAddedNodeInfo", $args);
+        return $this->rpc->query("getAddedNodeInfo", $args);
     }
 
     /**
@@ -320,7 +320,7 @@ class Wallet
             (string)$address,
             (string)$message
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -356,7 +356,7 @@ class Wallet
             !empty($priv_keys) ? $priv_keys : null,
             (string)$sighashtype
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -376,7 +376,7 @@ class Wallet
             (string)$signature,
             (string)$message
         ];
-        return $this->server->query("verifyMessage", $args);
+        return $this->rpc->query("verifyMessage", $args);
     }
 
     /**
@@ -390,7 +390,7 @@ class Wallet
             "*",
             $this->minconf
         ];
-        return $this->server->query("getBalance", $args);
+        return $this->rpc->query("getBalance", $args);
     }
 
     /**
@@ -414,7 +414,7 @@ class Wallet
             $this->minconf,
             (bool)$include_empty
         ];
-        return $this->server->query("listReceivedByAddress", $args);
+        return $this->rpc->query("listReceivedByAddress", $args);
     }
 
     /**
@@ -429,7 +429,7 @@ class Wallet
             (string)$account,
             $this->minconf
         ];
-        return $this->server->query("getBalance", $args);
+        return $this->rpc->query("getBalance", $args);
     }
 
     /**
@@ -444,7 +444,7 @@ class Wallet
             (string)$address,
             $this->minconf
         ];
-        return $this->server->query("getReceivedByAddress", $args);
+        return $this->rpc->query("getReceivedByAddress", $args);
     }
 
     /**
@@ -465,7 +465,7 @@ class Wallet
             $this->minconf,
             (string)$comment
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -487,7 +487,7 @@ class Wallet
             (string)$comment,
             (string)$comment_to
         ];
-        return $this->server->query("sendToAddress", $args);
+        return $this->rpc->query("sendToAddress", $args);
     }
 
     /**
@@ -510,7 +510,7 @@ class Wallet
             (string)$comment,
             (string)$comment_to
         ];
-        return $this->server->query("sendFrom", $args);
+        return $this->rpc->query("sendFrom", $args);
     }
 
     /**
@@ -529,7 +529,7 @@ class Wallet
             $this->minconf,
             (string)$comment
         ];
-        return $this->server->query("sendMany", $args);
+        return $this->rpc->query("sendMany", $args);
     }
     
     /**
@@ -547,7 +547,7 @@ class Wallet
     public function getAccounts()
     {
         $accounts = [];
-        $groups   = $this->server->query("listAccounts", [0]);
+        $groups   = $this->rpc->query("listAccounts", [0]);
         foreach($groups as $account => $balance) {
             $accounts[] = $account;
         }
@@ -571,7 +571,7 @@ class Wallet
             (string)$address,
             (string)$account
         ];
-        return null === $this->server->query(__FUNCTION__, $args);
+        return null === $this->rpc->query(__FUNCTION__, $args);
     }
     
     /**
@@ -587,7 +587,7 @@ class Wallet
         $args = [
             (string)$address
         ];
-        $account = $this->server->query("getAccount", $args);
+        $account = $this->rpc->query("getAccount", $args);
 
         return !empty($account) ? $account : null;
     }
@@ -607,7 +607,7 @@ class Wallet
     public function getAddresses()
     {
         $addresses = [];
-        $groups    = $this->server->query("listAddressGroupings");
+        $groups    = $this->rpc->query("listAddressGroupings");
         foreach($groups as $group) {
             foreach($group as $info) {
                 $addresses[] = $info[0];
@@ -631,7 +631,7 @@ class Wallet
         $args = [
             (string)$account
         ];
-        return $this->server->query("getAccountAddress", $args);
+        return $this->rpc->query("getAccountAddress", $args);
     }
     
     /**
@@ -645,7 +645,7 @@ class Wallet
         $args = [
             (string)$account
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -661,7 +661,7 @@ class Wallet
         $args = [
             (string)$account
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -678,7 +678,7 @@ class Wallet
         $args = [
             (string)$account
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -703,7 +703,7 @@ class Wallet
         $args = [
             (string)$address
         ];
-        return $this->server->query("validateAddress", $args);
+        return $this->rpc->query("validateAddress", $args);
     }
 
     /**
@@ -723,7 +723,7 @@ class Wallet
             (int)$nrequired,
             $keys
         ];
-        return $this->server->query("createMultiSig", $args);
+        return $this->rpc->query("createMultiSig", $args);
     }
 
     /**
@@ -748,7 +748,7 @@ class Wallet
         if (null !== $account) {
             $args[] = (string)$account;
         }
-        return $this->server->query("addMultiSigAddress", $args);
+        return $this->rpc->query("addMultiSigAddress", $args);
     }
 
     /**
@@ -768,7 +768,7 @@ class Wallet
 
         $priv_key = null;
         try {
-            $priv_key = $this->server->query("dumpPrivKey", $args);
+            $priv_key = $this->rpc->query("dumpPrivKey", $args);
         } catch (ServerException $e) {
             if ($e->getCode() != RPCErrorCodes::WALLET_ERROR) {
                 throw $e;
@@ -795,7 +795,7 @@ class Wallet
             (string)$label,
             (bool)$rescan
         ];
-        return null === $this->server->query("importPrivKey", $args);
+        return null === $this->rpc->query("importPrivKey", $args);
     }
     
     /**
@@ -828,7 +828,7 @@ class Wallet
             (string)$hash,
             (bool)$verbose
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -844,7 +844,7 @@ class Wallet
         $args = [
             (int)$index
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -880,7 +880,7 @@ class Wallet
             (string)$hash,
             (int)$target_confirmations
         ];
-        return $this->server->query("listSinceBlock", $args);
+        return $this->rpc->query("listSinceBlock", $args);
     }
 
     /**
@@ -914,7 +914,7 @@ class Wallet
         $args = [
             (string)$txid
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -950,7 +950,7 @@ class Wallet
             (int)$count,
             (int)$from
         ];
-        return $this->server->query("listTransactions", $args);
+        return $this->rpc->query("listTransactions", $args);
     }
 
     /**
@@ -960,7 +960,7 @@ class Wallet
      */
     public function getTransactionsFromMemoryPool()
     {
-        return $this->server->query("getRawMemPool");
+        return $this->rpc->query("getRawMemPool");
     }
     
     /**
@@ -1005,7 +1005,7 @@ class Wallet
             (string)$txid,
             (int)$verbose
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -1036,7 +1036,7 @@ class Wallet
             (int)$n,
             (bool)$include_mem_pool
         ];
-        return $this->server->query("getTxOut", $args);
+        return $this->rpc->query("getTxOut", $args);
     }
 
     /**
@@ -1057,7 +1057,7 @@ class Wallet
      */
     public function getTransactionOutSet()
     {
-        return $this->server->query("getTxOutSetInfo");
+        return $this->rpc->query("getTxOutSetInfo");
     }
 
     /**
@@ -1082,7 +1082,7 @@ class Wallet
             (int)$minconf,
             (int)$maxconf
         ];
-        return $this->server->query("listUnspent", $args);
+        return $this->rpc->query("listUnspent", $args);
     }
 
     /**
@@ -1094,7 +1094,7 @@ class Wallet
      */
     public function getLockUnspent()
     {
-        return $this->server->query("listLockUnspent");
+        return $this->rpc->query("listLockUnspent");
     }
 
     /**
@@ -1112,7 +1112,7 @@ class Wallet
             (bool)$unlock,
             $objs
         ];
-        return $this->server->query("lockUnspent", $args);
+        return $this->rpc->query("lockUnspent", $args);
     }
 
     /**
@@ -1161,7 +1161,7 @@ class Wallet
         $args = [
             $params
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -1189,7 +1189,7 @@ class Wallet
                 (string)$data
             ];
         }
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -1209,7 +1209,7 @@ class Wallet
             (string)$hex_data,
             $params
         ];
-        return $this->server->query("submitBlock", $args);
+        return $this->rpc->query("submitBlock", $args);
     }
 
     /**
@@ -1223,7 +1223,7 @@ class Wallet
         $args = [
             (string)$hex_data
         ];
-        return $this->server->query("sendRawTransaction", $args);
+        return $this->rpc->query("sendRawTransaction", $args);
     }
 
     /**
@@ -1272,7 +1272,7 @@ class Wallet
             $transactions,
             $addresses
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
@@ -1315,7 +1315,7 @@ class Wallet
         $args = [
             (string)$hex_string
         ];
-        return $this->server->query(__FUNCTION__, $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
     
     /**
@@ -1334,7 +1334,7 @@ class Wallet
         $args = [
             (string)$pass_phrase
         ];
-        return null === $this->server->query("encryptWallet", $args);
+        return null === $this->rpc->query("encryptWallet", $args);
     }
     
     /**
@@ -1347,7 +1347,7 @@ class Wallet
      */
     public function lock()
     {
-        return null === $this->server->query("walletLock");
+        return null === $this->rpc->query("walletLock");
     }
 
     /**
@@ -1366,7 +1366,7 @@ class Wallet
         ];
         
         try {
-            $this->server->query("walletPassPhrase", $args);
+            $this->rpc->query("walletPassPhrase", $args);
         } catch (ServerException $e) {
             if ($e->getCode() != RPCErrorCodes::WALLET_ALREADY_UNLOCKED) {
                 throw $e;
@@ -1389,7 +1389,7 @@ class Wallet
             (string)$old_passphrase,
             (string)$new_passphrase
         ];
-        return null === $this->server->query("walletPassPhraseChange", $args);
+        return null === $this->rpc->query("walletPassPhraseChange", $args);
     }
 
     /**
@@ -1405,7 +1405,7 @@ class Wallet
         $args = [
             (string)$destination
         ];
-        return null === $this->server->query("backupWallet", $args);
+        return null === $this->rpc->query("backupWallet", $args);
     }
 
     /**
@@ -1415,7 +1415,7 @@ class Wallet
      */
     public function stop()
     {
-        return $this->server->query(__FUNCTION__);
+        return $this->rpc->query(__FUNCTION__);
     }
     
     /**
@@ -1425,6 +1425,6 @@ class Wallet
      */
     public function fillKeyPool()
     {
-        return null === $this->server->query("keyPoolRefill");
+        return null === $this->rpc->query("keyPoolRefill");
     }
 } 
