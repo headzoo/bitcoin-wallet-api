@@ -65,8 +65,8 @@ Add the project to your composer.json as a dependency.
 ##### Wallet
 You will need to configure you wallet to act as a server before using this library. This is done by adding a few
 configuration values to the *bitcoin.conf* file. Shut down your wallet if it's running, and find your Bitcoin data
-directory. By default the data directory is located at */home/<user>/.bitcoin* on Linux systems,
-and */Users/<user>/AppData/Roaming/Bitcoin* on Windows systems. Create the *bitcoin.conf* file in the data directory
+directory. By default the data directory is located at */home/[user]/.bitcoin* on Linux systems,
+and */Users/[user]/AppData/Roaming/Bitcoin* on Windows systems. Create the *bitcoin.conf* file in the data directory
 if it does not already exist.
 
 Add the following lines:
