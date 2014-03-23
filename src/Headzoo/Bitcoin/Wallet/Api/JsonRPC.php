@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\CoinTalk;
+namespace Headzoo\Bitcoin\Wallet\Api;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 

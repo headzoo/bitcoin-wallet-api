@@ -1,6 +1,6 @@
 <?php
-use Headzoo\CoinTalk\RPCPool,
-    Headzoo\CoinTalk\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\RPCPool,
+    Headzoo\Bitcoin\Wallet\Api\JsonRPC;
 
 class RPCPoolTest
     extends PHPUnit_Framework_TestCase
@@ -21,11 +21,11 @@ class RPCPoolTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\RPCPool::add
+     * @covers Headzoo\Bitcoin\Wallet\Api\RPCPool::add
      */
     public function testAdd()
     {
-        $server = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
+        $server = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server);
@@ -35,14 +35,14 @@ class RPCPoolTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\RPCPool::get
+     * @covers Headzoo\Bitcoin\Wallet\Api\RPCPool::get
      */
     public function testGet()
     {
-        $server1 = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
+        $server1 = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
-        $server2 = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
+        $server2 = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server1);
@@ -63,7 +63,7 @@ class RPCPoolTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\RPCPool::query
+     * @covers Headzoo\Bitcoin\Wallet\Api\RPCPool::query
      */
     public function testQuery()
     {

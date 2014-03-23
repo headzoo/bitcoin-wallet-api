@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\CoinTalk;
+namespace Headzoo\Bitcoin\Wallet\Api;
 
 /**
  * The http status codes returned by the api.

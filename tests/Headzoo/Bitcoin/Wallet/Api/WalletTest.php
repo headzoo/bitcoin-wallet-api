@@ -1,6 +1,6 @@
 <?php
-use Headzoo\CoinTalk\Wallet;
-use Headzoo\CoinTalk\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\Wallet;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
 
 class WalletTest
     extends PHPUnit_Framework_TestCase
@@ -31,7 +31,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getInfo
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getInfo
      */
     public function testGetInfo()
     {
@@ -42,7 +42,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getConnectionCount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getConnectionCount
      */
     public function testGetConnectionCount()
     {
@@ -50,7 +50,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getDifficulty
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getDifficulty
      */
     public function testGetDifficulty()
     {
@@ -58,7 +58,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getGenerate
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getGenerate
      */
     public function testGetGenerate()
     {
@@ -66,7 +66,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getHashesPerSec
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getHashesPerSec
      */
     public function testGetHashesPerSec()
     {
@@ -74,7 +74,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getMiningInfo
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getMiningInfo
      */
     public function testGetMiningInfo()
     {
@@ -85,7 +85,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getPeerInfo
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getPeerInfo
      */
     public function testGetPeerInfo()
     {
@@ -96,7 +96,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBestBlockHash
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBestBlockHash
      */
     public function testGetBestBlockHash()
     {
@@ -104,7 +104,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBlockCount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBlockCount
      */
     public function testGetBlockCount()
     {
@@ -112,7 +112,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::setTransactionFee
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::setTransactionFee
      */
     public function testSetTransactionFee()
     {
@@ -120,7 +120,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::setGenerate
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::setGenerate
      */
     public function testSetGenerate()
     {
@@ -128,7 +128,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::addNode
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::addNode
      */
     public function testAddNode()
     {
@@ -136,7 +136,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getNodeInfo
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getNodeInfo
      */
     public function testGetNodeInfo()
     {
@@ -147,7 +147,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::signMessage
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::signMessage
      */
     public function testSignMessage()
     {
@@ -160,7 +160,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::signRawTransaction
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::signRawTransaction
      */
     public function testSignRawTransaction()
     {
@@ -172,7 +172,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::isSignedMessageValid
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::isSignedMessageValid
      */
     public function testIsSignedMessageValid()
     {
@@ -198,7 +198,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBalance
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBalance
      */
     public function testGetBalance()
     {
@@ -206,7 +206,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBalances
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBalances
      */
     public function testGetBalances()
     {
@@ -217,7 +217,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBalanceByAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBalanceByAccount
      */
     public function testGetBalanceByAccount()
     {
@@ -225,7 +225,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBalanceByAddress
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBalanceByAddress
      */
     public function testGetBalanceByAddress()
     {
@@ -233,7 +233,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::move
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::move
      */
     public function testMove()
     {
@@ -243,8 +243,8 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::send
-     * @expectedException Headzoo\CoinTalk\RPCException
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::send
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\RPCException
      */
     public function testSend()
     {
@@ -254,7 +254,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::sendFromAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::sendFromAccount
      */
     public function testSendFromAccount()
     {
@@ -264,7 +264,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::sendManyFromAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::sendManyFromAccount
      */
     public function testSendManyFromAccount()
     {
@@ -278,7 +278,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAccounts
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAccounts
      */
     public function testGetAccounts()
     {
@@ -289,7 +289,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::setAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::setAccount
      */
     public function testSetAccount()
     {
@@ -299,7 +299,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAccountByAddress
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAccountByAddress
      */
     public function testGetAccountByAddress()
     {
@@ -310,7 +310,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAddresses
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAddresses
      */
     public function testGetAddresses()
     {
@@ -320,7 +320,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAddressByAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAddressByAccount
      */
     public function testGetAddressByAccount()
     {
@@ -330,7 +330,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAddressesByAccount
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAddressesByAccount
      */
     public function testGetAddressesByAccount()
     {
@@ -340,7 +340,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getRawChangeAddress
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getRawChangeAddress
      */
     public function testGetRawChangeAddress()
     {
@@ -350,7 +350,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getNewAddress
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getNewAddress
      */
     public function testGetNewAddress()
     {
@@ -360,7 +360,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getAddressInfo
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getAddressInfo
      */
     public function testGetAddressInfo()
     {
@@ -369,7 +369,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getPrivateKeyByAddress
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getPrivateKeyByAddress
      */
     public function testGetPrivateKeyByAddress()
     {
@@ -379,7 +379,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBlock
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBlock
      */
     public function testGetBlock()
     {
@@ -390,7 +390,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBlockHash
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBlockHash
      */
     public function testGetBlockHash()
     {
@@ -401,7 +401,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getTransaction
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getTransaction
      */
     public function testGetTransaction()
     {
@@ -412,7 +412,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getTransactions
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getTransactions
      */
     public function testGetTransactions()
     {
@@ -422,7 +422,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getTransactionsFromMemoryPool
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getTransactionsFromMemoryPool
      */
     public function testGetTransactionsFromMemoryPool()
     {
@@ -432,7 +432,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getBlockTemplate
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getBlockTemplate
      */
     public function testGetBlockTemplate()
     {
@@ -443,7 +443,7 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Wallet::getWork
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getWork
      */
     public function testGetWork()
     {

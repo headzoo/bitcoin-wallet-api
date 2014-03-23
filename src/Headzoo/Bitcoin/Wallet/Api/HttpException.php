@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\CoinTalk;
+namespace Headzoo\Bitcoin\Wallet\Api;
 
 /**
  * Thrown when there was an error communicating with the server.

@@ -1,5 +1,5 @@
 <?php
-namespace Headzoo\CoinTalk;
+namespace Headzoo\Bitcoin\Wallet\Api;
 
 /**
  * Thrown when the rpc username or password was incorrect.

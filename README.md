@@ -14,7 +14,7 @@ Dogecoin.
 - [Class Documentation](#class-documentation)
     - [Headzoo\CoinTalk\JsonRPC](#headzoocointalkjsonrpc)
     - [Headzoo\CoinTalk\Wallet](#headzoocointalkwallet)
-    - [Headzoo\CoinTalk\RPCPool](#headzoocointalkrpcpool)
+    - [Headzoo\Bitcoin\Wallet\Api\RPCPool](#headzoocointalkrpcpool)
 - [Change Log](#change-log)
 - [TODO](#todo)
 - [License](#license)
@@ -93,9 +93,9 @@ Getting Started
 ---------------
 ```php
 <?php
-use Headzoo\CoinTalk\JsonRPC;
-use Headzoo\CoinTalk\Wallet;
-use Headzoo\CoinTalk\RPCException;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\Wallet;
+use Headzoo\Bitcoin\Wallet\Api\RPCException;
 
 // These configuration settings must match those from the bitcoin.conf file.
 $conf = [
@@ -199,15 +199,15 @@ Class Documentation
 -------------------
 The full class API documentation is available in the [/docs](docs/README.md) directory.
 
-##### Headzoo\CoinTalk\JsonRPC
+##### Headzoo\Bitcoin\Wallet\Api\JsonRPC
 Core class which directly communicates with Bitcoin wallets supporting the JSON-RPC API. This class provides a single
-`query($method, array $params = [])` method via the `Headzoo\CoinTalk\JsonRPCInterface` interface. Although you may
-use this class directly to query a wallet, it's best to use an instance of `Headzoo\CoinTalk\Wallet` instead.
+`query($method, array $params = [])` method via the `Headzoo\Bitcoin\Wallet\Api\JsonRPCInterface` interface. Although you may
+use this class directly to query a wallet, it's best to use an instance of `Headzoo\Bitcoin\Wallet\Api\Wallet` instead.
 
 ```php
 <?php
-use Headzoo\CoinTalk\JsonRPC;
-use Headzoo\CoinTalk\RPCException;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\RPCException;
 
 $conf = [
     "user" => "testuser",
@@ -225,17 +225,17 @@ try {
 }
 ```
 
-##### Headzoo\CoinTalk\Wallet
-Wraps an instance of `Headzoo\CoinTalk\JsonRPCInterface` to provide a higher level interface to the wallet API. This
-class has methods for every single API call, eg `Headzoo\CoinTalk\Wallet::getInfo()`, `Headzoo\CoinTalk\Wallet::backup($destination)`,
-`Headzoo\CoinTalk\Wallet::getAccount($account)`, etc. Using this class instead of directly using `Headzoo\CoinTalk\JsonRPC`
+##### Headzoo\Bitcoin\Wallet\Api\Wallet
+Wraps an instance of `Headzoo\Bitcoin\Wallet\Api\JsonRPCInterface` to provide a higher level interface to the wallet API. This
+class has methods for every single API call, eg `Headzoo\Bitcoin\Wallet\Api\Wallet::getInfo()`, `Headzoo\Bitcoin\Wallet\Api\Wallet::backup($destination)`,
+`Headzoo\Bitcoin\Wallet\Api\Wallet::getAccount($account)`, etc. Using this class instead of directly using `Headzoo\Bitcoin\Wallet\Api\JsonRPC`
 makes it easier to catch programming errors, and allows IDEs to provide auto-complete and type hinting.
 
 ```php
 <?php
-use Headzoo\CoinTalk\JsonRPC;
-use Headzoo\CoinTalk\Wallet;
-use Headzoo\CoinTalk\RPCException;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\Wallet;
+use Headzoo\Bitcoin\Wallet\Api\RPCException;
 
 $conf = [
     "user" => "testnet",
@@ -255,16 +255,16 @@ try {
 }
 ```
 
-##### Headzoo\CoinTalk\RPCPool
-Wallet servers may be clustered and queried randomly using the `Headzoo\CoinTalk\RPCPool` class.
-Both `Headzoo\CoinTalk\JsonRPC` and `Headzoo\CoinTalk\RPCPool` implement `Headzoo\CoinTalk\JsonRPCInterface`, which
-means either may be passed to the `Headzoo\CoinTalk\Wallet` constructor.
+##### Headzoo\Bitcoin\Wallet\Api\RPCPool
+Wallet servers may be clustered and queried randomly using the `Headzoo\Bitcoin\Wallet\Api\RPCPool` class.
+Both `Headzoo\Bitcoin\Wallet\Api\JsonRPC` and `Headzoo\Bitcoin\Wallet\Api\RPCPool` implement `Headzoo\Bitcoin\Wallet\Api\JsonRPCInterface`, which
+means either may be passed to the `Headzoo\Bitcoin\Wallet\Api\Wallet` constructor.
 
 ```php
 <?php
-use Headzoo\CoinTalk\RPCPool;
-use Headzoo\CoinTalk\JsonRPC;
-use Headzoo\CoinTalk\RPCException;
+use Headzoo\Bitcoin\Wallet\Api\RPCPool;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\RPCException;
 
 // Start by creating a new pool, adding JsonRPCInterface instances to it, and then pass the pool
 // to the Wallet constructor.
@@ -293,7 +293,7 @@ try {
     $info     = $wallet->getInfo();
     $balance  = $wallet->getBalance();
     $accounts = $wallet->getAccounts();
-} catch (Headzoo\CoinTalk\RPCException $e) {
+} catch (Headzoo\Bitcoin\Wallet\Api\RPCException $e) {
     echo $e->getTraceAsString();
     die();
 }
@@ -301,6 +301,10 @@ try {
 
 Change Log
 ----------
+##### v0.4 - 2014-03-23
+* Renamed project to Bitcoin Wallet API.
+* Renamed namespace `Headzoo\CoinTalk` to `Headzoo\Bitcoin\Wallet\Api`.
+
 ##### v0.3 - 2014-03-23
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
 * Renamed class `Headzoo\CoinTalk\Server` to `Headzoo\CoinTalk\JsonRPC`.

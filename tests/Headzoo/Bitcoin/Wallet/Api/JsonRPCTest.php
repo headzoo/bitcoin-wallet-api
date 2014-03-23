@@ -1,5 +1,5 @@
 <?php
-use Headzoo\CoinTalk\JsonRPC;
+use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
 
 /**
  * Test needs a running instance of bitcoind/bitcoin-qt or any other coin server.
@@ -30,7 +30,7 @@ class JsonRPCTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\JsonRPC::query
+     * @covers Headzoo\Bitcoin\Wallet\Api\JsonRPC::query
      */
     public function testQuery()
     {
@@ -40,8 +40,8 @@ class JsonRPCTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\MethodNotFoundException
+     * @covers Headzoo\Bitcoin\Wallet\Api\JsonRPC::query
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\MethodNotFoundException
      */
     public function testQuery_MethodNotFoundException()
     {
@@ -50,8 +50,8 @@ class JsonRPCTest
     }
     
     /**
-     * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\AuthenticationException
+     * @covers Headzoo\Bitcoin\Wallet\Api\JsonRPC::query
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\AuthenticationException
      */
     public function testQuery_AuthenticationException()
     {
@@ -61,8 +61,8 @@ class JsonRPCTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\RPCException
+     * @covers Headzoo\Bitcoin\Wallet\Api\JsonRPC::query
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\RPCException
      */
     public function testQuery_RPCException_Path()
     {
@@ -72,8 +72,8 @@ class JsonRPCTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\HTTPException
+     * @covers Headzoo\Bitcoin\Wallet\Api\JsonRPC::query
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\HTTPException
      */
     public function testQuery_HttpException_Port()
     {

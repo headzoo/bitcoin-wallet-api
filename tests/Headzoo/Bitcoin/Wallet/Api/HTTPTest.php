@@ -1,5 +1,5 @@
 <?php
-use Headzoo\CoinTalk\HTTP;
+use Headzoo\Bitcoin\Wallet\Api\HTTP;
 
 class HTTPTest
     extends PHPUnit_Framework_TestCase
@@ -32,7 +32,7 @@ class HTTPTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\HTTP::request
+     * @covers Headzoo\Bitcoin\Wallet\Api\HTTP::request
      */
     public function testRequest()
     {
@@ -44,7 +44,7 @@ class HTTPTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\HTTP::getStatusCode
+     * @covers Headzoo\Bitcoin\Wallet\Api\HTTP::getStatusCode
      */
     public function testGetStatusCode()
     {
@@ -56,8 +56,8 @@ class HTTPTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\HTTP::request
-     * @expectedException Headzoo\CoinTalk\HTTPException
+     * @covers Headzoo\Bitcoin\Wallet\Api\HTTP::request
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\HTTPException
      */
     public function testRequest_HTTPException()
     {
