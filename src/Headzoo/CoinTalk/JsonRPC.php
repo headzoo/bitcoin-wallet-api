@@ -31,6 +31,12 @@ class JsonRPC
     ];
 
     /**
+     * Used to make http request to the wallet
+     * @var HTTPInterface
+     */
+    private $http;
+
+    /**
      * Constructor
      *
      * @param array $conf See the setConf() method
@@ -58,6 +64,34 @@ class JsonRPC
         return $this;
     }
 
+    /**
+     * Sets the HTTPInterface used to make requests to the wallet
+     * 
+     * @param HTTPInterface $http The HTTPInterface instance
+     * @return $this
+     */
+    public function setHTTP(HTTPInterface $http)
+    {
+        $this->http = $http;
+        return $this;
+    }
+
+    /**
+     * Returns the HTTPInterface instance used to make requests to the wallet
+     * 
+     * Automatically creates an instance if none has been set.
+     * 
+     * @return HTTPInterface
+     */
+    public function getHTTP()
+    {
+        if (null === $this->http) {
+            $this->http = new HTTP();
+        }
+        
+        return $this->http;
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -107,24 +141,15 @@ class JsonRPC
      */
     protected function exec($query)
     {
-        $error_str = null;
+        $http = $this->getHTTP()
+            ->setUrl("http://{$this->conf['host']}:{$this->conf['port']}")
+            ->setContentType("application/json")
+            ->setAuthUser($this->conf["user"])
+            ->setAuthPass($this->conf["pass"])
+            ->setPostData($query);
+        $response    = $http->request();
+        $status_code = $http->getStatusCode();
 
-        $ch = curl_init("http://{$this->conf['host']}:{$this->conf['port']}");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,    1);
-        curl_setopt($ch, CURLOPT_POST,              1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,        $query);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,        ["Content-Type: application/json"]);
-        curl_setopt($ch, CURLOPT_USERPWD,           "{$this->conf['user']}:{$this->conf['pass']}");
-        $response    = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        if (false === $response) {
-            $error_str = curl_error($ch);
-        }
-        curl_close($ch);
-
-        if (null !== $error_str) {
-            throw new HTTPException($error_str, $status_code);
-        }
         if (HTTPStatusCodes::UNAUTHORIZED == $status_code) {
             throw new AuthenticationException(
                 "The RPC username or password was incorrect.",
@@ -138,7 +163,6 @@ class JsonRPC
                 RPCErrorCodes::METHOD_NOT_FOUND
             );
         }
-        
         if (HTTPStatusCodes::OK != $status_code) {
             if ($response) {
                 $response = json_decode($response, true);
@@ -162,8 +186,8 @@ class JsonRPC
                     }
                 }
             }
-            
-            throw new HTTPException(
+
+            throw new RPCException(
                 "Received HTTP status code {$status_code} from the server. '{$response}'.",
                 $status_code
             );
