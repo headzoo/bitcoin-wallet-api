@@ -51,7 +51,7 @@ class JsonRPC
      * @param HTTPInterface   $http   Used to make http post requests
      * @param LoggerInterface $logger Log requests and errors with this instance
      */
-    public function __construct(array $conf = [], HTTPInterface $http, LoggerInterface $logger = null)
+    public function __construct(array $conf = [], HTTPInterface $http = null, LoggerInterface $logger = null)
     {
         $this->setConf($conf);
         if (null !== $http) {
