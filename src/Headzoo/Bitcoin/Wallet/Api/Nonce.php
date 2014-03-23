@@ -11,6 +11,6 @@ class Nonce
      */
     public function generate()
     {
-        return (string)rand();
+        return (string)str_replace(".", "", uniqid("", true));
     }
 } 
