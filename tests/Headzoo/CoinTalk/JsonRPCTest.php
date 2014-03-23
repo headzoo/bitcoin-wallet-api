@@ -1,10 +1,10 @@
 <?php
-use Headzoo\CoinTalk\Server;
+use Headzoo\CoinTalk\JsonRPC;
 
 /**
  * Test needs a running instance of bitcoind/bitcoin-qt or any other coin server.
  */
-class ServerTest
+class JsonRPCTest
     extends PHPUnit_Framework_TestCase
 {
     /**
@@ -15,9 +15,9 @@ class ServerTest
     
     /**
      * The test fixture
-     * @var Server
+     * @var JsonRPC
      */
-    protected $fixture;
+    protected $rpc;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -26,59 +26,59 @@ class ServerTest
     protected function setUp()
     {
         $this->conf = include(__DIR__ . "/conf.php");
-        $this->fixture = new Server();
+        $this->rpc  = new JsonRPC();
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Server::query
+     * @covers Headzoo\CoinTalk\JsonRPC::query
      */
     public function testQuery()
     {
-        $this->fixture->setConf($this->conf["wallet1"]);
-        $response = $this->fixture->query("getinfo");
+        $this->rpc->setConf($this->conf["wallet1"]);
+        $response = $this->rpc->query("getinfo");
         $this->assertTrue(isset($response["version"]));
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Server::query
+     * @covers Headzoo\CoinTalk\JsonRPC::query
      * @expectedException Headzoo\CoinTalk\MethodNotFoundException
      */
     public function testQuery_MethodNotFoundException()
     {
-        $this->fixture->setConf($this->conf["wallet1"]);
-        $this->fixture->query("badmethod");
+        $this->rpc->setConf($this->conf["wallet1"]);
+        $this->rpc->query("badmethod");
     }
     
     /**
-     * @covers Headzoo\CoinTalk\Server::query
+     * @covers Headzoo\CoinTalk\JsonRPC::query
      * @expectedException Headzoo\CoinTalk\AuthenticationException
      */
     public function testQuery_AuthenticationException()
     {
         $this->conf["wallet1"]["user"] = "wrong";
-        $this->fixture->setConf($this->conf["wallet1"]);
-        $this->fixture->query("getinfo");
+        $this->rpc->setConf($this->conf["wallet1"]);
+        $this->rpc->query("getinfo");
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Server::query
+     * @covers Headzoo\CoinTalk\JsonRPC::query
      * @expectedException Headzoo\CoinTalk\HttpException
      */
     public function testQuery_HttpException_Path()
     {
         $this->conf["wallet1"]["host"] = "localhost/wrong";
-        $this->fixture->setConf($this->conf["wallet1"]);
-        $this->fixture->query("getinfo");
+        $this->rpc->setConf($this->conf["wallet1"]);
+        $this->rpc->query("getinfo");
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Server::query
+     * @covers Headzoo\CoinTalk\JsonRPC::query
      * @expectedException Headzoo\CoinTalk\HttpException
      */
     public function testQuery_HttpException_Port()
     {
         $this->conf["wallet1"]["port"] = 6545;
-        $this->fixture->setConf($this->conf["wallet1"]);
-        $this->fixture->query("getinfo");
+        $this->rpc->setConf($this->conf["wallet1"]);
+        $this->rpc->query("getinfo");
     }
 }

@@ -12,11 +12,11 @@ namespace Headzoo\CoinTalk;
  *      "host" => "localhost",
  *      "port" => 9332
  *  ];
- *  $server = new Server($conf);
- *  $info = $server->query("getinfo");
+ *  $rpc  = new JsonRPC($conf);
+ *  $info = $rpc->query("getinfo");
  * </code>
  */
-class Server
+class JsonRPC
     implements IServer
 {
     /**

@@ -11,7 +11,7 @@ which is a decentest of the Bitcoin wallet.
     - [Git](#git)
     - [Composer](#composer)
 - [Examples](#examples)
-    - [Headzoo\CoinTalk\Server](#headzoocointalkserver)
+    - [Headzoo\CoinTalk\JsonRPC](#headzoocointalkserver)
     - [Headzoo\CoinTalk\Wallet](#headzoocointalkapi)
     - [Headzoo\CoinTalk\Pool](#headzoocointalkpool)
 - [Change Log](#changelog)
@@ -64,7 +64,7 @@ Add the project to your composer.json as a dependency.
 Examples
 --------
 
-##### Headzoo\CoinTalk\Server
+##### Headzoo\CoinTalk\JsonRPC
 Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
 via the `Headzoo\CoinTalk\IServer` interface, which is used to call any of the wallet API methods.
 
@@ -87,9 +87,9 @@ $conf = [
     "port" => 9332
 ];
 
-// Create the Server instance, and query the wallet for info.
+// Create the JsonRPC instance, and query the wallet for info.
 try {
-    $server = new Headzoo\CoinTalk\Server($conf);
+    $server = new Headzoo\CoinTalk\JsonRPC($conf);
     $info = $server->query("getinfo");
     print_r($info);
 } catch (Headzoo\CoinTalk\ServerException $e) {
@@ -118,9 +118,9 @@ try {
 ```
 
 ##### Headzoo\CoinTalk\Wallet
-Wraps an instance of `Headzoo\CoinTalk\Server` to provide a higher level interface. This class has a method for every
+Wraps an instance of `Headzoo\CoinTalk\JsonRPC` to provide a higher level interface. This class has a method for every
 single wallet method, eg `Wallet::getInfo()`, `Wallet::backup($destination)`, `Wallet::getAccount($account)`, etc. Using
-this class instead of using `Headzoo\CoinTalk\Server` directly makes it easier to catch programming errors, and allows
+this class instead of using `Headzoo\CoinTalk\JsonRPC` directly makes it easier to catch programming errors, and allows
 IDEs to provide type hinting.
 
 ```php
@@ -132,7 +132,7 @@ $conf = [
 ];
 
 try {
-    $server = new Headzoo\CoinTalk\Server($conf);
+    $server = new Headzoo\CoinTalk\JsonRPC($conf);
     $api    = new Headzoo\CoinTalk\Wallet($server);
     $info    = $api->getInfo();
     $account = $api->getAccount("personal");
@@ -144,7 +144,7 @@ try {
 ```
 
 ##### Headzoo\CoinTalk\Pool
-Manages a pool of `Headzoo\CoinTalk\Server` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\Server`
+Manages a pool of `Headzoo\CoinTalk\JsonRPC` instances, which allows clustering of wallets. Like the `Headzoo\CoinTalk\JsonRPC`
 class, the `Headzoo\CoinTalk\Pool` class implements `Headzoo\CoinTalk\IServer`. Each call to `Headzoo\CoinTalk\Pool::query()`
 chooses one of the pooled server instances, and sends the query through that server. Instances of this class may be passed
 to an `Headzoo\CoinTalk\Wallet` instance to get the pooling and the higher level interface.
@@ -157,7 +157,7 @@ $conf = [
     "host" => "localhost",
     "port" => 9332
 ];
-$server = new Headzoo\CoinTalk\Server($conf);
+$server = new Headzoo\CoinTalk\JsonRPC($conf);
 $pool->add($server);
 
 $conf = [
@@ -166,10 +166,10 @@ $conf = [
     "host" => "localhost",
     "port" => 9333
 ];
-$server = new Headzoo\CoinTalk\Server($conf);
+$server = new Headzoo\CoinTalk\JsonRPC($conf);
 $pool->add($server);
 
-// The query will be sent using one of the Server instances in the pool.
+// The query will be sent using one of the JsonRPC instances in the pool.
 try {
     $info = $pool->query("getinfo");
 } catch (Headzoo\CoinTalk\ServerException $e) {

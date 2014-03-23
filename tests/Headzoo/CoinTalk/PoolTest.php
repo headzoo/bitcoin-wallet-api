@@ -1,6 +1,6 @@
 <?php
 use Headzoo\CoinTalk\Pool,
-    Headzoo\CoinTalk\Server;
+    Headzoo\CoinTalk\JsonRPC;
 
 class PoolTest
     extends PHPUnit_Framework_TestCase
@@ -25,7 +25,7 @@ class PoolTest
      */
     public function testAdd()
     {
-        $server = $this->getMockBuilder('Headzoo\CoinTalk\Server')
+        $server = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server);
@@ -39,10 +39,10 @@ class PoolTest
      */
     public function testGet()
     {
-        $server1 = $this->getMockBuilder('Headzoo\CoinTalk\Server')
+        $server1 = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
-        $server2 = $this->getMockBuilder('Headzoo\CoinTalk\Server')
+        $server2 = $this->getMockBuilder('Headzoo\CoinTalk\JsonRPC')
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server1);
@@ -68,10 +68,10 @@ class PoolTest
     public function testQuery()
     {
         $conf = include(__DIR__ . "/conf.php");
-        $server = new Server($conf["wallet1"]);
+        $server = new JsonRPC($conf["wallet1"]);
         $this->pool->add($server);
 
-        $server = new Server($conf["wallet2"]);
+        $server = new JsonRPC($conf["wallet2"]);
         $this->pool->add($server);
 
         $info = $this->pool->query("getinfo");

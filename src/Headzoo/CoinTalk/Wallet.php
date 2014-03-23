@@ -2,9 +2,9 @@
 namespace Headzoo\CoinTalk;
 
 /**
- * Server wrapper class
+ * JsonRPC wrapper class
  *
- * Wraps a Server instance, and provides concrete methods for each of the
+ * Wraps a IJsonRPC instance, and provides concrete methods for each of the
  * methods provided by the server.
  *
  * Example:
@@ -15,9 +15,9 @@ namespace Headzoo\CoinTalk;
  *      "host" => "localhost",
  *      "port" => 9332
  *  ];
- *  $server = new Server($conf);
- *  $api    = new Wallet($server);
- *  $info   = $api->getInfo();
+ *  $rpc    = new JsonRPC($conf);
+ *  $wallet = new Wallet($rpc);
+ *  $info   = $wallet->getInfo();
  * </code>
  *
  * @see https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list

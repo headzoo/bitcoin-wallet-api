@@ -2,7 +2,7 @@
 namespace Headzoo\CoinTalk;
 
 /**
- * Interface for wallet servers
+ * Interface for the Bitcoin json-rpc.
  */
 interface IServer
 {
@@ -13,8 +13,8 @@ interface IServer
      *
      * Example:
      * <code>
-     *  $server = new Server();
-     *  $info = $server->query("getinfo");
+     *  $rpc  = new JsonRPC();
+     *  $info = $rpc->query("getinfo");
      *  echo $info["version"];
      *  echo $info["balance"];
      *  echo $info["difficulty"];

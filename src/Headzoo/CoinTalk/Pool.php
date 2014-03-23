@@ -2,7 +2,7 @@
 namespace Headzoo\CoinTalk;
 
 /**
- * Manages a pool of Server instances
+ * Manages a pool of JsonRPC instances
  *
  * Acts as an instance of IServer, which transparently uses a pool of IServer
  * instances to query wallets.
@@ -16,8 +16,8 @@ namespace Headzoo\CoinTalk;
  *      "host" => "localhost",
  *      "port" => 9332
  *  ];
- *  $server = new Server($conf);
- *  $pool->add($server);
+ *  $rpc = new JsonRPC($conf);
+ *  $pool->add($rpc);
  *
  *  $conf = [
  *      "user" => "test",
@@ -25,8 +25,8 @@ namespace Headzoo\CoinTalk;
  *      "host" => "localhost",
  *      "port" => 9333
  *  ];
- *  $server = new Server($conf);
- *  $pool->add($server);
+ *  $rpc = new JsonRPC($conf);
+ *  $pool->add($rpc);
  *
  *  $info = $pool->query("getinfo");
  */
@@ -54,7 +54,7 @@ class Pool
     /**
      * Adds an IServer instance to the pool
      *
-     * @param IServer $server The Server instance
+     * @param IServer $server The JsonRPC instance
      * @return $this
      */
     public function add(IServer $server)
@@ -85,7 +85,7 @@ class Pool
     }
 
     /**
-     * Returns the number of Server instances in the pool
+     * Returns the number of IJsonRPC instances in the pool
      *
      * @return int
      */
@@ -104,7 +104,7 @@ class Pool
         $server = $this->get();
         if (null === $server) {
             throw new ServerException(
-                "No Server instances available in the pool."
+                "No IJsonRPC instances available in the pool."
             );
         }
 
