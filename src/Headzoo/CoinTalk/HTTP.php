@@ -5,6 +5,7 @@ namespace Headzoo\CoinTalk;
  * Used to make http post requests.
  */
 class HTTP
+    implements HTTPInterface
 {
     /**
      * The url to request
@@ -53,10 +54,7 @@ class HTTP
     }
 
     /**
-     * Sends the request and returns the response
-     * 
-     * @return string
-     * @throws HTTPException If the request generates an error
+     * {@inheritDoc}
      */
     public function request()
     {
@@ -83,22 +81,16 @@ class HTTP
     }
 
     /**
-     * Sets the url to request
-     * 
-     * @param  string $url The request url
-     * @return $this
+     * {@inheritDoc}
      */
     public function setUrl($url)
     {
         $this->url = (string)$url;
         return $this;
     }
-    
+
     /**
-     * Sets the post data
-     * 
-     * @param  mixed $post_data The post data
-     * @return $this
+     * {@inheritDoc}
      */
     public function setPostData($post_data)
     {
@@ -107,10 +99,7 @@ class HTTP
     }
 
     /**
-     * Sets the content type
-     * 
-     * @param  string $content_type The content type
-     * @return $this
+     * {@inheritDoc}
      */
     public function setContentType($content_type)
     {
@@ -119,10 +108,7 @@ class HTTP
     }
 
     /**
-     * Sets the basic auth username
-     * 
-     * @param  string $auth_user The username
-     * @return $this
+     * {@inheritDoc}
      */
     public function setAuthUser($auth_user)
     {
@@ -131,10 +117,7 @@ class HTTP
     }
 
     /**
-     * Sets the basic auth password
-     * 
-     * @param  string $auth_pass The password
-     * @return $this
+     * {@inheritDoc}
      */
     public function setAuthPass($auth_pass)
     {
@@ -143,9 +126,7 @@ class HTTP
     }
 
     /**
-     * Returns the status code returned by the server
-     * 
-     * @return int
+     * {@inheritDoc}
      */
     public function getStatusCode()
     {
