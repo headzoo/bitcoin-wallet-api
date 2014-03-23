@@ -84,8 +84,8 @@ Constructor
 
 #### Arguments
 
-* $conf **array** - &lt;p&gt;See the setConf() method&lt;/p&gt;
-* $logger **Psr\Log\LoggerInterface** - &lt;p&gt;Log requests and errors with this instance&lt;/p&gt;
+* $conf **array** - See the setConf() method
+* $logger **Psr\Log\LoggerInterface** - Log requests and errors with this instance
 
 
 
@@ -107,7 +107,7 @@ The configuration array should contain 4 items:
 
 #### Arguments
 
-* $conf **array** - &lt;p&gt;Configuration for the rpc&lt;/p&gt;
+* $conf **array** - Configuration for the rpc
 
 
 
@@ -125,7 +125,7 @@ Once set, requests and errors will be logged using the instance.
 
 #### Arguments
 
-* $logger **Psr\Log\LoggerInterface** - &lt;p&gt;The logger&lt;/p&gt;
+* $logger **Psr\Log\LoggerInterface** - The logger
 
 
 
@@ -143,7 +143,7 @@ Sets the HTTPInterface used to make requests to the wallet
 
 #### Arguments
 
-* $http **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** - &lt;p&gt;The HTTPInterface instance&lt;/p&gt;
+* $http **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** - The HTTPInterface instance
 
 
 
@@ -203,7 +203,7 @@ Sends the query string to the server and returns the response
 
 #### Arguments
 
-* $query **string** - &lt;p&gt;The query string to send&lt;/p&gt;
+* $query **string** - The query string to send
 
 
 
@@ -221,9 +221,9 @@ Logs a message with an arbitrary level when logging is enabled
 
 #### Arguments
 
-* $level **mixed** - &lt;p&gt;The logging level&lt;/p&gt;
-* $message **string** - &lt;p&gt;The message to log&lt;/p&gt;
-* $context **array** - &lt;p&gt;Values to place into the message&lt;/p&gt;
+* $level **mixed** - The logging level
+* $message **string** - The message to log
+* $context **array** - Values to place into the message
 
 
 
@@ -251,7 +251,7 @@ Example:
 
 #### Arguments
 
-* $method **string** - &lt;p&gt;The method to call&lt;/p&gt;
-* $params **array** - &lt;p&gt;The method parameters&lt;/p&gt;
+* $method **string** - The method to call
+* $params **array** - The method parameters
 
 

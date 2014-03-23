@@ -75,8 +75,8 @@ Constructor
 
 #### Arguments
 
-* $server **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - &lt;p&gt;Needed to communicate with the server&lt;/p&gt;
-* $minconf **int** - &lt;p&gt;Only include transactions confirmed at least this many times&lt;/p&gt;
+* $server **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - Needed to communicate with the server
+* $minconf **int** - Only include transactions confirmed at least this many times
 
 
 
@@ -122,7 +122,7 @@ Sets the minimum number of confirmations needed when checking balances
 
 #### Arguments
 
-* $minconf **int** - &lt;p&gt;Only include transactions confirmed at least this many times&lt;/p&gt;
+* $minconf **int** - Only include transactions confirmed at least this many times
 
 
 
@@ -309,7 +309,7 @@ Sets the transaction fee amount
 
 #### Arguments
 
-* $amount **double** - &lt;p&gt;Amount to use for transaction fees&lt;/p&gt;
+* $amount **double** - Amount to use for transaction fees
 
 
 
@@ -327,8 +327,8 @@ Generation is limited to $gen_proc_limit processors, -1 is unlimited.
 
 #### Arguments
 
-* $generate **bool** - &lt;p&gt;Turn coin generation on (true) or off (false)&lt;/p&gt;
-* $gen_proc_limit **int** - &lt;p&gt;The processor limit, or -1 for unlimited&lt;/p&gt;
+* $generate **bool** - Turn coin generation on (true) or off (false)
+* $gen_proc_limit **int** - The processor limit, or -1 for unlimited
 
 
 
@@ -346,8 +346,8 @@ Attempts add or remove a node from the addnode list or try a connection to it on
 
 #### Arguments
 
-* $node **string** - &lt;p&gt;The node ip address and port in &lt;ip&gt;:&lt;port&gt; format (see getPeerInfo() for nodes)&lt;/p&gt;
-* $type **string** - &lt;p&gt;Use &quot;add&quot; to add a node to the list, &quot;remove&quot; to remove a node from the list, &quot;onetry&quot; to try a connection to the node once&lt;/p&gt;
+* $node **string** - The node ip address and port in &lt;ip&gt;:&lt;port&gt; format (see getPeerInfo() for nodes)
+* $type **string** - Use &quot;add&quot; to add a node to the list, &quot;remove&quot; to remove a node from the list, &quot;onetry&quot; to try a connection to the node once
 
 
 
@@ -378,8 +378,8 @@ When $dns is true, returns a mutlidimentional array, with the sub-arrays contain
 
 #### Arguments
 
-* $dns **bool** - &lt;p&gt;If false, only a list of added nodes will be provided, otherwise connected information will also be available&lt;/p&gt;
-* $node **string** - &lt;p&gt;If provided, return information about this specific node, otherwise all nodes are returned&lt;/p&gt;
+* $dns **bool** - If false, only a list of added nodes will be provided, otherwise connected information will also be available
+* $node **string** - If provided, return information about this specific node, otherwise all nodes are returned
 
 
 
@@ -397,8 +397,8 @@ Sign a message with the private key of an address
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;The coin address&lt;/p&gt;
-* $message **string** - &lt;p&gt;The message to sign&lt;/p&gt;
+* $address **string** - The coin address
+* $message **string** - The message to sign
 
 
 
@@ -430,10 +430,10 @@ Example return value:
 
 #### Arguments
 
-* $hex_data **string** - &lt;p&gt;The transaction hex string&lt;/p&gt;
-* $prevtxs **array** - &lt;p&gt;An array of previous dependent transaction outputs&lt;/p&gt;
-* $priv_keys **array** - &lt;p&gt;Array of base58-encoded private keys for signing&lt;/p&gt;
-* $sighashtype **string** - &lt;p&gt;The signature hash type, one of &quot;ALL&quot;, &quot;NONE&quot;, &quot;SINGLE&quot;, &quot;ALL|ANYONECANPAY&quot;, &quot;NONE|ANYONECANPAY&quot;, &quot;SINGLE|ANYONECANPAY&quot;&lt;/p&gt;
+* $hex_data **string** - The transaction hex string
+* $prevtxs **array** - An array of previous dependent transaction outputs
+* $priv_keys **array** - Array of base58-encoded private keys for signing
+* $sighashtype **string** - The signature hash type, one of &quot;ALL&quot;, &quot;NONE&quot;, &quot;SINGLE&quot;, &quot;ALL|ANYONECANPAY&quot;, &quot;NONE|ANYONECANPAY&quot;, &quot;SINGLE|ANYONECANPAY&quot;
 
 
 
@@ -451,9 +451,9 @@ Returns a boolean value indicating whether the message was successfully verified
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;A coin address&lt;/p&gt;
-* $signature **string** - &lt;p&gt;The signature&lt;/p&gt;
-* $message **string** - &lt;p&gt;The message&lt;/p&gt;
+* $address **string** - A coin address
+* $signature **string** - The signature
+* $message **string** - The message
 
 
 
@@ -492,7 +492,7 @@ To get a list of accounts on the system, call getReceivedByAddress(0, true).
 
 #### Arguments
 
-* $include_empty **bool** - &lt;p&gt;Whether to include addresses that haven&#039;t received any payments&lt;/p&gt;
+* $include_empty **bool** - Whether to include addresses that haven&#039;t received any payments
 
 
 
@@ -510,7 +510,7 @@ Returns the balance for the given account
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;The account name, using &quot;&quot; for the default account&lt;/p&gt;
+* $account **string** - The account name, using &quot;&quot; for the default account
 
 
 
@@ -528,7 +528,7 @@ Returns the balance for a given address
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;The address&lt;/p&gt;
+* $address **string** - The address
 
 
 
@@ -546,10 +546,10 @@ Move from one account in your wallet to another
 
 #### Arguments
 
-* $from_account **string** - &lt;p&gt;Name of the from account&lt;/p&gt;
-* $to_account **string** - &lt;p&gt;Name of the to account&lt;/p&gt;
-* $amount **double** - &lt;p&gt;The amount to transfer&lt;/p&gt;
-* $comment **string** - &lt;p&gt;Comment to record with this transaction&lt;/p&gt;
+* $from_account **string** - Name of the from account
+* $to_account **string** - Name of the to account
+* $amount **double** - The amount to transfer
+* $comment **string** - Comment to record with this transaction
 
 
 
@@ -567,10 +567,10 @@ Returns the transaction id if successful.
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;Address to send to&lt;/p&gt;
-* $amount **double** - &lt;p&gt;The amount to send&lt;/p&gt;
-* $comment **string** - &lt;p&gt;Comment to record with this transaction&lt;/p&gt;
-* $comment_to **string** - &lt;p&gt;Comment sent to the network with the transaction&lt;/p&gt;
+* $address **string** - Address to send to
+* $amount **double** - The amount to send
+* $comment **string** - Comment to record with this transaction
+* $comment_to **string** - Comment sent to the network with the transaction
 
 
 
@@ -588,11 +588,11 @@ Sends coins from the given account to the given address
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;Name of the from account&lt;/p&gt;
-* $address **string** - &lt;p&gt;Address to send to&lt;/p&gt;
-* $amount **double** - &lt;p&gt;The amount to send&lt;/p&gt;
-* $comment **string** - &lt;p&gt;Comment to record with this transaction&lt;/p&gt;
-* $comment_to **string** - &lt;p&gt;Comment sent to the network with the transaction&lt;/p&gt;
+* $account **string** - Name of the from account
+* $address **string** - Address to send to
+* $amount **double** - The amount to send
+* $comment **string** - Comment to record with this transaction
+* $comment_to **string** - Comment sent to the network with the transaction
 
 
 
@@ -610,9 +610,9 @@ Sends coins to multiple addresses
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;Name of the from account&lt;/p&gt;
-* $addresses **array** - &lt;p&gt;[&quot;address1&quot; =&gt; &quot;amount1&quot;, &quot;address2&quot; =&gt; &quot;amount2&quot;]&lt;/p&gt;
-* $comment **string** - &lt;p&gt;A comment on this transaction&lt;/p&gt;
+* $account **string** - Name of the from account
+* $addresses **array** - [&quot;address1&quot; =&gt; &quot;amount1&quot;, &quot;address2&quot; =&gt; &quot;amount2&quot;]
+* $comment **string** - A comment on this transaction
 
 
 
@@ -650,8 +650,8 @@ that account.
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;A coin address from the wallet&lt;/p&gt;
-* $account **string** - &lt;p&gt;Name of the account&lt;/p&gt;
+* $address **string** - A coin address from the wallet
+* $account **string** - Name of the account
 
 
 
@@ -669,7 +669,7 @@ Returns null when an account does not exist for the given address.
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;The address for account lookup&lt;/p&gt;
+* $address **string** - The address for account lookup
 
 
 
@@ -707,7 +707,7 @@ the given name.
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;The account name for the address, using &quot;&quot; to represent the default account&lt;/p&gt;
+* $account **string** - The account name for the address, using &quot;&quot; to represent the default account
 
 
 
@@ -725,7 +725,7 @@ Returns the addresses for the given account
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;The account name, using &quot;&quot; to represent the default account&lt;/p&gt;
+* $account **string** - The account name, using &quot;&quot; to represent the default account
 
 
 
@@ -743,7 +743,7 @@ This is for use with raw transactions, NOT normal use.
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;Name of the account, using &quot;&quot; to represent the default account&lt;/p&gt;
+* $account **string** - Name of the account, using &quot;&quot; to represent the default account
 
 
 
@@ -762,7 +762,7 @@ will be credited to $account.
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;The account name for the address to be linked to, using &quot;&quot; to represent the default account&lt;/p&gt;
+* $account **string** - The account name for the address to be linked to, using &quot;&quot; to represent the default account
 
 
 
@@ -789,7 +789,7 @@ The returned array will only contain ["isvalid" => false] when the address is no
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;The coin address&lt;/p&gt;
+* $address **string** - The coin address
 
 
 
@@ -809,8 +809,8 @@ Returns an array with the following keys:
 
 #### Arguments
 
-* $nrequired **int** - &lt;p&gt;Number of keys needed to redeem&lt;/p&gt;
-* $keys **array** - &lt;p&gt;Array of public keys&lt;/p&gt;
+* $nrequired **int** - Number of keys needed to redeem
+* $keys **array** - Array of public keys
 
 
 
@@ -830,9 +830,9 @@ Returns the the multi-signature address.
 
 #### Arguments
 
-* $nrequired **int** - &lt;p&gt;Number of keys needed to redeem&lt;/p&gt;
-* $keys **array** - &lt;p&gt;Array of public keys&lt;/p&gt;
-* $account **string** - &lt;p&gt;Name of account which receives the address&lt;/p&gt;
+* $nrequired **int** - Number of keys needed to redeem
+* $keys **array** - Array of public keys
+* $account **string** - Name of account which receives the address
 
 
 
@@ -850,7 +850,7 @@ Returns null when the address does not belong to any wallet account.
 
 #### Arguments
 
-* $address **string** - &lt;p&gt;The address for the private key&lt;/p&gt;
+* $address **string** - The address for the private key
 
 
 
@@ -868,9 +868,9 @@ Rescanning may take a while looking for existing transactions, and may even free
 
 #### Arguments
 
-* $priv_key **string** - &lt;p&gt;The private key&lt;/p&gt;
-* $label **string** - &lt;p&gt;An optional label&lt;/p&gt;
-* $rescan **bool** - &lt;p&gt;Whether to rescan the wallet for transactions&lt;/p&gt;
+* $priv_key **string** - The private key
+* $label **string** - An optional label
+* $rescan **bool** - Whether to rescan the wallet for transactions
 
 
 
@@ -903,8 +903,8 @@ When $verbose is set to true, the return value will be an array with the followi
 
 #### Arguments
 
-* $hash **string** - &lt;p&gt;The block hash&lt;/p&gt;
-* $verbose **bool** - &lt;p&gt;True for an array, false for the hex encoded data&lt;/p&gt;
+* $hash **string** - The block hash
+* $verbose **bool** - True for an array, false for the hex encoded data
 
 
 
@@ -922,7 +922,7 @@ Index 0 is the genesis block.
 
 #### Arguments
 
-* $index **int** - &lt;p&gt;The block index&lt;/p&gt;
+* $index **int** - The block index
 
 
 
@@ -958,8 +958,8 @@ The return value will be an mutlidimentional array with the following keys:
 
 #### Arguments
 
-* $hash **string** - &lt;p&gt;The block hash to list transactions since&lt;/p&gt;
-* $target_confirmations **int** - &lt;p&gt;The confirmations required, must be 1 or more&lt;/p&gt;
+* $hash **string** - The block hash to list transactions since
+* $target_confirmations **int** - The confirmations required, must be 1 or more
 
 
 
@@ -995,7 +995,7 @@ The returned array will contain the following keys:
 
 #### Arguments
 
-* $txid **string** - &lt;p&gt;The transaction id&lt;/p&gt;
+* $txid **string** - The transaction id
 
 
 
@@ -1029,9 +1029,9 @@ The return value will be an mutlidimentional array, with each sub-array containi
 
 #### Arguments
 
-* $account **string** - &lt;p&gt;The name of the account&lt;/p&gt;
-* $count **int** - &lt;p&gt;Number of transactions to return&lt;/p&gt;
-* $from **int** - &lt;p&gt;Offset from the last transaction&lt;/p&gt;
+* $account **string** - The name of the account
+* $count **int** - Number of transactions to return
+* $from **int** - Offset from the last transaction
 
 
 
@@ -1090,8 +1090,8 @@ Returns an array with the following keys when $verbose is 1.
 
 #### Arguments
 
-* $txid **string** - &lt;p&gt;The transaction id&lt;/p&gt;
-* $verbose **int** - &lt;p&gt;If 0, return a string, other return a json object&lt;/p&gt;
+* $txid **string** - The transaction id
+* $verbose **int** - If 0, return a string, other return a json object
 
 
 
@@ -1120,9 +1120,9 @@ Returns an array with the following keys:
 
 #### Arguments
 
-* $txid **string** - &lt;p&gt;The transaction id&lt;/p&gt;
-* $n **int** - &lt;p&gt;The vout value&lt;/p&gt;
-* $include_mem_pool **bool** - &lt;p&gt;Whether to included the mem pool&lt;/p&gt;
+* $txid **string** - The transaction id
+* $n **int** - The vout value
+* $include_mem_pool **bool** - Whether to included the mem pool
 
 
 
@@ -1170,8 +1170,8 @@ The returned array will contain the following keys:
 
 #### Arguments
 
-* $minconf **int** - &lt;p&gt;The minimum confirmations to filter&lt;/p&gt;
-* $maxconf **int** - &lt;p&gt;The maximum confirmations to filter&lt;/p&gt;
+* $minconf **int** - The minimum confirmations to filter
+* $maxconf **int** - The maximum confirmations to filter
 
 
 
@@ -1203,8 +1203,8 @@ Temporarily lock (true) or unlock (false) specified transaction outputs.
 
 #### Arguments
 
-* $unlock **bool** - &lt;p&gt;Whether to unlock (true) or lock (false) the specified transactions&lt;/p&gt;
-* $objs **array** - &lt;p&gt;An array of objects. Each object has &quot;txid&quot; (string) and &quot;vout&quot; (numeric)&lt;/p&gt;
+* $unlock **bool** - Whether to unlock (true) or lock (false) the specified transactions
+* $objs **array** - An array of objects. Each object has &quot;txid&quot; (string) and &quot;vout&quot; (numeric)
 
 
 
@@ -1248,8 +1248,8 @@ The returned array contains the following keys:
 
 #### Arguments
 
-* $capabilities **array** - &lt;p&gt;An array of supported features, &quot;longpoll&quot;, &quot;coinbasetxn&quot;, &quot;coinbasevalue&quot;, &quot;proposal&quot;, &quot;serverlist&quot;, &quot;workid&quot;&lt;/p&gt;
-* $mode **string|null** - &lt;p&gt;This must be set to &quot;template&quot; or omitted&lt;/p&gt;
+* $capabilities **array** - An array of supported features, &quot;longpoll&quot;, &quot;coinbasetxn&quot;, &quot;coinbasevalue&quot;, &quot;proposal&quot;, &quot;serverlist&quot;, &quot;workid&quot;
+* $mode **string|null** - This must be set to &quot;template&quot; or omitted
 
 
 
@@ -1274,7 +1274,7 @@ When $data is not specified, the return value will be an array with the followin
 
 #### Arguments
 
-* $data **string** - &lt;p&gt;The hex-encoded data to solve&lt;/p&gt;
+* $data **string** - The hex-encoded data to solve
 
 
 
@@ -1293,8 +1293,8 @@ The $params argument is currently ignored, but may contain the following keys:
 
 #### Arguments
 
-* $hex_data **string** - &lt;p&gt;The hex string of the raw block&lt;/p&gt;
-* $params **array** - &lt;p&gt;Optional parameters&lt;/p&gt;
+* $hex_data **string** - The hex string of the raw block
+* $params **array** - Optional parameters
 
 
 
@@ -1312,7 +1312,7 @@ Submits a raw (serialized, hex-encoded) transaction to the network
 
 #### Arguments
 
-* $hex_data **string** - &lt;p&gt;The hex string of the raw transaction&lt;/p&gt;
+* $hex_data **string** - The hex string of the raw transaction
 
 
 
@@ -1361,8 +1361,8 @@ Example:
 
 #### Arguments
 
-* $transactions **array** - &lt;p&gt;The transactions&lt;/p&gt;
-* $addresses **array** - &lt;p&gt;Array using addresses for keys, and amounts for values&lt;/p&gt;
+* $transactions **array** - The transactions
+* $addresses **array** - Array using addresses for keys, and amounts for values
 
 
 
@@ -1407,7 +1407,7 @@ Returns an array with the following keys:
 
 #### Arguments
 
-* $hex_string **string** - &lt;p&gt;The serialized, hex-encoded transaction data&lt;/p&gt;
+* $hex_string **string** - The serialized, hex-encoded transaction data
 
 
 
@@ -1428,7 +1428,7 @@ Note: This will shutdown the server.
 
 #### Arguments
 
-* $pass_phrase **string** - &lt;p&gt;The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long&lt;/p&gt;
+* $pass_phrase **string** - The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long
 
 
 
@@ -1461,8 +1461,8 @@ Stores the wallet decryption key in memory for $timeout seconds
 
 #### Arguments
 
-* $passphrase **string** - &lt;p&gt;The wallet pass phrase&lt;/p&gt;
-* $timeout **int** - &lt;p&gt;Number of seconds to keep the pass phrase in memory&lt;/p&gt;
+* $passphrase **string** - The wallet pass phrase
+* $timeout **int** - Number of seconds to keep the pass phrase in memory
 
 
 
@@ -1480,8 +1480,8 @@ Updates the wallet passphrase
 
 #### Arguments
 
-* $old_passphrase **string** - &lt;p&gt;The old pass phrase&lt;/p&gt;
-* $new_passphrase **string** - &lt;p&gt;The new pass phrase&lt;/p&gt;
+* $old_passphrase **string** - The old pass phrase
+* $new_passphrase **string** - The new pass phrase
 
 
 
@@ -1499,7 +1499,7 @@ The destination can be a directory or a path with filename.
 
 #### Arguments
 
-* $destination **string** - &lt;p&gt;The destination directory or file&lt;/p&gt;
+* $destination **string** - The destination directory or file
 
 
 

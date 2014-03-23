@@ -47,7 +47,7 @@ Sets the url to request
 
 #### Arguments
 
-* $url **string** - &lt;p&gt;The request url&lt;/p&gt;
+* $url **string** - The request url
 
 
 
@@ -65,7 +65,7 @@ Sets the post data
 
 #### Arguments
 
-* $post_data **mixed** - &lt;p&gt;The post data&lt;/p&gt;
+* $post_data **mixed** - The post data
 
 
 
@@ -83,7 +83,7 @@ Sets the content type
 
 #### Arguments
 
-* $content_type **string** - &lt;p&gt;The content type&lt;/p&gt;
+* $content_type **string** - The content type
 
 
 
@@ -101,7 +101,7 @@ Sets the basic auth username
 
 #### Arguments
 
-* $auth_user **string** - &lt;p&gt;The username&lt;/p&gt;
+* $auth_user **string** - The username
 
 
 
@@ -119,7 +119,7 @@ Sets the basic auth password
 
 #### Arguments
 
-* $auth_pass **string** - &lt;p&gt;The password&lt;/p&gt;
+* $auth_pass **string** - The password
 
 
 

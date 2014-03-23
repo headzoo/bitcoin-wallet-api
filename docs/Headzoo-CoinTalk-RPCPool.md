@@ -98,7 +98,7 @@ Adds an JsonRPCInterface instance to the pool
 
 #### Arguments
 
-* $rpc **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - &lt;p&gt;The JsonRPCInterface instance&lt;/p&gt;
+* $rpc **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - The JsonRPCInterface instance
 
 
 
@@ -182,7 +182,7 @@ Example:
 
 #### Arguments
 
-* $method **string** - &lt;p&gt;The method to call&lt;/p&gt;
-* $params **array** - &lt;p&gt;The method parameters&lt;/p&gt;
+* $method **string** - The method to call
+* $params **array** - The method parameters
 
 

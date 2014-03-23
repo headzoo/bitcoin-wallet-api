@@ -42,7 +42,7 @@ Example:
 
 #### Arguments
 
-* $method **string** - &lt;p&gt;The method to call&lt;/p&gt;
-* $params **array** - &lt;p&gt;The method parameters&lt;/p&gt;
+* $method **string** - The method to call
+* $params **array** - The method parameters
 
 
