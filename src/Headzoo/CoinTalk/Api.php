@@ -770,7 +770,7 @@ class Api
         try {
             $priv_key = $this->server->query("dumpPrivKey", $args);
         } catch (ServerException $e) {
-            if (strpos($e->getMessage(), "not known") === false) {
+            if ($e->getCode() != RPCErrorCodes::WALLET_ERROR) {
                 throw $e;
             }
         }
@@ -1368,7 +1368,7 @@ class Api
         try {
             $this->server->query("walletPassPhrase", $args);
         } catch (ServerException $e) {
-            if (strpos($e->getMessage(), "already unlocked") === false) {
+            if ($e->getCode() != RPCErrorCodes::WALLET_ALREADY_UNLOCKED) {
                 throw $e;
             }
         }
