@@ -34,10 +34,9 @@ Example:
 </code>
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 

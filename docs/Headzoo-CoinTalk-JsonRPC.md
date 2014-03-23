@@ -36,7 +36,6 @@ Configuration for the litecoind rpc
 private array $conf = array("user" => "test", "pass" => "test", "host" => "localhost", "port" => 9332)
 ```
 
-* Visibility: **private**
 
 
 ### $http
@@ -48,7 +47,6 @@ Used to make http request to the wallet
 private Headzoo\CoinTalk\HTTPInterface $http
 ```
 
-* Visibility: **private**
 
 
 ### $logger
@@ -60,7 +58,6 @@ Used to log messages
 private Psr\Log\LoggerInterface $logger
 ```
 
-* Visibility: **private**
 
 
 Methods
@@ -73,10 +70,9 @@ Constructor
 
 
 ```
-mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(array $conf, Psr\Log\LoggerInterface $logger)
+public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(array $conf, Psr\Log\LoggerInterface $logger)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -95,10 +91,9 @@ The configuration array should contain 4 items:
  "port" - The rpc server port, default 9332
 
 ```
-Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -112,10 +107,9 @@ Sets a logger instance
 Once set, requests and errors will be logged using the instance.
 
 ```
-Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\LoggerInterface $logger)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\LoggerInterface $logger)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -129,10 +123,9 @@ Sets the HTTPInterface used to make requests to the wallet
 
 
 ```
-Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setHTTP(Headzoo\CoinTalk\HTTPInterface $http)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setHTTP(Headzoo\CoinTalk\HTTPInterface $http)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -146,10 +139,9 @@ Returns the HTTPInterface instance used to make requests to the wallet
 Automatically creates an instance if none has been set.
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::getHTTP()
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::getHTTP()
 ```
 
-* Visibility: **public**
 
 
 
@@ -168,10 +160,9 @@ Example:
 </code>
 
 ```
-mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, array $params)
+public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, array $params)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -186,10 +177,9 @@ Sends the query string to the server and returns the response
 
 
 ```
-string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string $query)
+protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string $query)
 ```
 
-* Visibility: **protected**
 
 #### Arguments
 
@@ -203,10 +193,9 @@ Logs a message with an arbitrary level when logging is enabled
 
 
 ```
-null Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, array $context)
+protected null Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, array $context)
 ```
 
-* Visibility: **protected**
 
 #### Arguments
 
@@ -231,10 +220,9 @@ Example:
 </code>
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
-* Visibility: **public**
 * This method is defined by [Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)
 
 #### Arguments

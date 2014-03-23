@@ -50,7 +50,6 @@ The JsonRPCInterface instances in the pool
 private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
 ```
 
-* Visibility: **private**
 
 
 ### $count
@@ -62,7 +61,6 @@ Number of servers in the pool
 private int $count
 ```
 
-* Visibility: **private**
 
 
 ### $index
@@ -74,7 +72,6 @@ Index of the last server returned from the pool
 private int $index
 ```
 
-* Visibility: **private**
 
 
 Methods
@@ -87,10 +84,9 @@ Adds an JsonRPCInterface instance to the pool
 
 
 ```
-Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::add(Headzoo\CoinTalk\JsonRPCInterface $rpc)
+public Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::add(Headzoo\CoinTalk\JsonRPCInterface $rpc)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -104,10 +100,9 @@ Returns an JsonRPCInterface instance from the pool
 Returns null when there are no servers in the pool.
 
 ```
-Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::get()
+public Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::get()
 ```
 
-* Visibility: **public**
 
 
 
@@ -117,10 +112,9 @@ Returns the number of JsonRPCInterface instances in the pool
 
 
 ```
-int Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::count()
+public int Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::count()
 ```
 
-* Visibility: **public**
 
 
 
@@ -139,10 +133,9 @@ Example:
 </code>
 
 ```
-mixed Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::query($method, array $params)
+public mixed Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::query($method, array $params)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -166,10 +159,9 @@ Example:
 </code>
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
-* Visibility: **public**
 * This method is defined by [Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)
 
 #### Arguments

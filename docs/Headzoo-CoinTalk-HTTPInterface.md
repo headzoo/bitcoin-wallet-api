@@ -25,10 +25,9 @@ Sends the request and returns the response
 
 
 ```
-string Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::request()
+public string Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::request()
 ```
 
-* Visibility: **public**
 
 
 
@@ -38,10 +37,9 @@ Sets the url to request
 
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setUrl(string $url)
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setUrl(string $url)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -55,10 +53,9 @@ Sets the post data
 
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setPostData(mixed $post_data)
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setPostData(mixed $post_data)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -72,10 +69,9 @@ Sets the content type
 
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setContentType(string $content_type)
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setContentType(string $content_type)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -89,10 +85,9 @@ Sets the basic auth username
 
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthUser(string $auth_user)
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthUser(string $auth_user)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -106,10 +101,9 @@ Sets the basic auth password
 
 
 ```
-Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthPass(string $auth_pass)
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthPass(string $auth_pass)
 ```
 
-* Visibility: **public**
 
 #### Arguments
 
@@ -123,9 +117,8 @@ Returns the status code returned by the server
 
 
 ```
-int Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::getStatusCode()
+public int Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::getStatusCode()
 ```
 
-* Visibility: **public**
 
 
