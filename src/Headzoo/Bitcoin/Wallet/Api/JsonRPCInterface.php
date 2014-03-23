@@ -23,10 +23,8 @@ interface JsonRPCInterface
      * @param  string $method The method to call
      * @param  array  $params The method parameters
      * @return array
-     * @throws JsonException            When encoding or decoding the server data fails
-     * @throws RPCException          When the server returns an error message
-     * @throws MethodNotFoundException  When the method does not exist
-     * @throws UnlockNeededException    When trying to call a method which requires an unlocked wallet
+     * @throws Exceptions\JsonException When encoding or decoding the server data fails
+     * @throws Exceptions\RPCException  When the server returns an error message
      */
     public function query($method, array $params = []);
 } 
