@@ -118,7 +118,7 @@ try {
 ```
 
 ##### Headzoo\CoinTalk\Wallet
-Wraps an instance of `Headzoo\CoinTalk\JsonRPC` to provide a higher level interface. This class has a method for every
+Wraps an instance of `Headzoo\CoinTalk\JsonRPCInterface` to provide a higher level interface. This class has a method for every
 single wallet method, eg `Wallet::getInfo()`, `Wallet::backup($destination)`, `Wallet::getAccount($account)`, etc. Using
 this class instead of using `Headzoo\CoinTalk\JsonRPC` directly makes it easier to catch programming errors, and allows
 IDEs to provide type hinting.
@@ -191,6 +191,8 @@ Change Log
 ----------
 ##### v0.2 - 2014-03-23
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
+* Renamed class `Headzoo\CoinTalk\Server` to `Headzoo\CoinTalk\JsonRPC`.
+* Renamed class `Headzoo\CoinTalk\IServer` to `Headzoo\CoinTalk\JsonRPCInterface`.
 * Renamed methods starting with `list` in the `Headzoo\CoinTalk\Wallet` class with `get`, eg `listAccounts()` was renamed to `getAccounts()`.
 * Renamed the following methods to make the method names more consistent, and so they conform to my naming standards:
     * `Headzoo\CoinTalk\Wallet::sendRawTransaction()`      to `Headzoo\CoinTalk\Wallet::submitRawTransaction()`.
