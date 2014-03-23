@@ -23,7 +23,6 @@ Methods
 Sends the request and returns the response
 
 
-
 ```
 public string Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::request()
 ```
@@ -33,7 +32,6 @@ public string Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::re
 
 ### Headzoo\CoinTalk\HTTPInterface::setUrl
 Sets the url to request
-
 
 
 ```
@@ -51,7 +49,6 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 Sets the post data
 
 
-
 ```
 public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setPostData(mixed $post_data)
 ```
@@ -65,7 +62,6 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ### Headzoo\CoinTalk\HTTPInterface::setContentType
 Sets the content type
-
 
 
 ```
@@ -83,7 +79,6 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 Sets the basic auth username
 
 
-
 ```
 public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthUser(string $auth_user)
 ```
@@ -99,7 +94,6 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 Sets the basic auth password
 
 
-
 ```
 public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\CoinTalk\HTTPInterface::setAuthPass(string $auth_pass)
 ```
@@ -113,7 +107,6 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ### Headzoo\CoinTalk\HTTPInterface::getStatusCode
 Returns the status code returned by the server
-
 
 
 ```

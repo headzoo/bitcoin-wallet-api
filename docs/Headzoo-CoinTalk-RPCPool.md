@@ -7,7 +7,7 @@ Acts as an instance of JsonRPCInterface, which transparently uses a pool of Json
 instances to query wallets.
 
 Example:
-<code>
+```php
  $pool = new RPCPool();
  $conf = [
      "user" => "test",
@@ -28,6 +28,7 @@ Example:
  $pool->add($rpc);
 
  $info = $pool->query("getinfo");
+```
 
 
 * Class name: RPCPool
@@ -45,7 +46,6 @@ Properties
 The JsonRPCInterface instances in the pool
 
 
-
 ```
 private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
 ```
@@ -56,7 +56,6 @@ private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
 Number of servers in the pool
 
 
-
 ```
 private int $count
 ```
@@ -65,7 +64,6 @@ private int $count
 
 ### $index
 Index of the last server returned from the pool
-
 
 
 ```
@@ -80,7 +78,6 @@ Methods
 
 ### Headzoo\CoinTalk\RPCPool::add
 Adds an JsonRPCInterface instance to the pool
-
 
 
 ```
@@ -98,7 +95,6 @@ public Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPo
 Returns an JsonRPCInterface instance from the pool
 
 Returns null when there are no servers in the pool.
-
 ```
 public Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::get()
 ```
@@ -108,7 +104,6 @@ public Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\
 
 ### Headzoo\CoinTalk\RPCPool::count
 Returns the number of JsonRPCInterface instances in the pool
-
 
 
 ```
@@ -124,14 +119,13 @@ Sends a raw query the litecoind rpc
 Returns an array which contains the server response.
 
 Example:
-<code>
+```php
  $rpc  = new JsonRPC();
  $info = $rpc->query("getinfo");
  echo $info["version"];
  echo $info["balance"];
  echo $info["difficulty"];
-</code>
-
+```
 ```
 public mixed Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::query($method, array $params)
 ```
@@ -150,14 +144,13 @@ Sends a raw query the litecoind rpc
 Returns an array which contains the server response.
 
 Example:
-<code>
+```php
  $rpc  = new JsonRPC();
  $info = $rpc->query("getinfo");
  echo $info["version"];
  echo $info["balance"];
  echo $info["difficulty"];
-</code>
-
+```
 ```
 public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```

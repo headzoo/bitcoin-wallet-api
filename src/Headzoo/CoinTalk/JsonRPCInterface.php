@@ -12,13 +12,13 @@ interface JsonRPCInterface
      * Returns an array which contains the server response.
      *
      * Example:
-     * <code>
+     * ```php
      *  $rpc  = new JsonRPC();
      *  $info = $rpc->query("getinfo");
      *  echo $info["version"];
      *  echo $info["balance"];
      *  echo $info["difficulty"];
-     * </code>
+     * ```
      *
      * @param  string $method The method to call
      * @param  array  $params The method parameters

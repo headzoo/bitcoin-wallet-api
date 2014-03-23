@@ -7,7 +7,7 @@ use Psr\Log\LogLevel;
  * Used to query the coin rpc server.
  *
  * Example:
- * <code>
+ * ```php
  *  $conf = [
  *      "user" => "test",
  *      "pass" => "pass",
@@ -16,7 +16,7 @@ use Psr\Log\LogLevel;
  *  ];
  *  $rpc  = new JsonRPC($conf);
  *  $info = $rpc->query("getinfo");
- * </code>
+ * ```
  */
 class JsonRPC
     implements JsonRPCInterface
@@ -62,10 +62,12 @@ class JsonRPC
      * Sets the configuration for the rpc
      *
      * The configuration array should contain 4 items:
+     * ```
      *  "user" - The rpc username, default "test"
      *  "pass" - The rpc password, default "test"
      *  "host" - The rpc server host, default "localhost"
      *  "port" - The rpc server port, default 9332
+     * ```
      *
      * @param array $conf Configuration for the rpc
      * @return $this

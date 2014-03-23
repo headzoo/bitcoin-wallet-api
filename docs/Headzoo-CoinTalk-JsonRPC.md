@@ -4,7 +4,7 @@ Headzoo\CoinTalk\JsonRPC
 Used to query the coin rpc server.
 
 Example:
-<code>
+```php
  $conf = [
      "user" => "test",
      "pass" => "pass",
@@ -13,7 +13,7 @@ Example:
  ];
  $rpc  = new JsonRPC($conf);
  $info = $rpc->query("getinfo");
-</code>
+```
 
 
 * Class name: JsonRPC
@@ -31,7 +31,6 @@ Properties
 Configuration for the litecoind rpc
 
 
-
 ```
 private array $conf = array("user" => "test", "pass" => "test", "host" => "localhost", "port" => 9332)
 ```
@@ -42,7 +41,6 @@ private array $conf = array("user" => "test", "pass" => "test", "host" => "local
 Used to make http request to the wallet
 
 
-
 ```
 private Headzoo\CoinTalk\HTTPInterface $http
 ```
@@ -51,7 +49,6 @@ private Headzoo\CoinTalk\HTTPInterface $http
 
 ### $logger
 Used to log messages
-
 
 
 ```
@@ -66,7 +63,6 @@ Methods
 
 ### Headzoo\CoinTalk\JsonRPC::__construct
 Constructor
-
 
 
 ```
@@ -85,11 +81,12 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(arr
 Sets the configuration for the rpc
 
 The configuration array should contain 4 items:
+```
  "user" - The rpc username, default "test"
  "pass" - The rpc password, default "test"
  "host" - The rpc server host, default "localhost"
  "port" - The rpc server port, default 9332
-
+```
 ```
 public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
 ```
@@ -105,7 +102,6 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 Sets a logger instance
 
 Once set, requests and errors will be logged using the instance.
-
 ```
 public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\LoggerInterface $logger)
 ```
@@ -119,7 +115,6 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 
 ### Headzoo\CoinTalk\JsonRPC::setHTTP
 Sets the HTTPInterface used to make requests to the wallet
-
 
 
 ```
@@ -137,7 +132,6 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 Returns the HTTPInterface instance used to make requests to the wallet
 
 Automatically creates an instance if none has been set.
-
 ```
 public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::getHTTP()
 ```
@@ -151,14 +145,13 @@ Sends a raw query the litecoind rpc
 Returns an array which contains the server response.
 
 Example:
-<code>
+```php
  $rpc  = new JsonRPC();
  $info = $rpc->query("getinfo");
  echo $info["version"];
  echo $info["balance"];
  echo $info["difficulty"];
-</code>
-
+```
 ```
 public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, array $params)
 ```
@@ -175,7 +168,6 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, 
 Sends the query string to the server and returns the response
 
 
-
 ```
 protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string $query)
 ```
@@ -189,7 +181,6 @@ protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string
 
 ### Headzoo\CoinTalk\JsonRPC::log
 Logs a message with an arbitrary level when logging is enabled
-
 
 
 ```
@@ -211,14 +202,13 @@ Sends a raw query the litecoind rpc
 Returns an array which contains the server response.
 
 Example:
-<code>
+```php
  $rpc  = new JsonRPC();
  $info = $rpc->query("getinfo");
  echo $info["version"];
  echo $info["balance"];
  echo $info["difficulty"];
-</code>
-
+```
 ```
 public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```

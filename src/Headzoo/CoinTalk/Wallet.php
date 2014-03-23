@@ -22,10 +22,10 @@ namespace Headzoo\CoinTalk;
  *
  * @see https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
  *      
- * Note: Some of the methods in this class are not supported by old wallets. Upgrade your wallet to the most recent
+ * **Note:** Some of the methods in this class are not supported by old wallets. Upgrade your wallet to the most recent
  * version to ensure 100% compatibility.
  *
- * Note: Internally the methods cast each argument to expected types (instead of simply using func_get_args()) to catch
+ * **Note:** Internally the methods cast each argument to expected types (instead of simply using func_get_args()) to catch
  * type errors. Be sure to have error reporting turned on during development to catch those errors.
  */
 class Wallet
@@ -160,6 +160,7 @@ class Wallet
      * Returns an array of mining related information
      *
      * The returned array contains the following keys:
+     * ```
      *  "blocks"            - (int)     The current block.
      *  "currentblocksize"  - (int)     The last block size.
      *  "currentblocktxt"   - (int)     The last block transaction.
@@ -171,6 +172,7 @@ class Wallet
      *  "networkhashps"     - (double)  The estimated network hashes per second based on the last n blocks.
      *  "pooledtxt"         - (int)     The size of the mem pool.
      *  "testnet"           - (boolean) If using testnet or not.
+     * ```
      *
      * @return array
      */
@@ -183,6 +185,7 @@ class Wallet
      * Returns an array describing each connected node
      *
      * Returns an mutlidimentional array, which each sub-array containing the following keys:
+     * ```
      *  "addr"              - (string)  The ip address and port of the peer.
      *  "addrlocal"         - (string)  The local address.
      *  "services"          - (string)  The supported services.
@@ -198,6 +201,7 @@ class Wallet
      *  "startingheight"    - (int)     The starting height (block) of the peer.
      *  "banscore"          - (int)     The ban score (stats.nMisbehavior).
      *  "syncnode"          - (boolean) True if sync node.
+     * ```
      *
      * @return array
      */
@@ -280,17 +284,21 @@ class Wallet
      * If dns is false, only a list of added nodes will be provided, otherwise connected information will also
      * be available.
      *
-     * Note: Nodes added using the addnode configuration and "onetry" nodes are not returned.
+     * **Note:** Nodes added using the addnode configuration and "onetry" nodes are not returned.
      *
      * When $dns is false, returns multidimensional array, with sub-arrays containing the keys:
+     * ```
      *  "addednode"     - (string) The node ip address and port in format <ip>:<port>.
+     * ```
      *
      * When $dns is true, returns a mutlidimentional array, with the sub-arrays containing the keys:
+     * ```
      *  "addednode"     - (string)  The node ip address and port in format <ip>:<port>.
      *  "connected"     - (boolean) If connected.
      *  "addresses"     - (array)   Array of node peers. Each sub-array contains the keys:
      *      "address"   - (string)  The node ip address and port in format <ip>:<port>.
      *      "connected" - (bool)    If connected.
+     * ```
      *
      * @param  bool   $dns  If false, only a list of added nodes will be provided, otherwise connected information will also be available
      * @param  string $node If provided, return information about this specific node, otherwise all nodes are returned
@@ -329,12 +337,15 @@ class Wallet
      *
      * If provided, the $prev_txs argument should be a multidimensional array, with the sub-arrays having the
      * following keys:
+     * ```
      *  "txid"          - (string)  The transaction id.
      *  "vout"          - (int)     The output number.
      *  "scriptPubKey"  - (string)  The script key.
      *  "redeemScript"  - (string)  The redeem script.
+     * ```
      * 
      * Example return value:
+     * ```php
      *  [
      *      // The raw transaction with signature(s) (hex-encoded string).
      *      "hex" => "010000000263f2dde1d550b081d59c09ccb3f8a83b01...",
@@ -342,6 +353,7 @@ class Wallet
      *      // If transaction has a complete set of signature (0 if not).
      *      "complete" => 1
      *  ]
+     * ```
      * 
      * @param  string $hex_data     The transaction hex string
      * @param  array  $prevtxs      An array of previous dependent transaction outputs
@@ -398,11 +410,13 @@ class Wallet
      * Returns balances by for every address
      *
      * Returns an mutlidimentional array, which each sub-array containing the following keys:
+     * ```
      *  "address"       - (string)  The receiving address.
      *  "account"       - (string)  The account of the receiving address, using "" to represent the default account.
      *  "amount"        - (double)  The total amount received by the address.
      *  "confirmations" - (int)     The number of confirmations of the most recent transaction included.
      *  "txids"         - (array)   An array of transaction ids.
+     * ```
      *
      * To get a list of accounts on the system, call getReceivedByAddress(0, true).
      *
@@ -537,11 +551,13 @@ class Wallet
      * Returns the wallet accounts
      *
      * Example return value:
+     * ```php
      *  [
      *      "",
      *      "Paper1",
      *      "Mining"
      *  ]
+     * ```
      *
      * @return array
      */
@@ -597,11 +613,13 @@ class Wallet
      * Returns the wallet addresses
      *
      * Example return value:
+     * ```php
      *  [
      *      "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM",
      *      "1JBKAM8W9jEnuGNvPRFjtpmeDGvfQx6PLU",
      *      "19tjsa4nBeAtn48kcmW9Gg2wRFtm24GRG2"
      *  ]
+     * ```
      *
      * @return array
      */
@@ -686,6 +704,7 @@ class Wallet
      * Returns address information
      *
      * The returned array will contain one or more of the following keys:
+     * ```
      *  "isvalid"      - (bool)     Whether the address is valid.
      *  "address"      - (string)   The address.
      *  "ismine"       - (bool)     Whether the address belongs to the wallet.
@@ -693,8 +712,9 @@ class Wallet
      *  "pubkey"       - (string)   The address public key.
      *  "iscompressed" - (bool)     Is the address compressed?
      *  "account"      - (string)   The account the address belongs to.
+     * ```
      *
-     * The returned array will only contain ["isvalid" => false] when the address is not valid.
+     * The returned array will only contain `["isvalid" => false]` when the address is not valid.
      *
      * @param  string $address The coin address
      * @return array
@@ -711,8 +731,10 @@ class Wallet
      * Returns a new multi-signature address
      *
      * Returns an array with the following keys:
+     * ```
      *  "address"       - (string) The multi-signature address
      *  "redeemScript"  - (string) The redeem script
+     * ```
      *
      * @param  int   $nrequired Number of keys needed to redeem
      * @param  array $keys      Array of public keys
@@ -805,6 +827,7 @@ class Wallet
      * When $verbose is set to false, this method returns the serialized and hex-encoded block data.
      *
      * When $verbose is set to true, the return value will be an array with the following keys:
+     * ```
      *  "hash"              - (string)  The block hash (same as provided).
      *  "confirmations"     - (int)     The number of confirmations.
      *  "size"              - (int)     The block size.
@@ -818,6 +841,7 @@ class Wallet
      *  "difficulty"        - (double)  The difficulty.
      *  "previousblockhash" - (string)  The hash of the previous block.
      *  "nextblockhash"     - (string)  The hash of the next block.
+     * ```
      *
      * @param  string $hash    The block hash
      * @param  bool   $verbose True for an array, false for the hex encoded data
@@ -854,6 +878,7 @@ class Wallet
      * Returns all transactions if $hash is omitted.
      *
      * The return value will be an mutlidimentional array with the following keys:
+     * ```
      *  "lastblock"             - (string)  The hash of the last block.
      *  "transactions"          - (array)   One or more transactions. Each transaction will contain the following keys:
      *      "account"           - (string)  The account name associated with the transaction, using "" to represent the default account.
@@ -870,6 +895,7 @@ class Wallet
      *      "timereceived"      - (int)     The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
      *      "comment"           - (string)  If a comment is associated with the transaction.
      *      "to"                - (string)  If a comment to is associated with the transaction.
+     * ```
      *
      * @param  string $hash                 The block hash to list transactions since
      * @param  int    $target_confirmations The confirmations required, must be 1 or more
@@ -891,6 +917,7 @@ class Wallet
      * non-wallet transactions.
      *
      * The returned array will contain the following keys:
+     * ```
      *  "amount"        - (double)  The transaction amount.
      *  "fee"           - (double)  The transaction fee.
      *  "confirmations" - (int)     The number of confirmations.
@@ -906,6 +933,7 @@ class Wallet
      *      "category"  - (string)  The category, either "send" or "receive".
      *      "amount"    - (double)  The amount.
      *      "fee"       - (double)  The transaction fee.
+     * ```
      *
      * @param  string $txid The transaction id
      * @return array
@@ -925,6 +953,7 @@ class Wallet
      * accounts.
      *
      * The return value will be an mutlidimentional array, with each sub-array containing the following keys:
+     * ```
      *  "account"           - (string)  The account name associated with the transaction, using "" to represent the default account.
      *  "address"           - (string)  The address of the transaction. Not present for move transactions (category = move).
      *  "category"          - (string)  The type of transaction, eg "send", "receive", or "move".
@@ -938,6 +967,7 @@ class Wallet
      *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
      *  "timereceived"      - (int)     The time received in seconds since epoch (Jan 1 1970 GMT). Available for 'send' and 'receive' category of transactions.
      *  "comment"           - (string)  If a comment is associated with the transaction.
+     * ```
      *
      * @param  string $account The name of the account
      * @param  int    $count   Number of transactions to return
@@ -971,6 +1001,7 @@ class Wallet
      * transaction data into an array.
      *
      * Returns an array with the following keys when $verbose is 1.
+     * ```
      *  "hex"               - (string)  The serialized, hex-encoded data.
      *  "txid"              - (string)  The transaction id.
      *  "version"           - (int)     The version.
@@ -995,6 +1026,7 @@ class Wallet
      *  "confirmations"     - (int)     The number of confirmations.
      *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
      *  "blocktime"         - (int)     The block time in seconds since epoch (Jan 1 1970 GMT).
+     * ```
      *
      * @param  string $txid     The transaction id
      * @param  int    $verbose  If 0, return a string, other return a json object
@@ -1013,6 +1045,7 @@ class Wallet
      * Returns details about an unspent transaction output
      *
      * Returns an array with the following keys:
+     * ```
      *  "bestblock"         - (string)  The block hash.
      *  "confirmations"     - (int)     The number of confirmations.
      *  "value"             - (double)  The transaction value.
@@ -1024,6 +1057,7 @@ class Wallet
      *      "addresses"     - (array)   An array of addresses.
      *  "version"           - (int)     The version.
      *  "coinbase"          - (bool)    Coinbase transaction or not.
+     * ```
      *
      * @param  string $txid             The transaction id
      * @param  int    $n                The vout value
@@ -1046,6 +1080,7 @@ class Wallet
      * Note this call may take some time.
      *
      * Returns an array with the following keys:
+     * ```
      *  "height"            - (int)     The current block height.
      *  "bestblock"         - (string)  The best block hash hex.
      *  "transactions"      - (int)     The number of transactions.
@@ -1053,6 +1088,7 @@ class Wallet
      *  "bytes_serialized"  - (int)     The serialized size.
      *  "hash_serialized"   - (string)  The serialized hash.
      *  "total_amount"      - (double)  The total amount.
+     * ```
      *
      * @return array
      */
@@ -1065,6 +1101,7 @@ class Wallet
      * Returns array of unspent transaction inputs in the wallet between $minconf and $maxconf
      *
      * The returned array will contain the following keys:
+     * ```
      *  "txid"          - (string)  The transaction id.
      *  "vout"          - (int)     The vout value.
      *  "address"       - (string)  The address.
@@ -1072,6 +1109,7 @@ class Wallet
      *  "scriptPubKey"  - (string)  The script key.
      *  "amount"        - (double)  The transaction amount.
      *  "confirmations" - (int)     The number of confirmations.
+     * ```
      *
      * @param  int $minconf The minimum confirmations to filter
      * @param  int $maxconf The maximum confirmations to filter
@@ -1123,6 +1161,7 @@ class Wallet
      * request or a "proposal".
      *
      * The returned array contains the following keys:
+     * ```
      *  "version"               - (int)     The block version.
      *  "previousblockhash"     - (string)  The hash of current highest block.
      *  "transactions"          - (array)   Array of non-coinbase transactions which should be included in the block. Each contains the following keys:
@@ -1146,6 +1185,7 @@ class Wallet
      *  "curtime"               - (int)     Current timestamp in seconds since epoch (Jan 1 1970 GMT).
      *  "bits"                  - (string)  Compressed target of next block.
      *  "height"                - (int)     The height of the next block.
+     * ```
      *
      * @see https://en.bitcoin.it/wiki/BIP_0022
      * @param  array        $capabilities An array of supported features, "longpoll", "coinbasetxn", "coinbasevalue", "proposal", "serverlist", "workid"
@@ -1172,10 +1212,12 @@ class Wallet
      * and returns a boolean value indicating success or failure.
      *
      * When $data is not specified, the return value will be an array with the following keys:
+     * ```
      *  "midstate"  - (string) The precomputed hash state after hashing the first half of the data (DEPRECATED).
      *  "data"      - (string) The serialized block data.
      *  "hash1"     - (string) The formatted hash buffer for second hash (DEPRECATED).
      *  "target"    - (string) The little endian hash target.
+     * ```
      *
      * @param  string $data The hex-encoded data to solve
      * @return array|bool
@@ -1197,7 +1239,9 @@ class Wallet
      * Submits a raw (serialized, hex-encoded) block to the network
      *
      * The $params argument is currently ignored, but may contain the following keys:
+     * ```
      *  "workid"    - (string) If the server provided a work id, it MUST be included with the submission.
+     * ```
      *
      * @see https://en.bitcoin.it/wiki/BIP_0022 for full specification
      * @param  string $hex_data The hex string of the raw block
@@ -1231,21 +1275,25 @@ class Wallet
      * Returns a hex-encoded raw transaction spending the given inputs and sending to the given addresses
      *
      * The $transactions argument is a multidimensional array, which each value being an array with the following keys:
+     * ```
      *  "txid"  - (string) The transaction id.
      *  "vout"  - (int)    The output number.
+     * ```
      *
      * The $addresses argument is an associative array using addresses for keys, and amounts to send to the address
      * as values. For example:
+     * ```php
      *  [
      *      "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM" => 0.5,
      *      "1FVCaRTKQtpxeE4gypz69NvDkyZUd7Y3SJ" => 0.08
      *  ]
+     * ```
      *
-     * Note: This method only creates the raw transaction data. The transaction's inputs are not signed, and it is not
+     * **Note:** This method only creates the raw transaction data. The transaction's inputs are not signed, and it is not
      * stored in the wallet or transmitted to the network.
      *
      * Example:
-     * <code>
+     * ```php
      *  $transactions = [
      *      [
      *          "txid" => "7de4c9a1e715a9aaf6f8573ce16f8bc3c06f927826e2d0c39424e1524eccda89",
@@ -1261,7 +1309,7 @@ class Wallet
      *      "13P4LpjYyBvWt283DffjsHpoFWFprr9dVq" => 0.08
      *  ];
      *  $raw = $api->createRawTransaction($transactions, $addresses);
-     * </code>
+     * ```
      *
      * @param  array $transactions The transactions
      * @param  array $addresses    Array using addresses for keys, and amounts for values
@@ -1283,6 +1331,7 @@ class Wallet
      * information.
      *
      * Returns an array with the following keys:
+     * ```
      *  "hex"               - (string)  The serialized, hex-encoded data.
      *  "txid"              - (string)  The transaction id.
      *  "version"           - (int)     The version.
@@ -1307,6 +1356,7 @@ class Wallet
      *  "confirmations"     - (int)     The number of confirmations.
      *  "time"              - (int)     The transaction time in seconds since epoch (Jan 1 1970 GMT).
      *  "blocktime"         - (int)     The block time in seconds since epoch (Jan 1 1970 GMT).
+     * ```
      *
      * @param  string $hex_string The serialized, hex-encoded transaction data
      * @return array
@@ -1325,7 +1375,7 @@ class Wallet
      * After this, any calls that interact with private keys such as sending or signing will require the passphrase to
      * be set prior the making these calls. Use the unlock() for this, and then lock().
      *
-     * Note: This will shutdown the server.
+     * **Note:** This will shutdown the server.
      *
      * @param  string $pass_phrase The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long
      * @return bool

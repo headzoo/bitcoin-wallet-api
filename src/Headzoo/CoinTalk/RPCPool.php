@@ -8,7 +8,7 @@ namespace Headzoo\CoinTalk;
  * instances to query wallets.
  *
  * Example:
- * <code>
+ * ```php
  *  $pool = new RPCPool();
  *  $conf = [
  *      "user" => "test",
@@ -29,6 +29,7 @@ namespace Headzoo\CoinTalk;
  *  $pool->add($rpc);
  *
  *  $info = $pool->query("getinfo");
+ * ```
  */
 class RPCPool
     implements JsonRPCInterface

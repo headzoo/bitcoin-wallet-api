@@ -25,14 +25,13 @@ Sends a raw query the litecoind rpc
 Returns an array which contains the server response.
 
 Example:
-<code>
+```php
  $rpc  = new JsonRPC();
  $info = $rpc->query("getinfo");
  echo $info["version"];
  echo $info["balance"];
  echo $info["difficulty"];
-</code>
-
+```
 ```
 public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
