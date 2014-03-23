@@ -1,6 +1,7 @@
 <?php
 namespace Headzoo\CoinTalk;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 /**
  * Used to query the coin rpc server.
@@ -177,7 +178,7 @@ class JsonRPC
         $status_code = $http->getStatusCode();
         
         $this->log(
-            (HTTPStatusCodes::OK == $status_code) ? "notice" : "error",
+            (HTTPStatusCodes::OK == $status_code) ? LogLevel::INFO: LogLevel::ERROR,
             "{$status_code}: {$url} => {$response}"
         );
 
