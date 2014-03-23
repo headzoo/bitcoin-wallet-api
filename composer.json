@@ -3,7 +3,7 @@
     "description": "PHP library supporting communication with the Bitcoin JSON-RPC API.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["php", "bitcoin", "litecoin", "crypto", "json-rpc", "api"],
+    "keywords": ["php", "bitcoin", "litecoin", "dogecoin", "crypto", "json-rpc", "api"],
     "version": "0.3",
     "authors": [
         {
