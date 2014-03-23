@@ -19,10 +19,10 @@ Methods
 -------
 
 
-### \Headzoo\CoinTalk\JsonRPCInterface::query()
+### \Headzoo\CoinTalk\JsonRPCInterface::query
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query()(string $method, array $params)
+array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
 Sends a raw query the litecoind rpc

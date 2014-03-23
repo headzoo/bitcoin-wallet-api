@@ -70,10 +70,10 @@ Methods
 -------
 
 
-### \Headzoo\CoinTalk\JsonRPC::__construct()
+### \Headzoo\CoinTalk\JsonRPC::__construct
 
 ```
-mixed Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::__construct()(array $conf, \Psr\Log\LoggerInterface $logger)
+mixed Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::__construct(array $conf, \Psr\Log\LoggerInterface $logger)
 ```
 
 Constructor
@@ -89,10 +89,10 @@ Constructor
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::setConf()
+### \Headzoo\CoinTalk\JsonRPC::setConf
 
 ```
-\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setConf()(array $conf)
+\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
 ```
 
 Sets the configuration for the rpc
@@ -111,10 +111,10 @@ The configuration array should contain 4 items:
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::setLogger()
+### \Headzoo\CoinTalk\JsonRPC::setLogger
 
 ```
-\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setLogger()(\Psr\Log\LoggerInterface $logger)
+\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setLogger(\Psr\Log\LoggerInterface $logger)
 ```
 
 Sets a logger instance
@@ -129,10 +129,10 @@ Once set, requests and errors will be logged using the instance.
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::setHTTP()
+### \Headzoo\CoinTalk\JsonRPC::setHTTP
 
 ```
-\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setHTTP()(\Headzoo\CoinTalk\HTTPInterface $http)
+\Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::setHTTP(\Headzoo\CoinTalk\HTTPInterface $http)
 ```
 
 Sets the HTTPInterface used to make requests to the wallet
@@ -147,10 +147,10 @@ Sets the HTTPInterface used to make requests to the wallet
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::getHTTP()
+### \Headzoo\CoinTalk\JsonRPC::getHTTP
 
 ```
-\Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::getHTTP()()
+\Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::getHTTP()
 ```
 
 Returns the HTTPInterface instance used to make requests to the wallet
@@ -161,10 +161,10 @@ Automatically creates an instance if none has been set.
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::query()
+### \Headzoo\CoinTalk\JsonRPC::query
 
 ```
-mixed Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::query()($method, array $params)
+mixed Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::query($method, array $params)
 ```
 
 Sends a raw query the litecoind rpc
@@ -189,10 +189,10 @@ Example:
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::exec()
+### \Headzoo\CoinTalk\JsonRPC::exec
 
 ```
-string Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::exec()(string $query)
+string Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::exec(string $query)
 ```
 
 Sends the query string to the server and returns the response
@@ -207,10 +207,10 @@ Sends the query string to the server and returns the response
 
 
 
-### \Headzoo\CoinTalk\JsonRPC::log()
+### \Headzoo\CoinTalk\JsonRPC::log
 
 ```
-null Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::log()(mixed $level, string $message, array $context)
+null Headzoo\CoinTalk\JsonRPC::\Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, array $context)
 ```
 
 Logs a message with an arbitrary level when logging is enabled
@@ -227,10 +227,10 @@ Logs a message with an arbitrary level when logging is enabled
 
 
 
-### \Headzoo\CoinTalk\JsonRPCInterface::query()
+### \Headzoo\CoinTalk\JsonRPCInterface::query
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query()(string $method, array $params)
+array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
 Sends a raw query the litecoind rpc

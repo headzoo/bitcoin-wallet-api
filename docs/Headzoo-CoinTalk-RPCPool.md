@@ -84,10 +84,10 @@ Methods
 -------
 
 
-### \Headzoo\CoinTalk\RPCPool::add()
+### \Headzoo\CoinTalk\RPCPool::add
 
 ```
-\Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::add()(\Headzoo\CoinTalk\JsonRPCInterface $rpc)
+\Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::add(\Headzoo\CoinTalk\JsonRPCInterface $rpc)
 ```
 
 Adds an JsonRPCInterface instance to the pool
@@ -102,10 +102,10 @@ Adds an JsonRPCInterface instance to the pool
 
 
 
-### \Headzoo\CoinTalk\RPCPool::get()
+### \Headzoo\CoinTalk\RPCPool::get
 
 ```
-\Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::get()()
+\Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::get()
 ```
 
 Returns an JsonRPCInterface instance from the pool
@@ -116,10 +116,10 @@ Returns null when there are no servers in the pool.
 
 
 
-### \Headzoo\CoinTalk\RPCPool::count()
+### \Headzoo\CoinTalk\RPCPool::count
 
 ```
-int Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::count()()
+int Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::count()
 ```
 
 Returns the number of JsonRPCInterface instances in the pool
@@ -130,10 +130,10 @@ Returns the number of JsonRPCInterface instances in the pool
 
 
 
-### \Headzoo\CoinTalk\RPCPool::query()
+### \Headzoo\CoinTalk\RPCPool::query
 
 ```
-mixed Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::query()($method, array $params)
+mixed Headzoo\CoinTalk\RPCPool::\Headzoo\CoinTalk\RPCPool::query($method, array $params)
 ```
 
 Sends a raw query the litecoind rpc
@@ -158,10 +158,10 @@ Example:
 
 
 
-### \Headzoo\CoinTalk\JsonRPCInterface::query()
+### \Headzoo\CoinTalk\JsonRPCInterface::query
 
 ```
-array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query()(string $method, array $params)
+array Headzoo\CoinTalk\JsonRPCInterface::\Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
 Sends a raw query the litecoind rpc
