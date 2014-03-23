@@ -84,10 +84,10 @@ class JsonRPC
         }
 
         if (!empty($obj["error"])) {
-            throw new ServerException($obj["error"]["message"]);
+            throw new RPCException($obj["error"]["message"]);
         }
         if ($obj["id"] != $request_id) {
-            throw new ServerException(
+            throw new RPCException(
                 "Server returned ID {$obj['id']}, was expecting {$request_id}."
             );
         }
@@ -103,7 +103,7 @@ class JsonRPC
      * @return string
      * @throws AuthenticationException When the wrong rpc username or password was sent
      * @throws HTTPException When there was an error sending the request
-     * @throws ServerException When the rpc server returns an error message
+     * @throws RPCException When the rpc server returns an error message
      */
     protected function exec($query)
     {
@@ -154,7 +154,7 @@ class JsonRPC
                             $code = !empty($response["error"]["code"])
                                 ? $response["error"]["code"]
                                 : $status_code;
-                            throw new ServerException(
+                            throw new RPCException(
                                 $response["error"]["message"],
                                 $code
                             );

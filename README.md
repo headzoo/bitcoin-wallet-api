@@ -92,7 +92,7 @@ try {
     $server = new Headzoo\CoinTalk\JsonRPC($conf);
     $info = $server->query("getinfo");
     print_r($info);
-} catch (Headzoo\CoinTalk\ServerException $e) {
+} catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
 }
@@ -137,7 +137,7 @@ try {
     $info    = $api->getInfo();
     $account = $api->getAccount("personal");
     $count   = $api->getBlockCount();
-} catch (Headzoo\CoinTalk\ServerException $e) {
+} catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
 }
@@ -172,7 +172,7 @@ $pool->add($server);
 // The query will be sent using one of the JsonRPC instances in the pool.
 try {
     $info = $pool->query("getinfo");
-} catch (Headzoo\CoinTalk\ServerException $e) {
+} catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
 }
@@ -181,7 +181,7 @@ try {
 try {
     $api  = new Wallet($pool);
     $info = $api->getInfo();
-} catch (Headzoo\CoinTalk\ServerException $e) {
+} catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
 }

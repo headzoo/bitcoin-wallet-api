@@ -97,13 +97,13 @@ class Pool
     /**
      * {@inheritDoc}
      *
-     * @throws ServerException When the pool has no available JsonRPCInterface instances
+     * @throws RPCException When the pool has no available JsonRPCInterface instances
      */
     public function query($method, array $params = [])
     {
         $rpc = $this->get();
         if (null === $rpc) {
-            throw new ServerException(
+            throw new RPCException(
                 "No JsonRPCInterface instances available in the pool."
             );
         }

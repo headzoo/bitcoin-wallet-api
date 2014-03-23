@@ -24,7 +24,7 @@ interface JsonRPCInterface
      * @param  array  $params The method parameters
      * @return array
      * @throws JsonException            When encoding or decoding the server data fails
-     * @throws ServerException          When the server returns an error message
+     * @throws RPCException          When the server returns an error message
      * @throws MethodNotFoundException  When the method does not exist
      * @throws UnlockNeededException    When trying to call a method which requires an unlocked wallet
      */
