@@ -19,7 +19,7 @@ Constants
 Standard error
 
 
-```
+```php
 const INVALID_REQUEST = -32600
 ```
 
@@ -31,7 +31,7 @@ const INVALID_REQUEST = -32600
 The rpc method does not exist
 
 
-```
+```php
 const METHOD_NOT_FOUND = -32601
 ```
 
@@ -43,7 +43,7 @@ const METHOD_NOT_FOUND = -32601
 The rpc parameters are invalid
 
 
-```
+```php
 const INVALID_PARAMS = -32602
 ```
 
@@ -55,7 +55,7 @@ const INVALID_PARAMS = -32602
 Internal error
 
 
-```
+```php
 const INTERNAL_ERROR = -32603
 ```
 
@@ -67,7 +67,7 @@ const INTERNAL_ERROR = -32603
 An rpc request parsing error
 
 
-```
+```php
 const PARSE_ERROR = -32700
 ```
 
@@ -79,7 +79,7 @@ const PARSE_ERROR = -32700
 std::exception thrown in command handling
 
 
-```
+```php
 const MISC_ERROR = -1
 ```
 
@@ -91,7 +91,7 @@ const MISC_ERROR = -1
 Server is in safe mode, and command is not allowed in safe mode
 
 
-```
+```php
 const FORBIDDEN_BY_SAFE_MODE = -2
 ```
 
@@ -103,7 +103,7 @@ const FORBIDDEN_BY_SAFE_MODE = -2
 Unexpected type was passed as parameter
 
 
-```
+```php
 const TYPE_ERROR = -3
 ```
 
@@ -115,7 +115,7 @@ const TYPE_ERROR = -3
 Invalid address or key
 
 
-```
+```php
 const INVALID_ADDRESS_OR_KEY = -5
 ```
 
@@ -127,7 +127,7 @@ const INVALID_ADDRESS_OR_KEY = -5
 Ran out of memory during operation
 
 
-```
+```php
 const OUT_OF_MEMORY = -7
 ```
 
@@ -139,7 +139,7 @@ const OUT_OF_MEMORY = -7
 Invalid, missing or duplicate parameter
 
 
-```
+```php
 const INVALID_PARAMETER = -8
 ```
 
@@ -151,7 +151,7 @@ const INVALID_PARAMETER = -8
 Database error
 
 
-```
+```php
 const DATABASE_ERROR = -20
 ```
 
@@ -163,7 +163,7 @@ const DATABASE_ERROR = -20
 Error parsing or validating structure in raw format
 
 
-```
+```php
 const DESERIALIZATION_ERROR = -22
 ```
 
@@ -175,7 +175,7 @@ const DESERIALIZATION_ERROR = -22
 Bitcoin is not connected
 
 
-```
+```php
 const CLIENT_NOT_CONNECTED = -9
 ```
 
@@ -187,7 +187,7 @@ const CLIENT_NOT_CONNECTED = -9
 Still downloading initial blocks
 
 
-```
+```php
 const CLIENT_IN_INITIAL_DOWNLOAD = -10
 ```
 
@@ -199,7 +199,7 @@ const CLIENT_IN_INITIAL_DOWNLOAD = -10
 Node is already added
 
 
-```
+```php
 const CLIENT_NODE_ALREADY_ADDED = -23
 ```
 
@@ -211,7 +211,7 @@ const CLIENT_NODE_ALREADY_ADDED = -23
 Node has not been added before
 
 
-```
+```php
 const CLIENT_NODE_NOT_ADDED = -24
 ```
 
@@ -223,7 +223,7 @@ const CLIENT_NODE_NOT_ADDED = -24
 Unspecified problem with wallet (key not found etc.)
 
 
-```
+```php
 const WALLET_ERROR = -4
 ```
 
@@ -235,7 +235,7 @@ const WALLET_ERROR = -4
 Not enough funds in wallet or account
 
 
-```
+```php
 const WALLET_INSUFFICIENT_FUNDS = -6
 ```
 
@@ -247,7 +247,7 @@ const WALLET_INSUFFICIENT_FUNDS = -6
 Invalid account name
 
 
-```
+```php
 const WALLET_INVALID_ACCOUNT_NAME = -11
 ```
 
@@ -259,7 +259,7 @@ const WALLET_INVALID_ACCOUNT_NAME = -11
 Keypool ran out, call fillKeyPool() first
 
 
-```
+```php
 const WALLET_KEYPOOL_RAN_OUT = -12
 ```
 
@@ -271,7 +271,7 @@ const WALLET_KEYPOOL_RAN_OUT = -12
 Enter the wallet passphrase with unlock() first
 
 
-```
+```php
 const WALLET_UNLOCK_NEEDED = -13
 ```
 
@@ -283,7 +283,7 @@ const WALLET_UNLOCK_NEEDED = -13
 The wallet passphrase entered was incorrect
 
 
-```
+```php
 const WALLET_PASSPHRASE_INCORRECT = -14
 ```
 
@@ -295,7 +295,7 @@ const WALLET_PASSPHRASE_INCORRECT = -14
 Command given in wrong wallet encryption state (encrypting an encrypted wallet etc.)
 
 
-```
+```php
 const WALLET_WRONG_ENC_STATE = -15
 ```
 
@@ -307,7 +307,7 @@ const WALLET_WRONG_ENC_STATE = -15
 Failed to encrypt the wallet
 
 
-```
+```php
 const WALLET_ENCRYPTION_FAILED = -16
 ```
 
@@ -319,7 +319,7 @@ const WALLET_ENCRYPTION_FAILED = -16
 Wallet is already unlocked
 
 
-```
+```php
 const WALLET_ALREADY_UNLOCKED = -17
 ```
 

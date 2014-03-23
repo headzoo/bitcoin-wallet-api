@@ -46,7 +46,7 @@ Properties
 The JsonRPCInterface instances in the pool
 
 
-```
+```php
 private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
 ```
 
@@ -56,7 +56,7 @@ private Headzoo\CoinTalk\JsonRPCInterface[] $items = array()
 Number of servers in the pool
 
 
-```
+```php
 private int $count
 ```
 
@@ -66,7 +66,7 @@ private int $count
 Index of the last server returned from the pool
 
 
-```
+```php
 private int $index
 ```
 
@@ -80,7 +80,7 @@ Methods
 Adds an JsonRPCInterface instance to the pool
 
 
-```
+```php
 public Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::add(Headzoo\CoinTalk\JsonRPCInterface $rpc)
 ```
 
@@ -95,7 +95,7 @@ public Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPo
 Returns an JsonRPCInterface instance from the pool
 
 Returns null when there are no servers in the pool.
-```
+```php
 public Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::get()
 ```
 
@@ -106,7 +106,7 @@ public Headzoo\CoinTalk\JsonRPCInterface|null Headzoo\CoinTalk\RPCPool::Headzoo\
 Returns the number of JsonRPCInterface instances in the pool
 
 
-```
+```php
 public int Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::count()
 ```
 
@@ -126,7 +126,7 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 ```
-```
+```php
 public mixed Headzoo\CoinTalk\RPCPool::Headzoo\CoinTalk\RPCPool::query($method, array $params)
 ```
 
@@ -151,7 +151,7 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 ```
-```
+```php
 public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 

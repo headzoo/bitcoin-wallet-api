@@ -32,7 +32,7 @@ Example:
  echo $info["balance"];
  echo $info["difficulty"];
 ```
-```
+```php
 public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 

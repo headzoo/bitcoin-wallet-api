@@ -19,7 +19,7 @@ Constants
 HTTP status code 200
 
 
-```
+```php
 const OK = 200
 ```
 
@@ -31,7 +31,7 @@ const OK = 200
 HTTP status code 400
 
 
-```
+```php
 const BAD_REQUEST = 400
 ```
 
@@ -43,7 +43,7 @@ const BAD_REQUEST = 400
 HTTP status code 401
 
 
-```
+```php
 const UNAUTHORIZED = 401
 ```
 
@@ -55,7 +55,7 @@ const UNAUTHORIZED = 401
 HTTP status code 403
 
 
-```
+```php
 const FORBIDDEN = 403
 ```
 
@@ -67,7 +67,7 @@ const FORBIDDEN = 403
 HTTP status code 404
 
 
-```
+```php
 const NOT_FOUND = 404
 ```
 
@@ -79,7 +79,7 @@ const NOT_FOUND = 404
 HTTP status code 500
 
 
-```
+```php
 const INTERNAL_SERVER_ERROR = 500
 ```
 
