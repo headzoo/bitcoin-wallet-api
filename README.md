@@ -223,7 +223,7 @@ Change Log
     * `Headzoo\CoinTalk\Api::listReceivedByAccount()`.
     
 ##### v0.1 - 2013-12-18
-    * Genesis import!
+* Genesis import!
 
 TODO
 ----
