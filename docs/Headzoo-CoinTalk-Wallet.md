@@ -66,8 +66,8 @@ public mixed Headzoo\CoinTalk\Wallet::__construct(Headzoo\CoinTalk\JsonRPCInterf
 
 ##### Arguments
 
-* **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** $server - Needed to communicate with the server
-* **int** $minconf - Only include transactions confirmed at least this many times
+* $server **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - Needed to communicate with the server
+* $minconf **int** - Only include transactions confirmed at least this many times
 
 
 
@@ -104,7 +104,7 @@ public Headzoo\CoinTalk\Wallet Headzoo\CoinTalk\Wallet::setMinConf(int $minconf)
 
 ##### Arguments
 
-* **int** $minconf - Only include transactions confirmed at least this many times
+* $minconf **int** - Only include transactions confirmed at least this many times
 
 
 
@@ -265,7 +265,7 @@ public bool Headzoo\CoinTalk\Wallet::setTransactionFee(double $amount)
 
 ##### Arguments
 
-* **double** $amount - Amount to use for transaction fees
+* $amount **double** - Amount to use for transaction fees
 
 
 
@@ -280,8 +280,8 @@ public bool Headzoo\CoinTalk\Wallet::setGenerate(bool $generate, int $gen_proc_l
 
 ##### Arguments
 
-* **bool** $generate - Turn coin generation on (true) or off (false)
-* **int** $gen_proc_limit - The processor limit, or -1 for unlimited
+* $generate **bool** - Turn coin generation on (true) or off (false)
+* $gen_proc_limit **int** - The processor limit, or -1 for unlimited
 
 
 
@@ -296,8 +296,8 @@ public bool Headzoo\CoinTalk\Wallet::addNode(string $node, string $type)
 
 ##### Arguments
 
-* **string** $node - The node ip address and port in &lt;ip&gt;:&lt;port&gt; format (see getPeerInfo() for nodes)
-* **string** $type - Use &quot;add&quot; to add a node to the list, &quot;remove&quot; to remove a node from the list, &quot;onetry&quot; to try a connection to the node once
+* $node **string** - The node ip address and port in &lt;ip&gt;:&lt;port&gt; format (see getPeerInfo() for nodes)
+* $type **string** - Use &quot;add&quot; to add a node to the list, &quot;remove&quot; to remove a node from the list, &quot;onetry&quot; to try a connection to the node once
 
 
 
@@ -329,8 +329,8 @@ public array Headzoo\CoinTalk\Wallet::getNodeInfo(bool $dns, string $node)
 
 ##### Arguments
 
-* **bool** $dns - If false, only a list of added nodes will be provided, otherwise connected information will also be available
-* **string** $node - If provided, return information about this specific node, otherwise all nodes are returned
+* $dns **bool** - If false, only a list of added nodes will be provided, otherwise connected information will also be available
+* $node **string** - If provided, return information about this specific node, otherwise all nodes are returned
 
 
 
@@ -345,8 +345,8 @@ public string Headzoo\CoinTalk\Wallet::signMessage(string $address, string $mess
 
 ##### Arguments
 
-* **string** $address - The coin address
-* **string** $message - The message to sign
+* $address **string** - The coin address
+* $message **string** - The message to sign
 
 
 
@@ -379,10 +379,10 @@ public array Headzoo\CoinTalk\Wallet::signRawTransaction(string $hex_data, array
 
 ##### Arguments
 
-* **string** $hex_data - The transaction hex string
-* **array** $prevtxs - An array of previous dependent transaction outputs
-* **array** $priv_keys - Array of base58-encoded private keys for signing
-* **string** $sighashtype - The signature hash type, one of &quot;ALL&quot;, &quot;NONE&quot;, &quot;SINGLE&quot;, &quot;ALL|ANYONECANPAY&quot;, &quot;NONE|ANYONECANPAY&quot;, &quot;SINGLE|ANYONECANPAY&quot;
+* $hex_data **string** - The transaction hex string
+* $prevtxs **array** - An array of previous dependent transaction outputs
+* $priv_keys **array** - Array of base58-encoded private keys for signing
+* $sighashtype **string** - The signature hash type, one of &quot;ALL&quot;, &quot;NONE&quot;, &quot;SINGLE&quot;, &quot;ALL|ANYONECANPAY&quot;, &quot;NONE|ANYONECANPAY&quot;, &quot;SINGLE|ANYONECANPAY&quot;
 
 
 
@@ -397,9 +397,9 @@ public bool Headzoo\CoinTalk\Wallet::isSignedMessageValid(string $address, strin
 
 ##### Arguments
 
-* **string** $address - A coin address
-* **string** $signature - The signature
-* **string** $message - The message
+* $address **string** - A coin address
+* $signature **string** - The signature
+* $message **string** - The message
 
 
 
@@ -434,7 +434,7 @@ public array Headzoo\CoinTalk\Wallet::getBalances(bool $include_empty)
 
 ##### Arguments
 
-* **bool** $include_empty - Whether to include addresses that haven&#039;t received any payments
+* $include_empty **bool** - Whether to include addresses that haven&#039;t received any payments
 
 
 
@@ -449,7 +449,7 @@ public double Headzoo\CoinTalk\Wallet::getBalanceByAccount(string $account)
 
 ##### Arguments
 
-* **string** $account - The account name, using &quot;&quot; for the default account
+* $account **string** - The account name, using &quot;&quot; for the default account
 
 
 
@@ -464,7 +464,7 @@ public double Headzoo\CoinTalk\Wallet::getBalanceByAddress(string $address)
 
 ##### Arguments
 
-* **string** $address - The address
+* $address **string** - The address
 
 
 
@@ -479,10 +479,10 @@ public bool Headzoo\CoinTalk\Wallet::move(string $from_account, string $to_accou
 
 ##### Arguments
 
-* **string** $from_account - Name of the from account
-* **string** $to_account - Name of the to account
-* **double** $amount - The amount to transfer
-* **string** $comment - Comment to record with this transaction
+* $from_account **string** - Name of the from account
+* $to_account **string** - Name of the to account
+* $amount **double** - The amount to transfer
+* $comment **string** - Comment to record with this transaction
 
 
 
@@ -497,10 +497,10 @@ public string Headzoo\CoinTalk\Wallet::send(string $address, double $amount, str
 
 ##### Arguments
 
-* **string** $address - Address to send to
-* **double** $amount - The amount to send
-* **string** $comment - Comment to record with this transaction
-* **string** $comment_to - Comment sent to the network with the transaction
+* $address **string** - Address to send to
+* $amount **double** - The amount to send
+* $comment **string** - Comment to record with this transaction
+* $comment_to **string** - Comment sent to the network with the transaction
 
 
 
@@ -515,11 +515,11 @@ public string Headzoo\CoinTalk\Wallet::sendFromAccount(string $account, string $
 
 ##### Arguments
 
-* **string** $account - Name of the from account
-* **string** $address - Address to send to
-* **double** $amount - The amount to send
-* **string** $comment - Comment to record with this transaction
-* **string** $comment_to - Comment sent to the network with the transaction
+* $account **string** - Name of the from account
+* $address **string** - Address to send to
+* $amount **double** - The amount to send
+* $comment **string** - Comment to record with this transaction
+* $comment_to **string** - Comment sent to the network with the transaction
 
 
 
@@ -534,9 +534,9 @@ public array Headzoo\CoinTalk\Wallet::sendManyFromAccount(string $account, array
 
 ##### Arguments
 
-* **string** $account - Name of the from account
-* **array** $addresses - [&quot;address1&quot; =&gt; &quot;amount1&quot;, &quot;address2&quot; =&gt; &quot;amount2&quot;]
-* **string** $comment - A comment on this transaction
+* $account **string** - Name of the from account
+* $addresses **array** - [&quot;address1&quot; =&gt; &quot;amount1&quot;, &quot;address2&quot; =&gt; &quot;amount2&quot;]
+* $comment **string** - A comment on this transaction
 
 
 
@@ -570,8 +570,8 @@ public bool Headzoo\CoinTalk\Wallet::setAccount(string $address, string $account
 
 ##### Arguments
 
-* **string** $address - A coin address from the wallet
-* **string** $account - Name of the account
+* $address **string** - A coin address from the wallet
+* $account **string** - Name of the account
 
 
 
@@ -586,7 +586,7 @@ public string|null Headzoo\CoinTalk\Wallet::getAccountByAddress(string $address)
 
 ##### Arguments
 
-* **string** $address - The address for account lookup
+* $address **string** - The address for account lookup
 
 
 
@@ -620,7 +620,7 @@ public string Headzoo\CoinTalk\Wallet::getAddressByAccount(string $account)
 
 ##### Arguments
 
-* **string** $account - The account name for the address, using &quot;&quot; to represent the default account
+* $account **string** - The account name for the address, using &quot;&quot; to represent the default account
 
 
 
@@ -635,7 +635,7 @@ public array Headzoo\CoinTalk\Wallet::getAddressesByAccount(string $account)
 
 ##### Arguments
 
-* **string** $account - The account name, using &quot;&quot; to represent the default account
+* $account **string** - The account name, using &quot;&quot; to represent the default account
 
 
 
@@ -650,7 +650,7 @@ public string Headzoo\CoinTalk\Wallet::getRawChangeAddress(string $account)
 
 ##### Arguments
 
-* **string** $account - Name of the account, using &quot;&quot; to represent the default account
+* $account **string** - Name of the account, using &quot;&quot; to represent the default account
 
 
 
@@ -666,7 +666,7 @@ public string Headzoo\CoinTalk\Wallet::getNewAddress(string $account)
 
 ##### Arguments
 
-* **string** $account - The account name for the address to be linked to, using &quot;&quot; to represent the default account
+* $account **string** - The account name for the address to be linked to, using &quot;&quot; to represent the default account
 
 
 
@@ -692,7 +692,7 @@ public array Headzoo\CoinTalk\Wallet::getAddressInfo(string $address)
 
 ##### Arguments
 
-* **string** $address - The coin address
+* $address **string** - The coin address
 
 
 
@@ -711,8 +711,8 @@ public array Headzoo\CoinTalk\Wallet::getNewMultiSignatureAddress(int $nrequired
 
 ##### Arguments
 
-* **int** $nrequired - Number of keys needed to redeem
-* **array** $keys - Array of public keys
+* $nrequired **int** - Number of keys needed to redeem
+* $keys **array** - Array of public keys
 
 
 
@@ -729,9 +729,9 @@ public string Headzoo\CoinTalk\Wallet::addMultiSignatureAddress(int $nrequired, 
 
 ##### Arguments
 
-* **int** $nrequired - Number of keys needed to redeem
-* **array** $keys - Array of public keys
-* **string** $account - Name of account which receives the address
+* $nrequired **int** - Number of keys needed to redeem
+* $keys **array** - Array of public keys
+* $account **string** - Name of account which receives the address
 
 
 
@@ -746,7 +746,7 @@ public string Headzoo\CoinTalk\Wallet::getPrivateKeyByAddress(string $address)
 
 ##### Arguments
 
-* **string** $address - The address for the private key
+* $address **string** - The address for the private key
 
 
 
@@ -761,9 +761,9 @@ public bool Headzoo\CoinTalk\Wallet::addPrivateKey(string $priv_key, string $lab
 
 ##### Arguments
 
-* **string** $priv_key - The private key
-* **string** $label - An optional label
-* **bool** $rescan - Whether to rescan the wallet for transactions
+* $priv_key **string** - The private key
+* $label **string** - An optional label
+* $rescan **bool** - Whether to rescan the wallet for transactions
 
 
 
@@ -795,8 +795,8 @@ public array|string Headzoo\CoinTalk\Wallet::getBlock(string $hash, bool $verbos
 
 ##### Arguments
 
-* **string** $hash - The block hash
-* **bool** $verbose - True for an array, false for the hex encoded data
+* $hash **string** - The block hash
+* $verbose **bool** - True for an array, false for the hex encoded data
 
 
 
@@ -811,7 +811,7 @@ public string Headzoo\CoinTalk\Wallet::getBlockHash(int $index)
 
 ##### Arguments
 
-* **int** $index - The block index
+* $index **int** - The block index
 
 
 
@@ -846,8 +846,8 @@ public array Headzoo\CoinTalk\Wallet::getSinceBlock(string $hash, int $target_co
 
 ##### Arguments
 
-* **string** $hash - The block hash to list transactions since
-* **int** $target_confirmations - The confirmations required, must be 1 or more
+* $hash **string** - The block hash to list transactions since
+* $target_confirmations **int** - The confirmations required, must be 1 or more
 
 
 
@@ -882,7 +882,7 @@ public array Headzoo\CoinTalk\Wallet::getTransaction(string $txid)
 
 ##### Arguments
 
-* **string** $txid - The transaction id
+* $txid **string** - The transaction id
 
 
 
@@ -915,9 +915,9 @@ public array Headzoo\CoinTalk\Wallet::getTransactions(string $account, int $coun
 
 ##### Arguments
 
-* **string** $account - The name of the account
-* **int** $count - Number of transactions to return
-* **int** $from - Offset from the last transaction
+* $account **string** - The name of the account
+* $count **int** - Number of transactions to return
+* $from **int** - Offset from the last transaction
 
 
 
@@ -972,8 +972,8 @@ public array Headzoo\CoinTalk\Wallet::getRawTransaction(string $txid, int $verbo
 
 ##### Arguments
 
-* **string** $txid - The transaction id
-* **int** $verbose - If 0, return a string, other return a json object
+* $txid **string** - The transaction id
+* $verbose **int** - If 0, return a string, other return a json object
 
 
 
@@ -1001,9 +1001,9 @@ public array Headzoo\CoinTalk\Wallet::getTransactionOut(string $txid, int $n, bo
 
 ##### Arguments
 
-* **string** $txid - The transaction id
-* **int** $n - The vout value
-* **bool** $include_mem_pool - Whether to included the mem pool
+* $txid **string** - The transaction id
+* $n **int** - The vout value
+* $include_mem_pool **bool** - Whether to included the mem pool
 
 
 
@@ -1049,8 +1049,8 @@ public array Headzoo\CoinTalk\Wallet::getUnspent(int $minconf, int $maxconf)
 
 ##### Arguments
 
-* **int** $minconf - The minimum confirmations to filter
-* **int** $maxconf - The maximum confirmations to filter
+* $minconf **int** - The minimum confirmations to filter
+* $maxconf **int** - The maximum confirmations to filter
 
 
 
@@ -1076,8 +1076,8 @@ public bool Headzoo\CoinTalk\Wallet::setLockUnspent(bool $unlock, array $objs)
 
 ##### Arguments
 
-* **bool** $unlock - Whether to unlock (true) or lock (false) the specified transactions
-* **array** $objs - An array of objects. Each object has &quot;txid&quot; (string) and &quot;vout&quot; (numeric)
+* $unlock **bool** - Whether to unlock (true) or lock (false) the specified transactions
+* $objs **array** - An array of objects. Each object has &quot;txid&quot; (string) and &quot;vout&quot; (numeric)
 
 
 
@@ -1120,8 +1120,8 @@ public array Headzoo\CoinTalk\Wallet::getBlockTemplate(array $capabilities, stri
 
 ##### Arguments
 
-* **array** $capabilities - An array of supported features, &quot;longpoll&quot;, &quot;coinbasetxn&quot;, &quot;coinbasevalue&quot;, &quot;proposal&quot;, &quot;serverlist&quot;, &quot;workid&quot;
-* **string|null** $mode - This must be set to &quot;template&quot; or omitted
+* $capabilities **array** - An array of supported features, &quot;longpoll&quot;, &quot;coinbasetxn&quot;, &quot;coinbasevalue&quot;, &quot;proposal&quot;, &quot;serverlist&quot;, &quot;workid&quot;
+* $mode **string|null** - This must be set to &quot;template&quot; or omitted
 
 
 
@@ -1145,7 +1145,7 @@ public array|bool Headzoo\CoinTalk\Wallet::getWork(string $data)
 
 ##### Arguments
 
-* **string** $data - The hex-encoded data to solve
+* $data **string** - The hex-encoded data to solve
 
 
 
@@ -1163,8 +1163,8 @@ public array Headzoo\CoinTalk\Wallet::submitRawBlock(string $hex_data, array $pa
 
 ##### Arguments
 
-* **string** $hex_data - The hex string of the raw block
-* **array** $params - Optional parameters
+* $hex_data **string** - The hex string of the raw block
+* $params **array** - Optional parameters
 
 
 
@@ -1179,7 +1179,7 @@ public array Headzoo\CoinTalk\Wallet::submitRawTransaction(string $hex_data)
 
 ##### Arguments
 
-* **string** $hex_data - The hex string of the raw transaction
+* $hex_data **string** - The hex string of the raw transaction
 
 
 
@@ -1229,8 +1229,8 @@ public array Headzoo\CoinTalk\Wallet::createRawTransaction(array $transactions, 
 
 ##### Arguments
 
-* **array** $transactions - The transactions
-* **array** $addresses - Array using addresses for keys, and amounts for values
+* $transactions **array** - The transactions
+* $addresses **array** - Array using addresses for keys, and amounts for values
 
 
 
@@ -1274,7 +1274,7 @@ public array Headzoo\CoinTalk\Wallet::decodeRawTransaction(string $hex_string)
 
 ##### Arguments
 
-* **string** $hex_string - The serialized, hex-encoded transaction data
+* $hex_string **string** - The serialized, hex-encoded transaction data
 
 
 
@@ -1292,7 +1292,7 @@ public bool Headzoo\CoinTalk\Wallet::encrypt(string $pass_phrase)
 
 ##### Arguments
 
-* **string** $pass_phrase - The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long
+* $pass_phrase **string** - The pass phrase to encrypt the wallet with. It must be at least 1 character, but should be long
 
 
 
@@ -1319,8 +1319,8 @@ public bool Headzoo\CoinTalk\Wallet::unlock(string $passphrase, int $timeout)
 
 ##### Arguments
 
-* **string** $passphrase - The wallet pass phrase
-* **int** $timeout - Number of seconds to keep the pass phrase in memory
+* $passphrase **string** - The wallet pass phrase
+* $timeout **int** - Number of seconds to keep the pass phrase in memory
 
 
 
@@ -1335,8 +1335,8 @@ public array Headzoo\CoinTalk\Wallet::changePassPhrase(string $old_passphrase, s
 
 ##### Arguments
 
-* **string** $old_passphrase - The old pass phrase
-* **string** $new_passphrase - The new pass phrase
+* $old_passphrase **string** - The old pass phrase
+* $new_passphrase **string** - The new pass phrase
 
 
 
@@ -1351,7 +1351,7 @@ public bool Headzoo\CoinTalk\Wallet::backup(string $destination)
 
 ##### Arguments
 
-* **string** $destination - The destination directory or file
+* $destination **string** - The destination directory or file
 
 
 

@@ -87,7 +87,7 @@ public Headzoo\CoinTalk\RPCPool Headzoo\CoinTalk\RPCPool::add(Headzoo\CoinTalk\J
 
 ##### Arguments
 
-* **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** $rpc - The JsonRPCInterface instance
+* $rpc **[Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)** - The JsonRPCInterface instance
 
 
 
@@ -133,8 +133,8 @@ public mixed Headzoo\CoinTalk\RPCPool::query($method, array $params)
 
 ##### Arguments
 
-* **mixed** $method
-* **array** $params
+* $method **mixed**
+* $params **array**
 
 
 
@@ -159,7 +159,7 @@ public array Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $par
 
 ##### Arguments
 
-* **string** $method - The method to call
-* **array** $params - The method parameters
+* $method **string** - The method to call
+* $params **array** - The method parameters
 
 

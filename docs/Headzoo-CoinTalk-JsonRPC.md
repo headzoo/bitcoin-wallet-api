@@ -72,8 +72,8 @@ public mixed Headzoo\CoinTalk\JsonRPC::__construct(array $conf, Psr\Log\LoggerIn
 
 ##### Arguments
 
-* **array** $conf - See the setConf() method
-* **Psr\Log\LoggerInterface** $logger - Log requests and errors with this instance
+* $conf **array** - See the setConf() method
+* $logger **Psr\Log\LoggerInterface** - Log requests and errors with this instance
 
 
 
@@ -94,7 +94,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
 
 ##### Arguments
 
-* **array** $conf - Configuration for the rpc
+* $conf **array** - Configuration for the rpc
 
 
 
@@ -109,7 +109,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\Logg
 
 ##### Arguments
 
-* **Psr\Log\LoggerInterface** $logger - The logger
+* $logger **Psr\Log\LoggerInterface** - The logger
 
 
 
@@ -124,7 +124,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setHTTP(Headzoo\CoinTa
 
 ##### Arguments
 
-* **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** $http - The HTTPInterface instance
+* $http **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** - The HTTPInterface instance
 
 
 
@@ -159,8 +159,8 @@ public mixed Headzoo\CoinTalk\JsonRPC::query($method, array $params)
 
 ##### Arguments
 
-* **mixed** $method
-* **array** $params
+* $method **mixed**
+* $params **array**
 
 
 
@@ -175,7 +175,7 @@ protected string Headzoo\CoinTalk\JsonRPC::exec(string $query)
 
 ##### Arguments
 
-* **string** $query - The query string to send
+* $query **string** - The query string to send
 
 
 
@@ -190,9 +190,9 @@ protected null Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, arra
 
 ##### Arguments
 
-* **mixed** $level - The logging level
-* **string** $message - The message to log
-* **array** $context - Values to place into the message
+* $level **mixed** - The logging level
+* $message **string** - The message to log
+* $context **array** - Values to place into the message
 
 
 
@@ -217,7 +217,7 @@ public array Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $par
 
 ##### Arguments
 
-* **string** $method - The method to call
-* **array** $params - The method parameters
+* $method **string** - The method to call
+* $params **array** - The method parameters
 
 
