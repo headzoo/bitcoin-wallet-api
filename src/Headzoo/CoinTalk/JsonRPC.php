@@ -1,5 +1,6 @@
 <?php
 namespace Headzoo\CoinTalk;
+use Psr\Log\LoggerInterface;
 
 /**
  * Used to query the coin rpc server.
@@ -37,13 +38,23 @@ class JsonRPC
     private $http;
 
     /**
+     * Used to log messages
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * Constructor
      *
      * @param array $conf See the setConf() method
+     * @param LoggerInterface $logger Log requests and errors with this instance
      */
-    public function __construct(array $conf = [])
+    public function __construct(array $conf = [], LoggerInterface $logger = null)
     {
         $this->setConf($conf);
+        if (null !== $logger) {
+            $this->setLogger($logger);
+        }
     }
 
     /**
@@ -61,6 +72,20 @@ class JsonRPC
     public function setConf(array $conf)
     {
         $this->conf = array_merge($this->conf, $conf);
+        return $this;
+    }
+
+    /**
+     * Sets a logger instance
+     * 
+     * Once set, requests and errors will be logged using the instance.
+     * 
+     * @param LoggerInterface $logger The logger
+     * @return $this
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
         return $this;
     }
 
@@ -141,14 +166,20 @@ class JsonRPC
      */
     protected function exec($query)
     {
+        $url = "http://{$this->conf['host']}:{$this->conf['port']}";
         $http = $this->getHTTP()
-            ->setUrl("http://{$this->conf['host']}:{$this->conf['port']}")
+            ->setUrl($url)
             ->setContentType("application/json")
             ->setAuthUser($this->conf["user"])
             ->setAuthPass($this->conf["pass"])
             ->setPostData($query);
         $response    = $http->request();
         $status_code = $http->getStatusCode();
+        
+        $this->log(
+            (HTTPStatusCodes::OK == $status_code) ? "notice" : "error",
+            "{$status_code}: {$url} => {$response}"
+        );
 
         if (HTTPStatusCodes::UNAUTHORIZED == $status_code) {
             throw new AuthenticationException(
@@ -194,5 +225,20 @@ class JsonRPC
         }
 
         return $response;
+    }
+
+    /**
+     * Logs a message with an arbitrary level when logging is enabled
+     *
+     * @param  mixed $level     The logging level
+     * @param  string $message  The message to log
+     * @param  array $context   Values to place into the message
+     * @return null
+     */
+    protected function log($level, $message, array $context = [])
+    {
+        if ($this->logger) {
+            $this->logger->log($level, $message, $context);
+        }
     }
 } 
