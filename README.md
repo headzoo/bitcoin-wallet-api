@@ -91,8 +91,8 @@ $conf = [
 
 // Create the JsonRPC instance, and query the wallet for info.
 try {
-    $server = new Headzoo\CoinTalk\JsonRPC($conf);
-    $info = $server->query("getinfo");
+    $rpc  = new Headzoo\CoinTalk\JsonRPC($conf);
+    $info = $rpc->query("getinfo");
     print_r($info);
 } catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
@@ -134,11 +134,11 @@ $conf = [
 ];
 
 try {
-    $server = new Headzoo\CoinTalk\JsonRPC($conf);
-    $api    = new Headzoo\CoinTalk\Wallet($server);
-    $info    = $api->getInfo();
-    $account = $api->getAccount("personal");
-    $count   = $api->getBlockCount();
+    $rpc     = new Headzoo\CoinTalk\JsonRPC($conf);
+    $wallet  = new Headzoo\CoinTalk\Wallet($rpc);
+    $info    = $wallet->getInfo();
+    $account = $wallet->getAccount("personal");
+    $count   = $wallet->getBlockCount();
 } catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
@@ -159,8 +159,8 @@ $conf = [
     "host" => "localhost",
     "port" => 9332
 ];
-$server = new Headzoo\CoinTalk\JsonRPC($conf);
-$pool->add($server);
+$rpc = new Headzoo\CoinTalk\JsonRPC($conf);
+$pool->add($rpc);
 
 $conf = [
     "user" => "testnet",
@@ -168,8 +168,8 @@ $conf = [
     "host" => "localhost",
     "port" => 9333
 ];
-$server = new Headzoo\CoinTalk\JsonRPC($conf);
-$pool->add($server);
+$rpc = new Headzoo\CoinTalk\JsonRPC($conf);
+$pool->add($rpc);
 
 // The query will be sent using one of the JsonRPC instances in the pool.
 try {
@@ -181,8 +181,8 @@ try {
 
 // Using the pool with the Wallet class.
 try {
-    $api  = new Wallet($pool);
-    $info = $api->getInfo();
+    $wallet = new Wallet($pool);
+    $info   = $wallet->getInfo();
 } catch (Headzoo\CoinTalk\RPCException $e) {
     echo $e->getTraceAsString();
     die();
