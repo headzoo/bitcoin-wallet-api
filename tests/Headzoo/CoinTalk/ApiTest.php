@@ -67,11 +67,11 @@ class ApiTest
     }
 
     /**
-     * @covers Headzoo\CoinTalk\Api::listAccounts
+     * @covers Headzoo\CoinTalk\Api::getAccounts
      */
-    public function testListAccounts()
+    public function testGetAccounts()
     {
-        $accounts = $this->fixture->listAccounts();
+        $accounts = $this->fixture->getAccounts();
         $this->assertNotEmpty($accounts);
     }
 } 
