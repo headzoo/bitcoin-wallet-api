@@ -88,8 +88,9 @@ Examples
 --------
 
 ##### Headzoo\CoinTalk\JsonRPC
-Core class which talks to Bitcoin wallets using JSON-RPC. Provides a single `query($method, array $params = [])` method
-via the `Headzoo\CoinTalk\JsonRPCInterface` interface, which is used to call any of the wallet API methods.
+Core class which directly communicates with Bitcoin wallets supporting the JSON-RPC API. This class provides a single
+`query($method, array $params = [])` method via the `Headzoo\CoinTalk\JsonRPCInterface` interface, which is used to
+query the wallet API.
 
 Although you may use this class directly, it does not provide concrete methods for each API call, and does not error
 check the arguments. It's recommended that you use the `Headzoo\CoinTalk\Wallet` class instead.
