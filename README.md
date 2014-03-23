@@ -1,9 +1,7 @@
 Coin Talk
 =========
-
-Provides PHP classes to communicate with any crypto wallet which supports the JSON-RPC protocol defined in the Bitcoin
-wallet. The rest of this documentation will refer to the Bitcoin wallet, but this library will work with any wallet
-which is a decentest of the Bitcoin wallet.
+PHP library which facilitates communication with the Bitcoin JSON-RPC API. The rest of this documentation refers
+to the Bitcoin wallet, but this library works with any Bitcoin wallet descendant.
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -20,7 +18,7 @@ which is a decentest of the Bitcoin wallet.
 
 Overview
 --------
-The goal of this project is to provide more than a thin PHP wrapper to the Bitcoin JSON-RPC; there are plenty
+The goal of this project is to provide more than a thin PHP wrapper to the Bitcoin JSON-RPC API; there are plenty
 of PHP libraries for that purpose. This library is meant to be more powerful than other libraries by offering the
 following features:
 
