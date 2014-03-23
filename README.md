@@ -197,7 +197,7 @@ try {
 
 Class Documentation
 -------------------
-The full class API documentation is available in the `/docs` directory.
+The full class API documentation is available in the [/docs](docs/README.md) directory.
 
 ##### Headzoo\CoinTalk\JsonRPC
 Core class which directly communicates with Bitcoin wallets supporting the JSON-RPC API. This class provides a single
