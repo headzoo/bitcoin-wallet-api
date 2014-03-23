@@ -181,7 +181,7 @@ class Api
     /**
      * Returns an array describing each connected node
      *
-     * Returns an associative array, which each sub-array containing the following keys:
+     * Returns an mutlidimentional array, which each sub-array containing the following keys:
      *  "addr"              - (string)  The ip address and port of the peer.
      *  "addrlocal"         - (string)  The local address.
      *  "services"          - (string)  The supported services.
@@ -326,15 +326,35 @@ class Api
     /**
      * Adds signatures to a raw transaction and returns the resulting raw transaction
      *
-     * @param  string $hex_string
-     * @param  string $transaction
+     * If provided, the $prev_txs argument should be a multidimensional array, with the sub-arrays having the
+     * following keys:
+     *  "txid"          - (string)  The transaction id.
+     *  "vout"          - (int)     The output number.
+     *  "scriptPubKey"  - (string)  The script key.
+     *  "redeemScript"  - (string)  The redeem script.
+     * 
+     * Example return value:
+     *  [
+     *      // The raw transaction with signature(s) (hex-encoded string).
+     *      "hex" => "010000000263f2dde1d550b081d59c09ccb3f8a83b01...",
+     * 
+     *      // If transaction has a complete set of signature (0 if not).
+     *      "complete" => 1
+     *  ]
+     * 
+     * @param  string $hex_data     The transaction hex string
+     * @param  array  $prevtxs      An array of previous dependent transaction outputs
+     * @param  array  $priv_keys    Array of base58-encoded private keys for signing
+     * @param  string $sighashtype  The signature hash type, one of "ALL", "NONE", "SINGLE", "ALL|ANYONECANPAY", "NONE|ANYONECANPAY", "SINGLE|ANYONECANPAY"
      * @return array
      */
-    public function signRawTransaction($hex_string, $transaction = "")
+    public function signRawTransaction($hex_data, array $prevtxs = [], array $priv_keys = [], $sighashtype = "ALL")
     {
         $args = [
-            (string)$hex_string,
-            (string)$transaction
+            (string)$hex_data,
+            !empty($prevtxs)   ? $prevtxs   : null,
+            !empty($priv_keys) ? $priv_keys : null,
+            (string)$sighashtype
         ];
         return $this->server->query(__FUNCTION__, $args);
     }
@@ -376,9 +396,9 @@ class Api
     /**
      * Returns balances by for every address
      *
-     * Returns an associative array, which each sub-array containing the following keys:
+     * Returns an mutlidimentional array, which each sub-array containing the following keys:
      *  "address"       - (string)  The receiving address.
-     *  "account"       - (string)  The account of the receiving address. The default account is "".
+     *  "account"       - (string)  The account of the receiving address, using "" to represent the default account.
      *  "amount"        - (double)  The total amount received by the address.
      *  "confirmations" - (int)     The number of confirmations of the most recent transaction included.
      *  "txids"         - (array)   An array of transaction ids.
@@ -633,7 +653,7 @@ class Api
      *
      * This is for use with raw transactions, NOT normal use.
      *
-     * @param  string $account Name of the account or "" for the default account
+     * @param  string $account Name of the account, using "" to represent the default account
      * @return string
      */
     public function getRawChangeAddress($account)
@@ -650,7 +670,7 @@ class Api
      * If $account is specified (recommended), it is added to the address book so payments received with the address
      * will be credited to $account.
      *
-     * @param  string $account The account name for the address to be linked to. if not provided, the default account "" is used
+     * @param  string $account The account name for the address to be linked to, using "" to represent the default account
      * @return string
      */
     public function getNewAddress($account)
@@ -832,10 +852,10 @@ class Api
      *
      * Returns all transactions if $hash is omitted.
      *
-     * The return value will be an associative array:
-     *  "lastblock"         - (string)      The hash of the last block.
-     *  "transactions"      - (array)       One or more transactions. Each transaction will contain the following keys:
-     *      "account"           - (string)  The account name associated with the transaction. Will be "" for the default account.
+     * The return value will be an mutlidimentional array with the following keys:
+     *  "lastblock"             - (string)  The hash of the last block.
+     *  "transactions"          - (array)   One or more transactions. Each transaction will contain the following keys:
+     *      "account"           - (string)  The account name associated with the transaction, using "" to represent the default account.
      *      "address"           - (string)  The address of the transaction. Not present for move transactions (category = move).
      *      "category"          - (string)  The type of transaction, eg "send", "receive", or "move".
      *      "amount"            - (double)  The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
@@ -880,7 +900,7 @@ class Api
      *  "time"          - (int)     The transaction time in seconds since epoch (1 Jan 1970 GMT).
      *  "timereceived"  - (int)     The time received in seconds since epoch (1 Jan 1970 GMT).
      *  "details"       - (array)   The transaction details. Each array contains the following keys:
-     *      "account"   - (string)  The account name involved in the transaction, can be "" for the default account.
+     *      "account"   - (string)  The account name involved in the transaction, using "" to represent the default account.
      *      "address"   - (string)  The address involved in the transaction.
      *      "category"  - (string)  The category, either "send" or "receive".
      *      "amount"    - (double)  The amount.
@@ -903,8 +923,8 @@ class Api
      * The first $from transactions are skipped. If $account not provided will return recent transaction from all
      * accounts.
      *
-     * The return value will be an associative array, with each sub-array containing the following keys:
-     *  "account"           - (string)  The account name associated with the transaction. Will be "" for the default account.
+     * The return value will be an mutlidimentional array, with each sub-array containing the following keys:
+     *  "account"           - (string)  The account name associated with the transaction, using "" to represent the default account.
      *  "address"           - (string)  The address of the transaction. Not present for move transactions (category = move).
      *  "category"          - (string)  The type of transaction, eg "send", "receive", or "move".
      *  "amount"            - (double)  The transaction amount. This is negative for the "send" category, and for the 'move' category for moves outbound, otherwise it's positive.
@@ -1047,7 +1067,7 @@ class Api
      *  "txid"          - (string)  The transaction id.
      *  "vout"          - (int)     The vout value.
      *  "address"       - (string)  The address.
-     *  "account"       - (string)  The associated account, or "" for the default account.
+     *  "account"       - (string)  The associated account, using "" to represent the default account.
      *  "scriptPubKey"  - (string)  The script key.
      *  "amount"        - (double)  The transaction amount.
      *  "confirmations" - (int)     The number of confirmations.
