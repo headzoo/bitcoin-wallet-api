@@ -41,7 +41,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $url **string** - The request url
 
@@ -57,7 +57,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $post_data **mixed** - The post data
 
@@ -73,7 +73,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $content_type **string** - The content type
 
@@ -89,7 +89,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $auth_user **string** - The username
 
@@ -105,7 +105,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $auth_pass **string** - The password
 

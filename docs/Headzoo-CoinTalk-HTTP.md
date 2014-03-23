@@ -97,7 +97,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::__construct(string $u
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $url **string** - The url to request
 
@@ -125,7 +125,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setUrl($url)
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $url **mixed**
 
@@ -141,7 +141,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setPostData($post_dat
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $post_data **mixed**
 
@@ -157,7 +157,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setContentType($conte
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $content_type **mixed**
 
@@ -173,7 +173,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setAuthUser($auth_use
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $auth_user **mixed**
 
@@ -189,7 +189,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setAuthPass($auth_pas
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $auth_pass **mixed**
 
@@ -231,7 +231,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 * This method is defined by [Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $url **string** - The request url
 
@@ -248,7 +248,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 * This method is defined by [Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $post_data **mixed** - The post data
 
@@ -265,7 +265,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 * This method is defined by [Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $content_type **string** - The content type
 
@@ -282,7 +282,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 * This method is defined by [Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $auth_user **string** - The username
 
@@ -299,7 +299,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 * This method is defined by [Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $auth_pass **string** - The password
 

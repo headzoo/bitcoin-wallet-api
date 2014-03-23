@@ -74,7 +74,7 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(arr
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $conf **array** - See the setConf() method
 * $logger **Psr\Log\LoggerInterface** - Log requests and errors with this instance
@@ -95,7 +95,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $conf **array** - Configuration for the rpc
 
@@ -111,7 +111,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $logger **Psr\Log\LoggerInterface** - The logger
 
@@ -127,7 +127,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $http **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** - The HTTPInterface instance
 
@@ -164,7 +164,7 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, 
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $method **mixed**
 * $params **array**
@@ -181,7 +181,7 @@ protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $query **string** - The query string to send
 
@@ -197,7 +197,7 @@ protected null Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::log(mixed $le
 ```
 
 
-#### Arguments
+##### Arguments
 
 * $level **mixed** - The logging level
 * $message **string** - The message to log
@@ -225,7 +225,7 @@ public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterfac
 
 * This method is defined by [Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)
 
-#### Arguments
+##### Arguments
 
 * $method **string** - The method to call
 * $params **array** - The method parameters
