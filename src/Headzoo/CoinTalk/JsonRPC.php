@@ -102,7 +102,7 @@ class JsonRPC
      * @param string $query The query string to send
      * @return string
      * @throws AuthenticationException When the wrong rpc username or password was sent
-     * @throws HttpException When there was an error sending the request
+     * @throws HTTPException When there was an error sending the request
      * @throws ServerException When the rpc server returns an error message
      */
     protected function exec($query)
@@ -123,7 +123,7 @@ class JsonRPC
         curl_close($ch);
 
         if (null !== $error_str) {
-            throw new HttpException($error_str, $status_code);
+            throw new HTTPException($error_str, $status_code);
         }
         if (HTTPStatusCodes::UNAUTHORIZED == $status_code) {
             throw new AuthenticationException(
@@ -163,7 +163,7 @@ class JsonRPC
                 }
             }
             
-            throw new HttpException(
+            throw new HTTPException(
                 "Received HTTP status code {$status_code} from the server. '{$response}'.",
                 $status_code
             );

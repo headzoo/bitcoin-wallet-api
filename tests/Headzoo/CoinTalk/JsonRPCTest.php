@@ -62,7 +62,7 @@ class JsonRPCTest
 
     /**
      * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\HttpException
+     * @expectedException Headzoo\CoinTalk\HTTPException
      */
     public function testQuery_HttpException_Path()
     {
@@ -73,7 +73,7 @@ class JsonRPCTest
 
     /**
      * @covers Headzoo\CoinTalk\JsonRPC::query
-     * @expectedException Headzoo\CoinTalk\HttpException
+     * @expectedException Headzoo\CoinTalk\HTTPException
      */
     public function testQuery_HttpException_Port()
     {
