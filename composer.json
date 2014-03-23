@@ -1,10 +1,10 @@
 {
-    "name": "headzoo/coin-talk",
-    "description": "PHP library supporting communication with the Bitcoin JSON-RPC API.",
+    "name": "headzoo/bitcoin-wallet-rpc",
+    "description": "PHP library supporting communication with the Bitcoin wallet JSON-RPC API.",
     "type": "library",
     "license": "MIT",
     "keywords": ["php", "bitcoin", "litecoin", "dogecoin", "crypto", "json-rpc", "api"],
-    "version": "0.3",
+    "version": "0.4",
     "authors": [
         {
             "name": "headzoo",
