@@ -4,6 +4,8 @@ set_include_path(
   PATH_SEPARATOR .
   get_include_path()
 );
+
+require(__DIR__ . "/../vendor/autoload.php");
 spl_autoload_register(function($class_name)
   {
     $class_name = ltrim($class_name, "\\");
