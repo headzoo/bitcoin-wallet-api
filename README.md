@@ -14,6 +14,8 @@ which is a decentest of the Bitcoin wallet.
     - [Headzoo\CoinTalk\Server](#headzoocointalkserver)
     - [Headzoo\CoinTalk\Api](#headzoocointalkapi)
     - [Headzoo\CoinTalk\Pool](#headzoocointalkpool)
+- [Change Log](#changelog)
+- [TODO](#todo)
 - [License](#license)
 
 Overview
@@ -24,15 +26,19 @@ following features:
 
 * Concrete methods are defined for each API call, which means modern IDEs can provide auto-complete and argument documentation.
 * Arguments for each API call are checked for correct type and format, which is useful during development and debugging.
+* Abstracts away some of the Bitcoin API complications and inconsistencies, while tyring to stay close to the original.
 * Pool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
 * Solid documentation for each API call. Often taken directly from the Bitcoin source code.
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
 
+**Please notify me of API changes by submitting an issue.**
+
 Requirements
 ------------
-* PHP 5.4 or greater
-* cURL PHP extension
+* PHP 5.4 or greater.
+* cURL PHP extension.
+* A wallet server supporting the Bitcoin JSON-API protocol for Bitcoin wallet version 0.9 or greater.
 
 Installing
 ----------
@@ -181,6 +187,55 @@ try {
 }
 ```
 
+Change Log
+----------
+v0.2 - 2014-03-23
+* Renamed methods starting with `list` in the `Headzoo\CoinTalk\Api` class with `get`, eg `listAccounts()` was renamed to `getAccounts()`.
+* Renamed the following methods to make the method names more consistent, and so they conform to my naming standards:
+    * `Headzoo\CoinTalk\Api::sendRawTransaction()`      to `Headzoo\CoinTalk\Api::submitRawTransaction()`.
+    * `Headzoo\CoinTalk\Api::submitBlock()`             to `Headzoo\CoinTalk\Api::submitRawBlock()`.
+    * `Headzoo\CoinTalk\Api::getRawMemPool()`           to `Headzoo\CoinTalk\Api::getTransactionsFromMemoryPool()`.
+    * `Headzoo\CoinTalk\Api::dumpPrivKey()`             to `Headzoo\CoinTalk\Api::getPrivateKeyByAddress()`.
+    * `Headzoo\CoinTalk\Api::importPrivKey()`           to `Headzoo\CoinTalk\Api::addPrivateKey()`.
+    * `Headzoo\CoinTalk\Api::lockUnspent()`             to `Headzoo\CoinTalk\Api::setLockUnspent()`.
+    * `Headzoo\CoinTalk\Api::sendToAddress()`           to `Headzoo\CoinTalk\Api::send()`.
+    * `Headzoo\CoinTalk\Api::sendFrom()`                to `Headzoo\CoinTalk\Api::sendFromAccount()`.
+    * `Headzoo\CoinTalk\Api::sendMany()`                to `Headzoo\CoinTalk\Api::sendManyFromAccount()`.
+    * `Headzoo\CoinTalk\Api::verifyMessage()`           to `Headzoo\CoinTalk\Api::isSignedMessageValid()`.
+    * `Headzoo\CoinTalk\Api::validateAddress()`         to `Headzoo\CoinTalk\Api::getAddressInfo()`.
+    * `Headzoo\CoinTalk\Api::encryptWallet()`           to `Headzoo\CoinTalk\Api::encrypt()`.
+    * `Headzoo\CoinTalk\Api::walletLock()`              to `Headzoo\CoinTalk\Api::lock()`.
+    * `Headzoo\CoinTalk\Api::walletPassPhrase()`        to `Headzoo\CoinTalk\Api::unlock()`.
+    * `Headzoo\CoinTalk\Api::walletPassPhraseChange()`  to `Headzoo\CoinTalk\Api::changePassPhrase()`.
+    * `Headzoo\CoinTalk\Api::keyPoolRefill()`           to `Headzoo\CoinTalk\Api::fillKeyPool()`.
+    * `Headzoo\CoinTalk\Api::stop()`                    to `Headzoo\CoinTalk\Api::stop()`.
+    * `Headzoo\CoinTalk\Api::setTxFee()`                to `Headzoo\CoinTalk\Api::setTransactionFee()`.
+    * `Headzoo\CoinTalk\Api::getReceivedByAddress()`    to `Headzoo\CoinTalk\Api::getBalanceByAddress()`.
+    * `Headzoo\CoinTalk\Api::getAccount()`              to `Headzoo\CoinTalk\Api::getAccountByAddress()`.
+    * `Headzoo\CoinTalk\Api::getAccountAddress()`       to `Headzoo\CoinTalk\Api::getAddressByAccount()`.
+    * `Headzoo\CoinTalk\Api::createMultiSig()`          to `Headzoo\CoinTalk\Api::getNewMultiSignatureAddress()`.
+    * `Headzoo\CoinTalk\Api::addMultiSigAddress()`      to `Headzoo\CoinTalk\Api::addMultiSignatureAddress()`.
+    * `Headzoo\CoinTalk\Api::getTxOut()`                to `Headzoo\CoinTalk\Api::getTransactionOut()`.
+    * `Headzoo\CoinTalk\Api::getTxOutSetInfo()`         to `Headzoo\CoinTalk\Api::getTransactionOutSet()`.
+    * `Headzoo\CoinTalk\Api::getAddedNodeInfo()`        to `Headzoo\CoinTalk\Api::getNodeInfo()`.
+* Removed the following methods:
+    * `Headzoo\CoinTalk\Api::getReceivedByAccount()`.
+    * `Headzoo\CoinTalk\Api::listReceivedByAccount()`.
+v0.1 - 2013-12-18
+    * Genesis import!
+
+TODO
+----
+* Handle errors caused by encrypted wallets.
+* Ensure the wallet is the right version for the API call.
+* Document which methods need an unlocked wallet.
+* Get list of all error messages. Don't use strpos($e->getMessage()).
+* Create classes for:
+    * Blocks
+    * Keys (public/private)
+    * Addresses
+    * Transactions
+    
 License
 -------
 This content is released under the MIT License. See the included LICENSE for more information.
@@ -189,9 +244,3 @@ I write code because I like writing code, and writing code is a reward in itself
 
 Bitcoin: 1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM  
 Litecoin: LheadzBgTNAitxYxUTUTTQ3RT7zR5jnkfq
-
-
-TODO
-----
-* Handle errors caused by encrypted wallets.
-* Ensure the wallet is the right version for the API call.
