@@ -99,7 +99,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::__construct(string $u
 
 ##### Arguments
 
-* $url **string** - The url to request
+* **string** $url - The url to request
 
 
 
@@ -127,7 +127,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setUrl($url)
 
 ##### Arguments
 
-* $url **mixed**
+* **mixed** $url
 
 
 
@@ -143,7 +143,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setPostData($post_dat
 
 ##### Arguments
 
-* $post_data **mixed**
+* **mixed** $post_data
 
 
 
@@ -159,7 +159,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setContentType($conte
 
 ##### Arguments
 
-* $content_type **mixed**
+* **mixed** $content_type
 
 
 
@@ -175,7 +175,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setAuthUser($auth_use
 
 ##### Arguments
 
-* $auth_user **mixed**
+* **mixed** $auth_user
 
 
 
@@ -191,7 +191,7 @@ public mixed Headzoo\CoinTalk\HTTP::Headzoo\CoinTalk\HTTP::setAuthPass($auth_pas
 
 ##### Arguments
 
-* $auth_pass **mixed**
+* **mixed** $auth_pass
 
 
 
@@ -233,7 +233,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ##### Arguments
 
-* $url **string** - The request url
+* **string** $url - The request url
 
 
 
@@ -250,7 +250,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ##### Arguments
 
-* $post_data **mixed** - The post data
+* **mixed** $post_data - The post data
 
 
 
@@ -267,7 +267,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ##### Arguments
 
-* $content_type **string** - The content type
+* **string** $content_type - The content type
 
 
 
@@ -284,7 +284,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ##### Arguments
 
-* $auth_user **string** - The username
+* **string** $auth_user - The username
 
 
 
@@ -301,7 +301,7 @@ public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\HTTPInterface::Headzoo\Co
 
 ##### Arguments
 
-* $auth_pass **string** - The password
+* **string** $auth_pass - The password
 
 
 

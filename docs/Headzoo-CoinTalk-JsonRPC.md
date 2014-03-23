@@ -76,8 +76,8 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(arr
 
 ##### Arguments
 
-* $conf **array** - See the setConf() method
-* $logger **Psr\Log\LoggerInterface** - Log requests and errors with this instance
+* **array** $conf - See the setConf() method
+* **Psr\Log\LoggerInterface** $logger - Log requests and errors with this instance
 
 
 
@@ -97,7 +97,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 
 ##### Arguments
 
-* $conf **array** - Configuration for the rpc
+* **array** $conf - Configuration for the rpc
 
 
 
@@ -113,7 +113,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 
 ##### Arguments
 
-* $logger **Psr\Log\LoggerInterface** - The logger
+* **Psr\Log\LoggerInterface** $logger - The logger
 
 
 
@@ -129,7 +129,7 @@ public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonR
 
 ##### Arguments
 
-* $http **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** - The HTTPInterface instance
+* **[Headzoo\CoinTalk\HTTPInterface](Headzoo-CoinTalk-HTTPInterface.md)** $http - The HTTPInterface instance
 
 
 
@@ -166,8 +166,8 @@ public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, 
 
 ##### Arguments
 
-* $method **mixed**
-* $params **array**
+* **mixed** $method
+* **array** $params
 
 
 
@@ -183,7 +183,7 @@ protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string
 
 ##### Arguments
 
-* $query **string** - The query string to send
+* **string** $query - The query string to send
 
 
 
@@ -199,9 +199,9 @@ protected null Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::log(mixed $le
 
 ##### Arguments
 
-* $level **mixed** - The logging level
-* $message **string** - The message to log
-* $context **array** - Values to place into the message
+* **mixed** $level - The logging level
+* **string** $message - The message to log
+* **array** $context - Values to place into the message
 
 
 
@@ -227,7 +227,7 @@ public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterfac
 
 ##### Arguments
 
-* $method **string** - The method to call
-* $params **array** - The method parameters
+* **string** $method - The method to call
+* **array** $params - The method parameters
 
 

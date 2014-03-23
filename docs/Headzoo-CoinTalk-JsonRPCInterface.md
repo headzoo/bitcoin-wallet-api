@@ -40,7 +40,7 @@ public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterfac
 
 ##### Arguments
 
-* $method **string** - The method to call
-* $params **array** - The method parameters
+* **string** $method - The method to call
+* **array** $params - The method parameters
 
 
