@@ -39,6 +39,7 @@ Requirements
 ------------
 * PHP 5.4 or greater.
 * cURL PHP extension.
+* A logger library that supports PSR-3 if you want to log requests.
 * A wallet server supporting the Bitcoin JSON-API protocol for Bitcoin wallet version 0.9 or greater.
 
 Installing
