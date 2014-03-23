@@ -229,7 +229,7 @@ class Wallet
      * Sets the transaction fee amount
      *
      * @param  double $amount Amount to use for transaction fees
-     * @return array
+     * @return bool
      */
     public function setTransactionFee($amount)
     {
@@ -264,7 +264,7 @@ class Wallet
      * @param  string $type Use "add" to add a node to the list, "remove" to remove a node from the list, "onetry" to try a connection to the node once
      * @return bool
      */
-    public function addNode($node, $type = "")
+    public function addNode($node, $type)
     {
         $args = [
             (string)$node,
