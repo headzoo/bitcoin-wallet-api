@@ -66,7 +66,7 @@ Constructor
 
 
 ```php
-public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::__construct(array $conf, Psr\Log\LoggerInterface $logger)
+public mixed Headzoo\CoinTalk\JsonRPC::__construct(array $conf, Psr\Log\LoggerInterface $logger)
 ```
 
 
@@ -88,7 +88,7 @@ The configuration array should contain 4 items:
  "port" - The rpc server port, default 9332
 ```
 ```php
-public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setConf(array $conf)
 ```
 
 
@@ -103,7 +103,7 @@ Sets a logger instance
 
 Once set, requests and errors will be logged using the instance.
 ```php
-public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\LoggerInterface $logger)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setLogger(Psr\Log\LoggerInterface $logger)
 ```
 
 
@@ -118,7 +118,7 @@ Sets the HTTPInterface used to make requests to the wallet
 
 
 ```php
-public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::setHTTP(Headzoo\CoinTalk\HTTPInterface $http)
+public Headzoo\CoinTalk\JsonRPC Headzoo\CoinTalk\JsonRPC::setHTTP(Headzoo\CoinTalk\HTTPInterface $http)
 ```
 
 
@@ -133,7 +133,7 @@ Returns the HTTPInterface instance used to make requests to the wallet
 
 Automatically creates an instance if none has been set.
 ```php
-public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::getHTTP()
+public Headzoo\CoinTalk\HTTPInterface Headzoo\CoinTalk\JsonRPC::getHTTP()
 ```
 
 
@@ -153,7 +153,7 @@ Example:
  echo $info["difficulty"];
 ```
 ```php
-public mixed Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::query($method, array $params)
+public mixed Headzoo\CoinTalk\JsonRPC::query($method, array $params)
 ```
 
 
@@ -169,7 +169,7 @@ Sends the query string to the server and returns the response
 
 
 ```php
-protected string Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::exec(string $query)
+protected string Headzoo\CoinTalk\JsonRPC::exec(string $query)
 ```
 
 
@@ -184,7 +184,7 @@ Logs a message with an arbitrary level when logging is enabled
 
 
 ```php
-protected null Headzoo\CoinTalk\JsonRPC::Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, array $context)
+protected null Headzoo\CoinTalk\JsonRPC::log(mixed $level, string $message, array $context)
 ```
 
 
@@ -210,7 +210,7 @@ Example:
  echo $info["difficulty"];
 ```
 ```php
-public array Headzoo\CoinTalk\JsonRPCInterface::Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
+public array Headzoo\CoinTalk\JsonRPCInterface::query(string $method, array $params)
 ```
 
 * This method is defined by [Headzoo\CoinTalk\JsonRPCInterface](Headzoo-CoinTalk-JsonRPCInterface.md)
