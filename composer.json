@@ -16,7 +16,7 @@
         "ext-curl": "*",
         "ext-simplexml": "*",
         "psr/log": "dev-master",
-        "headzoo/web-tools": "dev-master"
+        "headzoo/web-tools": "0.1"
     },
     "autoload": {
         "psr-0": {
