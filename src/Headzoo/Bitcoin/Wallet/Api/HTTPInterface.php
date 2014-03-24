@@ -10,7 +10,7 @@ interface HTTPInterface
      * Sends the request and returns the response
      *
      * @return string
-     * @throws HTTPException If the request generates an error
+     * @throws Exceptions\HTTPException If the request generates an error
      */
     public function request();
 
