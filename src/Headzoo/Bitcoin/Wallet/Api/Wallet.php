@@ -403,7 +403,7 @@ class Wallet
             "*",
             $this->minconf
         ];
-        return $this->rpc->query("getBalance", $args);
+        return $this->rpc->query(__FUNCTION__, $args);
     }
 
     /**
