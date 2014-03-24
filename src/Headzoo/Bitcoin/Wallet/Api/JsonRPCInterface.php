@@ -2,7 +2,7 @@
 namespace Headzoo\Bitcoin\Wallet\Api;
 
 /**
- * Interface for the Bitcoin json-rpc.
+ * Core interface for communicating with a Bitcoin wallet supporting the JSON-RPC API.
  */
 interface JsonRPCInterface
 {
