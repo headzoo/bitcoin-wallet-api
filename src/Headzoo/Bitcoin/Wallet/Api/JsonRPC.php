@@ -15,7 +15,7 @@ use Psr\Log\LogLevel;
  *      "port" => 9332
  *  ];
  *  $rpc  = new JsonRPC($conf);
- *  $info = $rpc->query("getinfo");
+ *  $info = $rpc->query("getInfo");
  * ```
  */
 class JsonRPC
@@ -159,33 +159,26 @@ class JsonRPC
      */
     public function query($method, array $params = [])
     {
-        $id    = $this->getNonce();
-        $query = json_encode([
+        $request = [
             "method" => strtolower($method),
             "params" => $params,
-            "id"     => $id
-        ]);
-        if (!$query) {
-            throw new Exceptions\JsonException(
-                "Unable to json encode server query."
-            );
-        }
+            "id"     => $this->getNonce()
+        ];
+        $response = $this->exec(json_encode($request));
+        $response = json_decode($response, true);
         
-        $response = $this->exec($query);
-        $obj = json_decode($response, true);
-        if (!$obj) {
+        if (!$response) {
             throw new Exceptions\JsonException(
                 "Unable to json decode server response."
             );
         }
-        
-        if ($obj["id"] !== $id) {
+        if ($response["id"] !== $request["id"]) {
             throw new Exceptions\IdentityException(
-                "Server returned ID '{$obj['id']}', was expecting '{$id}'."
+                "Server returned ID '{$response['id']}', was expecting '{$request['id']}'."
             );
         }
 
-        return $obj["result"];
+        return $response["result"];
     }
 
     /**
@@ -197,7 +190,11 @@ class JsonRPC
      */
     protected function exec($query)
     {
-        $url = "http://{$this->conf['host']}:{$this->conf['port']}";
+        if (!$query) {
+            throw new Exceptions\RPCException("Empty query.");
+        }
+        
+        $url = sprintf("http://%s:%d", $this->conf["host"], $this->conf["port"]);
         $http = $this->getHTTP()
             ->setUrl($url)
             ->setContentType("application/json")
@@ -209,11 +206,11 @@ class JsonRPC
         
         $this->log(
             (HTTPStatusCodes::OK == $status_code) ? LogLevel::INFO: LogLevel::ERROR,
-            "{$status_code}: {$url} => {$response}"
+            "{$status_code}: '{$url}' => '{$response}'"
         );
         
-        $error = $this->getResponseError($response, $status_code);
         if (isset(self::$exceptions[$status_code])) {
+            $error     = $this->getResponseError($response, $status_code);
             $exception = __NAMESPACE__ . self::$exceptions[$status_code];
             throw new $exception(
                 $error["message"],
@@ -300,7 +297,6 @@ class JsonRPC
         if (null === $this->nonce) {
             $this->nonce = new Nonce();
         }
-        
         return $this->nonce->generate();
     }
 } 
