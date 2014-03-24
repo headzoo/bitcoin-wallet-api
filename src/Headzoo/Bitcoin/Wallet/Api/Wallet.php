@@ -781,7 +781,7 @@ class Wallet
      *
      * @param  string $address The address for the private key
      * @return string
-     * @throws RPCException
+     * @throws Exceptions\RPCException
      */
     public function getPrivateKeyByAddress($address)
     {
@@ -792,7 +792,7 @@ class Wallet
         $priv_key = null;
         try {
             $priv_key = $this->rpc->query("dumpPrivKey", $args);
-        } catch (RPCException $e) {
+        } catch (Exceptions\RPCException $e) {
             if ($e->getCode() != RPCErrorCodes::WALLET_ERROR) {
                 throw $e;
             }
@@ -1407,7 +1407,7 @@ class Wallet
      * @param  string $passphrase The wallet pass phrase
      * @param  int    $timeout    Number of seconds to keep the pass phrase in memory
      * @return bool
-     * @throws RPCException
+     * @throws Exceptions\RPCException
      */
     public function unlock($passphrase, $timeout)
     {
@@ -1418,7 +1418,7 @@ class Wallet
         
         try {
             $this->rpc->query("walletPassPhrase", $args);
-        } catch (RPCException $e) {
+        } catch (Exceptions\RPCException $e) {
             if ($e->getCode() != RPCErrorCodes::WALLET_ALREADY_UNLOCKED) {
                 throw $e;
             }
