@@ -71,7 +71,7 @@ class HTTP
     public function request()
     {
         if (!$this->url) {
-            throw new HTTPException("Request URL has not been set.", 1);
+            throw new Exceptions\HTTPException("Request URL has not been set.", 1);
         }
         
         $ch = curl_init($this->url);
@@ -89,7 +89,7 @@ class HTTP
             $error = curl_error($ch);
             $code  = curl_errno($ch);
             curl_close($ch);
-            throw new HTTPException($error, $code);
+            throw new Exceptions\HTTPException($error, $code);
         }
         curl_close($ch);
         
