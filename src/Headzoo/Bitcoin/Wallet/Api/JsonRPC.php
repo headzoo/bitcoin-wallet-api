@@ -19,7 +19,16 @@ use Psr\Log\LogLevel;
  *      "port" => 9332
  *  ];
  *  $rpc  = new JsonRPC($conf);
- *  $info = $rpc->query("getInfo");
+ *
+ *  $info      = $rpc->query("getInfo");
+ *  $balance   = $rpc->query("getBalance", ["headz", 1]);
+ *  $signature = $rpc->query(
+ *      "signMessage",
+ *      [
+ *          "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM",
+ *          "Mary had a little lamb."
+ *      ]
+ *  );
  * ```
  */
 class JsonRPC
