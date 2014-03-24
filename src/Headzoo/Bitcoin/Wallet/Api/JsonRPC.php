@@ -39,10 +39,28 @@ class JsonRPC
     private $http;
 
     /**
+     * Used to generate request ids
+     * @var Nonce
+     */
+    private $nonce;
+
+    /**
      * Used to log messages
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * Map of http status codes to exceptions that should be thrown
+     * @var array
+     */
+    private static $exceptions = [
+        HTTPStatusCodes::UNAUTHORIZED           => '\Exceptions\AuthenticationException',
+        HTTPStatusCodes::NOT_FOUND              => '\Exceptions\MethodNotFoundException',
+        HTTPStatusCodes::BAD_REQUEST            => '\Exceptions\BadRequestException',
+        HTTPStatusCodes::FORBIDDEN              => '\Exceptions\ForbiddenException',
+        HTTPStatusCodes::INTERNAL_SERVER_ERROR  => '\Exceptions\InternalServerErrorException'
+    ];
 
     /**
      * Constructor
@@ -73,7 +91,7 @@ class JsonRPC
      *  "port" - The rpc server port, default 9332
      * ```
      *
-     * @param array $conf Configuration for the rpc
+     * @param  array $conf Configuration for the rpc
      * @return $this
      */
     public function setConf(array $conf)
@@ -87,7 +105,7 @@ class JsonRPC
      * 
      * Once set, requests and errors will be logged using the instance.
      * 
-     * @param LoggerInterface $logger The logger
+     * @param  LoggerInterface $logger The logger
      * @return $this
      */
     public function setLogger(LoggerInterface $logger)
@@ -99,7 +117,7 @@ class JsonRPC
     /**
      * Sets the HTTPInterface used to make requests to the wallet
      * 
-     * @param HTTPInterface $http The HTTPInterface instance
+     * @param  HTTPInterface $http The HTTPInterface instance
      * @return $this
      */
     public function setHTTP(HTTPInterface $http)
@@ -123,53 +141,59 @@ class JsonRPC
         
         return $this->http;
     }
+
+    /**
+     * Sets the object used to create request ids
+     * 
+     * @param  NonceInterface $nonce Any instance of NonceInterface
+     * @return $this
+     */
+    public function setNonce(NonceInterface $nonce)
+    {
+        $this->nonce = $nonce;
+        return $this;
+    }
     
     /**
      * {@inheritDoc}
      */
     public function query($method, array $params = [])
     {
-        $request_id = rand();
+        $id    = $this->getNonce();
         $query = json_encode([
             "method" => strtolower($method),
             "params" => $params,
-            "id"     => $request_id
+            "id"     => $id
         ]);
-        if (false === $query) {
-            throw new JsonException(
-                "Unable to encode server request."
+        if (!$query) {
+            throw new Exceptions\JsonException(
+                "Unable to json encode server query."
             );
         }
-
+        
         $response = $this->exec($query);
-        $obj = json_decode(trim($response), true);
+        $obj = json_decode($response, true);
         if (!$obj) {
-            throw new JsonException(
-                "Unable to decode server response."
+            throw new Exceptions\JsonException(
+                "Unable to json decode server response."
             );
         }
-
-        if (!empty($obj["error"])) {
-            throw new RPCException($obj["error"]["message"]);
-        }
-        if ($obj["id"] != $request_id) {
-            throw new RPCException(
-                "Server returned ID {$obj['id']}, was expecting {$request_id}."
+        
+        if ($obj["id"] !== $id) {
+            throw new Exceptions\IdentityException(
+                "Server returned ID '{$obj['id']}', was expecting '{$id}'."
             );
         }
 
         return $obj["result"];
-
     }
 
     /**
      * Sends the query string to the server and returns the response
      *
-     * @param string $query The query string to send
+     * @param  string $query The query string to send
      * @return string
-     * @throws AuthenticationException When the wrong rpc username or password was sent
-     * @throws HTTPException When there was an error sending the request
-     * @throws RPCException When the rpc server returns an error message
+     * @throws Exceptions\RPCException
      */
     protected function exec($query)
     {
@@ -187,51 +211,68 @@ class JsonRPC
             (HTTPStatusCodes::OK == $status_code) ? LogLevel::INFO: LogLevel::ERROR,
             "{$status_code}: {$url} => {$response}"
         );
+        
+        $error = $this->getResponseError($response, $status_code);
+        if (isset(self::$exceptions[$status_code])) {
+            $exception = __NAMESPACE__ . self::$exceptions[$status_code];
+            throw new $exception(
+                $error["message"],
+                $error["code"]
+            );
+        }
 
-        if (HTTPStatusCodes::UNAUTHORIZED == $status_code) {
-            throw new AuthenticationException(
-                "The RPC username or password was incorrect.",
-                $status_code
-            );
-        }
-        if (HTTPStatusCodes::NOT_FOUND == $status_code) {
-            $query = json_decode($query, true);
-            throw new MethodNotFoundException(
-                "The method '{$query['method']}' was not found.",
-                RPCErrorCodes::METHOD_NOT_FOUND
-            );
-        }
-        if (HTTPStatusCodes::OK != $status_code) {
-            if ($response) {
-                $response = json_decode($response, true);
-                if (is_array($response) && !empty($response["error"])) {
-                    switch($response["error"]["code"]) {
-                        case RPCErrorCodes::WALLET_UNLOCK_NEEDED:
-                            throw new UnlockNeededException(
-                                $response["error"]["message"],
-                                $response["error"]["code"]
-                            );
-                            break;
-                        default:
-                            $code = !empty($response["error"]["code"])
-                                ? $response["error"]["code"]
-                                : $status_code;
-                            throw new RPCException(
-                                $response["error"]["message"],
-                                $code
-                            );
-                            break;
-                    }
+        return trim($response);
+    }
+
+    /**
+     * Creates an array of error information based on the server response
+     *
+     * The Bitcoin api is a real mess. For some errors the server responds with a json encoded string.
+     * For other errors an html string is returned, but the format of the html varies depending on
+     * the error. Some of the html is well formatted, and can be parsed with SimpleXML, and other html
+     * strings are not well formatted.
+     * 
+     * This method attempts to parse the various error responses, and returns an array with the keys:
+     * ```
+     *  "message"   - (string)  A message describing the error
+     *  "code"      - (int)     An error code
+     * ```
+     * 
+     * Returns `["message" => "", "code" => 0]` when there is no error.
+     * 
+     * @param  string $response    The server response
+     * @param  int    $status_code The http status code
+     * @return array
+     */
+    protected function getResponseError($response, $status_code)
+    {
+        $error = [
+            "message" => "",
+            "code"    => 0
+        ];
+        
+        $obj = json_decode($response, true);
+        if (!$obj) {
+            if (stripos($response, "<H1>401 Unauthorized.</H1>") !== false) {
+                $error["message"] = "Unauthorized";
+                $error["code"]    = RPCErrorCodes::WALLET_PASSPHRASE_INCORRECT;
+            } else if (strpos($response, "<?xml") !== false) {
+                $xml = simplexml_load_string($response);
+                if ($xml && isset($xml->body->p[0])) {
+                    $error["message"] = trim((string)$xml->body->p[0]);
+                    $error["message"] = preg_replace("/[\\n\\r]/", "", $error["message"]);
+                    $error["message"] = preg_replace("/\\s{2,}/", " ", $error["message"]);
+                    $error["code"]    = $status_code;
+                } else {
+                    $error["message"] = $response;
+                    $error["code"]    = $status_code;
                 }
             }
-
-            throw new RPCException(
-                "Received HTTP status code {$status_code} from the server. '{$response}'.",
-                $status_code
-            );
+        } else if (!empty($obj["error"])) {
+            $error = $obj["error"];
         }
-
-        return $response;
+        
+        return $error;
     }
 
     /**
@@ -247,5 +288,19 @@ class JsonRPC
         if ($this->logger) {
             $this->logger->log($level, $message, $context);
         }
+    }
+
+    /**
+     * Generates and returns a nonce value for use as a request id
+     * 
+     * @return string
+     */
+    protected function getNonce()
+    {
+        if (null === $this->nonce) {
+            $this->nonce = new Nonce();
+        }
+        
+        return $this->nonce->generate();
     }
 } 
