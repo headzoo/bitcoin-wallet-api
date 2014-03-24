@@ -4,8 +4,12 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 /**
- * Used to query the coin rpc server.
+ * Core class which directly communicates with Bitcoin wallets supporting the JSON-RPC API.
  *
+ * This class provides a single `query($method, array $params = [])` method via the
+ * `Headzoo\Bitcoin\Wallet\Api\JsonRPCInterface` interface. Although you may use this class directly to query a wallet,
+ * it's best to use an instance of `Headzoo\Bitcoin\Wallet\Api\Wallet` instead.
+ * 
  * Example:
  * ```php
  *  $conf = [
