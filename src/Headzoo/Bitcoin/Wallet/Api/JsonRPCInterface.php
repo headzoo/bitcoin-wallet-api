@@ -14,17 +14,25 @@ interface JsonRPCInterface
      * Example:
      * ```php
      *  $rpc  = new JsonRPC();
-     *  $info = $rpc->query("getinfo");
+     *  $info = $rpc->query("getInfo");
      *  echo $info["version"];
      *  echo $info["balance"];
      *  echo $info["difficulty"];
-     * ```
      *
-     * @param  string $method The method to call
-     * @param  array  $params The method parameters
+     * $signature = $rpc->query(
+     *      "signMessage",
+     *      [
+     *          "1Headz2mYtpBRo6KFaaUEtcm5Kce6BZRJM",
+     *          "Mary had a little lamb."
+     *      ]
+     * );
+     * ```
+     * 
+     * @see https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
+     * @param  string $method The name of the api method to call
+     * @param  array  $params Optional method parameters
      * @return array
-     * @throws Exceptions\JsonException When encoding or decoding the server data fails
-     * @throws Exceptions\RPCException  When the server returns an error message
+     * @throws Exceptions\RPCException
      */
     public function query($method, array $params = []);
 } 
