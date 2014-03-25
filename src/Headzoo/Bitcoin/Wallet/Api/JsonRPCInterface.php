@@ -1,6 +1,5 @@
 <?php
 namespace Headzoo\Bitcoin\Wallet\Api;
-use Headzoo\Web\Tools\WebClientInterface;
 
 /**
  * Core interface for communicating with a Bitcoin wallet supporting the JSON-RPC API.
