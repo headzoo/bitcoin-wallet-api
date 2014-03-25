@@ -36,11 +36,10 @@ See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/AP
 
 Requirements
 ------------
-* PHP 5.4 or greater.
-* cURL PHP extension.
-* SimpleXML PHP extension.
-* A logger library which supports PSR-3, if you want to log requests.
-* A Bitcoin wallet which supports the JSON-API API.
+* [PHP 5.5 or greater](https://php.net/downloads.php).
+* [SimpleXML PHP extension](http://php.net/simplexml).
+* [psr/log](https://github.com/php-fig/log).
+* [A Bitcoin wallet which supports the JSON-API API](https://bitcoin.org/en/choose-your-wallet).
 
 Installing
 ----------
@@ -293,6 +292,7 @@ try {
 Change Log
 ----------
 ##### v0.4.0 - 2014/03/23
+* Increased minimum PHP version to 5.5.
 * Renamed project to Bitcoin Wallet API.
 * Renamed namespace `Headzoo\CoinTalk` to `Headzoo\Bitcoin\Wallet\Api`.
 * Refactored the unit tests to use more mocks.
