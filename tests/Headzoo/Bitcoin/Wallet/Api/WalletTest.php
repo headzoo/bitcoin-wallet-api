@@ -11,7 +11,6 @@ class WalletTest
      */
     protected $conf = [];
 
-    
     /**
      * The test fixture
      * @var Wallet
@@ -58,22 +57,6 @@ class WalletTest
     }
 
     /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getGenerate
-     */
-    public function testGetGenerate()
-    {
-        $this->assertFalse($this->wallet->getGenerate());
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getHashesPerSec
-     */
-    public function testGetHashesPerSec()
-    {
-        $this->assertEquals(0, $this->wallet->getHashesPerSec());
-    }
-
-    /**
      * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getMiningInfo
      */
     public function testGetMiningInfo()
@@ -82,6 +65,14 @@ class WalletTest
             "blocks",
             $this->wallet->getInfo()
         );
+    }
+    
+    /**
+     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getGenerate
+     */
+    public function testGetGenerate()
+    {
+        $this->assertFalse($this->wallet->getGenerate());
     }
 
     /**
@@ -125,20 +116,6 @@ class WalletTest
     public function testSetGenerate()
     {
         $this->assertTrue($this->wallet->setGenerate(false));
-    }
-
-    /**
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::addNode
-     * @covers Headzoo\Bitcoin\Wallet\Api\Wallet::getNodeInfo
-     */
-    public function testAddNode()
-    {
-        $this->assertTrue($this->wallet->addNode("127.0.0.1:8333", "add"));
-        $this->assertArrayHasKey(
-            "addednode",
-            $this->wallet->getNodeInfo(true, "127.0.0.1:8333")[0]
-        );
-        $this->assertTrue($this->wallet->addNode("127.0.0.1:8333", "remove"));
     }
 
     /**
