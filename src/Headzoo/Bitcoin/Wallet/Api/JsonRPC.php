@@ -64,40 +64,33 @@ class JsonRPC
      * @var array
      */
     private static $exceptions = [
-        HTTPStatusCodes::UNAUTHORIZED           => '\Exceptions\AuthenticationException',
-        HTTPStatusCodes::NOT_FOUND              => '\Exceptions\MethodNotFoundException',
-        HTTPStatusCodes::BAD_REQUEST            => '\Exceptions\BadRequestException',
-        HTTPStatusCodes::FORBIDDEN              => '\Exceptions\ForbiddenException',
-        HTTPStatusCodes::INTERNAL_SERVER_ERROR  => '\Exceptions\InternalServerErrorException'
+        HTTPStatusCodes::UNAUTHORIZED           => Exceptions\AuthenticationException::class,
+        HTTPStatusCodes::NOT_FOUND              => Exceptions\MethodNotFoundException::class,
+        HTTPStatusCodes::BAD_REQUEST            => Exceptions\BadRequestException::class,
+        HTTPStatusCodes::FORBIDDEN              => Exceptions\ForbiddenException::class,
+        HTTPStatusCodes::INTERNAL_SERVER_ERROR  => Exceptions\InternalServerErrorException::class
     ];
 
     /**
      * Constructor
      *
-     * @param array              $conf   See the setConf() method
+     * @param array              $conf  See the setConf() method
      * @param WebClientInterface $web   Used to make http post requests
+     * @param NonceInterface     $nonce Any instance of NonceInterface
      */
-    public function __construct(array $conf = [], WebClientInterface $web = null)
+    public function __construct(array $conf = [], WebClientInterface $web = null, NonceInterface $nonce = null)
     {
         $this->setConf($conf);
         if (null !== $web) {
             $this->setWebClient($web);
         }
+        if (null !== $nonce) {
+            $this->setNonce($nonce);
+        }
     }
 
     /**
-     * Sets the configuration for the rpc
-     *
-     * The configuration array should contain 4 items:
-     * ```
-     *  "user" - The rpc username, default "test"
-     *  "pass" - The rpc password, default "test"
-     *  "host" - The rpc server host, default "localhost"
-     *  "port" - The rpc server port, default 9332
-     * ```
-     *
-     * @param  array $conf Configuration for the rpc
-     * @return $this
+     * {@inheritDoc}
      */
     public function setConf(array $conf)
     {
@@ -106,10 +99,7 @@ class JsonRPC
     }
 
     /**
-     * Sets the WebClientInterface used to make requests to the wallet
-     * 
-     * @param  WebClientInterface $web The WebClientInterface instance
-     * @return $this
+     * {@inheritDoc}
      */
     public function setWebClient(WebClientInterface $web)
     {
@@ -118,11 +108,7 @@ class JsonRPC
     }
 
     /**
-     * Returns the WebClientInterface instance used to make requests to the wallet
-     * 
-     * Automatically creates an instance if none has been set.
-     * 
-     * @return WebClientInterface
+     * {@inheritDoc}
      */
     public function getWebClient()
     {
@@ -134,10 +120,7 @@ class JsonRPC
     }
 
     /**
-     * Sets the object used to create request ids
-     * 
-     * @param  NonceInterface $nonce Any instance of NonceInterface
-     * @return $this
+     * {@inheritDoc}
      */
     public function setNonce(NonceInterface $nonce)
     {
@@ -195,9 +178,8 @@ class JsonRPC
         $status_code = $response->getCode();
         
         if (isset(self::$exceptions[$status_code])) {
-            $error     = $this->getResponseError($response, $status_code);
-            $exception = __NAMESPACE__ . self::$exceptions[$status_code];
-            throw new $exception(
+            $error = $this->getResponseError($response, $status_code);
+            throw new self::$exceptions[$status_code](
                 $error["message"],
                 $error["code"]
             );
