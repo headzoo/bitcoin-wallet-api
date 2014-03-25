@@ -25,7 +25,7 @@ class RPCPoolTest
      */
     public function testAdd()
     {
-        $server = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
+        $server = $this->getMockBuilder(JsonRPC::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server);
@@ -39,10 +39,10 @@ class RPCPoolTest
      */
     public function testGet()
     {
-        $server1 = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
+        $server1 = $this->getMockBuilder(JsonRPC::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $server2 = $this->getMockBuilder('Headzoo\Bitcoin\Wallet\Api\JsonRPC')
+        $server2 = $this->getMockBuilder(JsonRPC::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->pool->add($server1);
