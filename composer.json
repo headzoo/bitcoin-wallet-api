@@ -14,7 +14,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "ext-curl": "*",
         "ext-simplexml": "*",
         "psr/log": "dev-master",
         "headzoo/web-tools": "dev-master"
