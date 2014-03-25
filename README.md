@@ -7,10 +7,8 @@ Dogecoin.
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installing](#installing)
-    - [Git](#git)
-    - [Composer](#composer)
-    - [Wallet](#wallet)
-- [Getting Started](#getting-started)
+- [Wallet Configuration](#wallet-configuration)
+- [Quick Start](#quick-start)
 - [Class Documentation](#class-documentation)
     - [Headzoo\CoinTalk\JsonRPC](#headzoobitcoinwalletapijsonrpc)
     - [Headzoo\CoinTalk\Wallet](#headzoobitcoinwalletapiwallet)
@@ -28,43 +26,36 @@ following features:
 * Concrete methods are defined for each API call, which means modern IDEs can provide auto-complete and argument documentation.
 * Arguments for each API call are checked for correct type and format, which is useful during development and debugging.
 * Abstracts away some of the Bitcoin API complications and inconsistencies, while tyring to stay close to the original.
+* Better error handling and reporting.
 * RPCPool management so that wallets may be clustered, with queries are evenly distributed to the cluster.
-* Solid documentation for each API call. Often taken directly from the Bitcoin source code.
-* PSR compliance.
+* Follows [PSR](http://www.php-fig.org/) standards.
+* Designed from the ground up to be unit testable.
+* Solid documentation for each API call, which is often taken directly from the Bitcoin source code.
 
 See the [Bitcoin API wiki](https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list) for information on each method.
-
-**Please notify me of API changes by submitting an issue.**
 
 Requirements
 ------------
 * PHP 5.4 or greater.
 * cURL PHP extension.
+* SimpleXML PHP extension.
 * A logger library which supports PSR-3, if you want to log requests.
 * A Bitcoin wallet which supports the JSON-API API.
 
 Installing
 ----------
-The library may be installed using either git or composer. Additionally you will need to install a Bitcoin wallet, and
-configure the wallet to act as a RPC server.
-
-##### Git
-Simply clone the project with the following command.
-
-```
-git clone git@github.com:headzoo/coin-talk.git
-```
-
-##### Composer
 Add the project to your composer.json as a dependency.
 
 ```
 "require": {
-    "headzoo/coin-talk" : "dev-master"
+    "headzoo/bitcoin-wallet-api" : "dev-master"
 }
 ```
 
-##### Wallet
+And then run `composer update`.
+
+Wallet Configuration
+--------------------
 You will need to configure you wallet to act as a server before using this library. This is done by adding a few
 configuration values to the `bitcoin.conf` file. Shut down your wallet if it's running, and find your Bitcoin data
 directory. By default the data directory is located at `/home/[user]/.bitcoin` on Linux systems,
@@ -89,8 +80,8 @@ and `/Users/[user]/AppData/Roaming/Litecoin` on Windows systems, and the configu
 transactions. You may need to start your wallet with the `-rescan` switch for the first time after adding this
 configuration directive.
 
-Getting Started
----------------
+Quick Start
+-----------
 ```php
 <?php
 use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
@@ -301,11 +292,12 @@ try {
 
 Change Log
 ----------
-##### v0.4 - 2014-03-23
+##### v0.4 - 2014/03/23
 * Renamed project to Bitcoin Wallet API.
 * Renamed namespace `Headzoo\CoinTalk` to `Headzoo\Bitcoin\Wallet\Api`.
+* Refactored the unit tests to use more mocks.
 
-##### v0.3 - 2014-03-23
+##### v0.3 - 2014/03/23
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
 * Renamed class `Headzoo\CoinTalk\Server` to `Headzoo\CoinTalk\JsonRPC`.
 * Renamed class `Headzoo\CoinTalk\IServer` to `Headzoo\CoinTalk\JsonRPCInterface`.
@@ -342,10 +334,10 @@ Change Log
     * `Headzoo\CoinTalk\Wallet::getReceivedByAccount()`.
     * `Headzoo\CoinTalk\Wallet::listReceivedByAccount()`.
     
-##### v0.2 - 2013-12-31
+##### v0.2 - 2013/12/31
 * Minor tweaks.
 
-##### v0.1 - 2013-12-18
+##### v0.1 - 2013/12/18
 * Genesis import!
 
 TODO

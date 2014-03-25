@@ -23,12 +23,11 @@ class HTTPTest
     protected function setUp()
     {
         $this->conf = include(__DIR__ . "/conf.php");
-        $this->http = new HTTP($this->conf["wallet1"]["host"] . ":" . $this->conf["wallet1"]["port"]);
+        $this->http = new HTTP(HTTP::METHOD_POST);
         $this->http
             ->setContentType("application/json")
-            ->setAuthUser($this->conf["wallet1"]["user"])
-            ->setAuthPass($this->conf["wallet1"]["pass"])
-            ->setPostData("{\"method\":\"getinfo\",\"params\":[],\"id\":11532}");
+            ->setBasicAuth($this->conf["wallet1"]["user"], $this->conf["wallet1"]["pass"])
+            ->setData("{\"method\":\"getinfo\",\"params\":[],\"id\":11532}");
     }
 
     /**
@@ -36,7 +35,7 @@ class HTTPTest
      */
     public function testRequest()
     {
-        $info = $this->http->request();
+        $info = $this->http->request($this->conf["wallet1"]["host"] . ":" . $this->conf["wallet1"]["port"]);
         $this->assertContains(
             "{\"result\":",
             $info
@@ -48,7 +47,7 @@ class HTTPTest
      */
     public function testGetStatusCode()
     {
-        $this->http->request();
+        $this->http->request($this->conf["wallet1"]["host"] . ":" . $this->conf["wallet1"]["port"]);
         $this->assertEquals(
             200,
             $this->http->getStatusCode()
@@ -57,11 +56,10 @@ class HTTPTest
 
     /**
      * @covers Headzoo\Bitcoin\Wallet\Api\HTTP::request
-     * @expectedException Headzoo\Bitcoin\Wallet\Api\HTTPException
+     * @expectedException Headzoo\Bitcoin\Wallet\Api\Exceptions\HTTPException
      */
     public function testRequest_HTTPException()
     {
-        $this->http->setUrl("badhost");
-        $this->http->request();
+        $this->http->request("bad_host");
     }
 }

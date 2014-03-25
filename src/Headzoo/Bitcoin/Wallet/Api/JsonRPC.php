@@ -210,10 +210,11 @@ class JsonRPC
         $url = sprintf("http://%s:%d", $this->conf["host"], $this->conf["port"]);
         $http = $this->getHTTP()
             ->setUrl($url)
+            ->setMethod(HTTPInterface::METHOD_POST)
             ->setContentType("application/json")
             ->setAuthUser($this->conf["user"])
             ->setAuthPass($this->conf["pass"])
-            ->setPostData($query);
+            ->setData($query);
         $response    = $http->request();
         $status_code = $http->getStatusCode();
         

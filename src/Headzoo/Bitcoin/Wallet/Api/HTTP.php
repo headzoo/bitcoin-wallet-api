@@ -1,17 +1,18 @@
 <?php
 namespace Headzoo\Bitcoin\Wallet\Api;
+use InvalidArgumentException;
 
 /**
- * Used to make http post requests.
+ * Used to make http requests.
  * 
  * Example:
  * ```php
  *  $http = new HTTP("127.0.0.1:8333");
  *  $http
+ *      ->setMethod(HTTP::METHOD_POST)
  *      ->setContentType("application/json")
- *      ->setAuthUser("testuser")
- *      ->setAuthPass("testpass")
- *      ->setPostData("{'method':'getinfo','params':[],'id':11532}");
+ *      ->setBasicAuth("test_user", "test_pass")
+ *      ->setData("{'method':'getinfo','params':[],'id':11532}");
  * $response = $http->request();
  * $status   = $http->getStatusCode();
  * ```
@@ -20,22 +21,22 @@ class HTTP
     implements HTTPInterface
 {
     /**
-     * The url to request
-     * @var string
-     */
-    protected $url;
-
-    /**
      * The http status code returned by the requested server
      * @var int
      */
     protected $status_code = 200;
 
     /**
-     * The post data
+     * The request method
+     * @var string
+     */
+    protected $method = self::METHOD_GET;
+    
+    /**
+     * The get/post data
      * @var mixed
      */
-    protected $post_data;
+    protected $data;
 
     /**
      * The content type
@@ -44,44 +45,50 @@ class HTTP
     protected $content_type = "text/html";
 
     /**
-     * The basic auth username
-     * @var string
+     * The basic auth username and password
+     * @var array
      */
-    protected $auth_user;
-
-    /**
-     * The basic auth password
-     * @var string
-     */
-    protected $auth_pass;
+    protected $auth = [];
 
     /**
      * Constructor
      * 
-     * @param string $url The url to request
+     * @param string $method The request method, one of HTTP::METHOD_GET or HTTP::METHOD_POST
      */
-    public function __construct($url = null)
+    public function __construct($method = self::METHOD_GET)
     {
-        $this->setUrl($url);
+        $this->setMethod($method);
     }
-
+    
     /**
      * {@inheritDoc}
      */
-    public function request()
+    public function request($url)
     {
-        if (!$this->url) {
-            throw new Exceptions\HTTPException("Request URL has not been set.", 1);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,     ["Content-Type: {$this->content_type}"]);
+        
+        if ($this->method === self::METHOD_POST) {
+            curl_setopt($ch, CURLOPT_POST, true);
+        }
+        if (!empty($this->auth)) {
+            curl_setopt(
+                $ch,
+                CURLOPT_USERPWD,
+                sprintf("%s:%s", $this->auth["user"], $this->auth["pass"])
+            );
         }
         
-        $ch = curl_init($this->url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,    1);
-        curl_setopt($ch, CURLOPT_POST,              1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,        $this->post_data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,        ["Content-Type: {$this->content_type}"]);
-        if ($this->auth_user && $this->auth_pass) {
-            curl_setopt($ch, CURLOPT_USERPWD, "{$this->auth_user}:{$this->auth_pass}");
+        $query = $this->prepareData($url);
+        if ($query) {
+            if ($this->method === self::METHOD_POST) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+            } else {
+                $url = "{$url}{$query}";
+            }
         }
+        curl_setopt($ch, CURLOPT_URL, $url);
         
         $response = curl_exec($ch);
         $this->status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -97,20 +104,53 @@ class HTTP
     }
 
     /**
+     * Prepares the GET/POST data for use with the specified url
+     * 
+     * When the request method is GET, the return value has "?" or "&" prepended to it, depending on whether
+     * or not the url already has request parameters.
+     * 
+     * @param  string $url The request url
+     * @return string
+     */
+    protected function prepareData($url)
+    {
+        $params = null;
+        if (!empty($this->data)) {
+            if ($this->method === self::METHOD_GET) {
+                if (is_array($this->data)) {
+                    $query = http_build_query($this->data);
+                } else {
+                    $query = $this->data;
+                }
+                $combine = (strpos($url, "?") === false) ? "?" : "&";
+                $params  = "{$combine}{$query}";
+            }
+        }
+        
+        return $params;
+    }
+
+    /**
      * {@inheritDoc}
      */
-    public function setUrl($url)
+    public function setMethod($method)
     {
-        $this->url = (string)$url;
+        if ($method !== self::METHOD_GET && $method !== self::METHOD_POST) {
+            throw new InvalidArgumentException(
+                "Method must be either 'GET' or 'POST'."
+            );
+        }
+        $this->method = $method;
+        
         return $this;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setPostData($post_data)
+    public function setData($data)
     {
-        $this->post_data = $post_data;
+        $this->data = $data;
         return $this;
     }
 
@@ -126,18 +166,10 @@ class HTTP
     /**
      * {@inheritDoc}
      */
-    public function setAuthUser($auth_user)
+    public function setBasicAuth($user, $pass)
     {
-        $this->auth_user = (string)$auth_user;
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setAuthPass($auth_pass)
-    {
-        $this->auth_pass = (string)$auth_pass;
+        $this->auth["user"] = (string)$user;
+        $this->auth["pass"] = (string)$pass;
         return $this;
     }
 

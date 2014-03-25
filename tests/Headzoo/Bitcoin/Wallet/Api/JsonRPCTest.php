@@ -76,7 +76,7 @@ class HTTPRequestTest
         return $this;
     }
 
-    public function setPostData($post_data)
+    public function setData($post_data)
     {
         $this->data["post_data"] = $post_data;
         return $this;
@@ -88,7 +88,7 @@ class HTTPRequestTest
         return $this;
     }
 
-    public function setAuthUser($auth_user)
+    public function setBasicAuth($auth_user)
     {
         $this->data["auth_user"] = $auth_user;
         return $this;

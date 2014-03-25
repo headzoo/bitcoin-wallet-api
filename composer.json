@@ -5,6 +5,7 @@
     "license": "MIT",
     "keywords": ["php", "bitcoin", "litecoin", "dogecoin", "crypto", "json-rpc", "api"],
     "version": "0.4",
+    "minimum-stability" : "dev",
     "authors": [
         {
             "name": "headzoo",
@@ -16,7 +17,7 @@
         "ext-curl": "*",
         "ext-simplexml": "*",
         "psr/log": "dev-master",
-        "headzoo/web-tools": "0.1"
+        "headzoo/web-tools": "dev-master"
     },
     "autoload": {
         "psr-0": {
