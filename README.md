@@ -1,5 +1,5 @@
-Bitcoin Wallet API
-==================
+Bitcoin Wallet API v0.4.0
+=========================
 PHP library which facilitates communication with the Bitcoin JSON-RPC API. The rest of this documentation refers
 to the Bitcoin wallet, but this library works with any Bitcoin wallet descendant. Including wallets for Litecoin and
 Dogecoin. 
