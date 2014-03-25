@@ -292,12 +292,12 @@ try {
 
 Change Log
 ----------
-##### v0.4 - 2014/03/23
+##### v0.4.0 - 2014/03/23
 * Renamed project to Bitcoin Wallet API.
 * Renamed namespace `Headzoo\CoinTalk` to `Headzoo\Bitcoin\Wallet\Api`.
 * Refactored the unit tests to use more mocks.
 
-##### v0.3 - 2014/03/23
+##### v0.3.0 - 2014/03/23
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
 * Renamed class `Headzoo\CoinTalk\Server` to `Headzoo\CoinTalk\JsonRPC`.
 * Renamed class `Headzoo\CoinTalk\IServer` to `Headzoo\CoinTalk\JsonRPCInterface`.
@@ -334,10 +334,10 @@ Change Log
     * `Headzoo\CoinTalk\Wallet::getReceivedByAccount()`.
     * `Headzoo\CoinTalk\Wallet::listReceivedByAccount()`.
     
-##### v0.2 - 2013/12/31
+##### v0.2.0 - 2013/12/31
 * Minor tweaks.
 
-##### v0.1 - 2013/12/18
+##### v0.1.0 - 2013/12/18
 * Genesis import!
 
 TODO
