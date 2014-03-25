@@ -1,25 +1,28 @@
 <?php
 use Headzoo\Bitcoin\Wallet\Api\JsonRPC;
+use Headzoo\Web\Tools\WebClient;
+use Headzoo\Web\Tools\WebResponse;
+use Headzoo\Web\Tools\HttpMethods;
 use Headzoo\Bitcoin\Wallet\Api\HTTPStatusCodes;
 use Headzoo\Bitcoin\Wallet\Api\RPCErrorCodes;
-use Headzoo\Bitcoin\Wallet\Api\HTTPInterface;
 use Headzoo\Bitcoin\Wallet\Api\Exceptions;
 
 
-class HTTPRequestTest
-    implements HTTPInterface
+class WebClientTester
+    extends  WebClient
 {
     private $conf;
-    private $status_code = HTTPStatusCodes::OK;
-    private $data = [];
+    protected $data = [];
     
     public function __construct(array $conf)
     {
+        parent::__construct();
         $this->conf = $conf;
     }
     
-    public function request()
+    public function request($url)
     {
+        $this->data["url"] = $url;
         if ($this->data["auth_user"] != $this->conf["user"] || $this->data["auth_pass"] != $this->conf["pass"]) {
             throw new Exceptions\AuthenticationException(
                 "Error",
@@ -46,7 +49,17 @@ class HTTPRequestTest
             );
         }
 
-         return json_encode([
+        $data = [
+            "time"    => time(),
+            "method"  => HttpMethods::POST,
+            "version" => "HTTP/1.1",
+            "code"    => 200,
+            "info"    => [
+                "url"       => $url,
+                "http_code" => 200
+            ]
+        ];
+        $data["body"] = json_encode([
             "result"          => [
                 "version"         => 90000,
                 "protocolversion" => 70002,
@@ -68,12 +81,8 @@ class HTTPRequestTest
             "error"               => null,
             "id"                  => "unit_testing"
         ]);
-    }
-
-    public function setUrl($url)
-    {
-        $this->data["url"] = $url;
-        return $this;
+        
+        return new WebResponse($data);
     }
 
     public function setData($post_data)
@@ -82,27 +91,11 @@ class HTTPRequestTest
         return $this;
     }
 
-    public function setContentType($content_type)
+    public function setBasicAuth($user, $pass)
     {
-        $this->data["content_type"] = $content_type;
+        $this->data["auth_user"] = $user;
+        $this->data["auth_pass"] = $pass;
         return $this;
-    }
-
-    public function setBasicAuth($auth_user)
-    {
-        $this->data["auth_user"] = $auth_user;
-        return $this;
-    }
-
-    public function setAuthPass($auth_pass)
-    {
-        $this->data["auth_pass"] = $auth_pass;
-        return $this;
-    }
-
-    public function getStatusCode()
-    {
-        return $this->status_code;
     }
 }
 
@@ -131,7 +124,7 @@ class JsonRPCTest
     protected function setUp()
     {
         $this->conf = include(__DIR__ . "/conf.php");
-        $this->rpc  = new JsonRPC($this->conf["wallet1"], new HTTPRequestTest($this->conf["wallet1"]));
+        $this->rpc  = new JsonRPC($this->conf["wallet1"], new WebClientTester($this->conf["wallet1"]));
         
         $nonce = $this->getMock('Headzoo\Bitcoin\Wallet\Api\NonceInterface');
         $nonce->expects($this->any())
