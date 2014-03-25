@@ -296,6 +296,7 @@ Change Log
 * Renamed project to Bitcoin Wallet API.
 * Renamed namespace `Headzoo\CoinTalk` to `Headzoo\Bitcoin\Wallet\Api`.
 * Refactored the unit tests to use more mocks.
+* Using headzoo/web-tools for making HTTP requests.
 
 ##### v0.3.0 - 2014/03/23
 * Renamed class `Headzoo\CoinTalk\Api` to `Headzoo\CoinTalk\Wallet`.
